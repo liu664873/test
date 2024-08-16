@@ -1,0 +1,188 @@
+import Phaser from "phaser"
+import Grid from "./grid"
+import LayerPro from "./layerPro"
+import Generator from "./generator"
+
+/**
+ * 维护地图的类
+ */
+export default class Map{
+
+    constructor(scene, key, x = 0, y = 0, depth = 0){
+
+        this.scene = scene
+        this.tilemap = scene.make.tilemap({key: key})
+        this.x = x
+        this.y = y
+        this.depth = depth
+        this.width = this.tilemap.width
+        this.height = this.tilemap.height
+        this.tileWidth = this.tilemap.tileWidth
+        this.tileHeight = this.tilemap.tileHeight
+        this.tilesets = this.tilemap.tilesets
+        this.tilePros = {}
+        this.grid = new Grid(scene, this)
+        this.layerListData = this.tilemap.layers            //存储图层二维数组数据
+        this.layerList = []
+        this.propList = []
+        this.playerList = []
+
+        this.moveSpace = new Array(this.height)
+
+        this.initLayers()
+        this.initMoveSapce(1, 2)
+        this.addOnEvent()
+    }
+
+    addOnEvent(){
+        let dragX, dragY;   
+        let dragging = false;  
+  
+        // 鼠标按下事件  
+        this.grid.setInteractive();  
+        this.grid.on('pointerdown', (pointer) => {  
+            dragging = true;  
+            dragX = pointer.x - this.x;  
+            dragY = pointer.y - this.y;  
+        });  
+    
+        // 鼠标移动事件  
+        this.grid.on('pointermove', (pointer) => {  
+            console.log(dragging)
+            if (dragging) {  
+                const x = pointer.x - dragX;  
+                const y = pointer.y - dragY; 
+                this.setPosition(x, y) 
+            }  
+        });  
+    
+        // 鼠标释放事件  
+        this.grid.on('pointerup', () => {  
+            dragging = false;  
+        });  
+    }
+
+    /**
+     * 添加瓦片集
+     */
+    addTilesetImages(){
+        this.tilemap.tilesets.forEach(tileset => {
+            this.tilemap.addTilesetImage(tileset.name, tileset.name)
+            tileset.offset = tileset.tileOffset     //存储图片集偏移量
+            const firstgid = tileset.firstgid
+            for(let key in tileset.tileProperties){
+                this.tilePros[firstgid + parseInt(key)] = tileset.tileProperties[key]   //需要将key转换成数字
+            }
+        })
+    }
+
+    /**
+     * 关闭显示网格
+     */
+    closeGrid(){
+        this.grid.setVisible(false)
+    }
+
+    /**
+     * 初始化图层
+     */
+    initLayers(){
+        this.addTilesetImages()
+        this.tilemap.layers.forEach(layerData => {
+            const layerPro = new LayerPro(layerData.properties) //将json数据中图层属性转化成对象
+            if(layerPro.getType() === "build"){
+                const layer = this.tilemap.createLayer(layerData.name, this.tilemap.tilesets, this.x, this.y)
+                layer.setDepth(this.depth + layerPro.getDepth())
+                this.layerList.push(layer)
+            } else if(layerPro.getType() === "prop"){
+                layerData.data.forEach((row) => {
+                    row.forEach((tile) => {
+                        const tilePro = this.tilePros[tile.index]
+                        if(tilePro && tilePro.type === "prop"){
+                            const prop = Generator.generateProp(this, tilePro.name, tile.x, tile.y, this.depth + layerPro.getDepth())
+                            this.propList.push(prop)
+                        }
+                    });
+                });
+            }
+        });
+    }
+
+    /**
+     * 初始化活动空间moveSpace
+     * layerIndex1、layerIndex2为物体脚下一层和物体所在的一层
+     * 根据两个图层来决定moveSace
+     */
+    initMoveSapce(layerIndex1 = 0, layerIndex2 = 1){
+        const layer1 = this.layerList[layerIndex1] ? this.layerList[layerIndex1].layer.data : undefined
+        const layer2 = this.layerList[layerIndex2] ?  this.layerList[layerIndex2].layer.data : undefined
+        console.log(layer1, layer2, this.layerList)
+        for(let i = 0; i < this.height; i++){
+            this.moveSpace[i] = new Array(this.width)
+            for(let j = 0; j < this.width; j++){
+                this.moveSpace[i][j] = -1
+                const tilePro1 = layer1 ? this.tilePros[layer1[i][j].index] : undefined
+                const tilePro2 = layer2 ? this.tilePros[layer2[i][j].index] : undefined
+                if(tilePro1 && tilePro1.collide
+                    && (!tilePro2 ||  tilePro2.collide) 
+                ) this.moveSpace[i][j] = 0
+            }
+        }
+    }
+
+    /**
+     * 显示网格
+     */
+    openGrid(){
+        this.grid.setVisible(true)
+    }
+
+    /**
+     * 设置depth
+     * @param {*} depth 
+     */
+    setDepth(depth = 0){
+        if(typeof depth != "number") 
+            console.log("./objects/map.js setDepth中depth参数不是合法数字！")
+        this.depth = depth
+    }
+
+    /**
+     * 放大和缩小
+     */
+    setScale(scale){
+        this.layerList.forEach(layer => {
+            layer.setScale(scale)
+        });
+        this.propList.forEach(prop => {
+            prop.setScale(scale)
+            
+        });
+        this.playerList.forEach(player => {
+            player.setScale(scale)
+        });
+        this.tilesets.forEach(tileset => {
+            tileset.tileOffset = new Phaser.Math.Vector2(tileset.offset.x*scale, tileset.offset.y*scale)
+        });
+        this.grid.setScale(scale)
+    }
+
+    /**
+     * 设置地图坐标
+     */
+    setPosition(x, y){
+        this.x = x
+        this.y = y
+        this.layerList.forEach(layer => {
+            layer.setPosition(this.x, this.y)
+        })
+        this.propList.forEach(prop => {
+            prop.setGridPosition(prop.gridX, prop.gridY)
+        });
+        this.playerList.forEach(player => {
+            player.setGridPosition(player.gridX, player.gridY)
+        })
+        this.grid.setPosition(this.x, this.y)
+    }
+
+}
