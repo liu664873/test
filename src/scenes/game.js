@@ -27,9 +27,27 @@ export default class Game extends Phaser.Scene {
         this.amplify = this.add.sprite(1600, 50, "amplify").setScale(0.75).setInteractive()
         this.reduce = this.add.sprite(1700, 50, "reduce").setScale(0.75).setInteractive()
         this.addOnEvent()
-        // this.tweens.chain().add(this.player.step(2))
-        
-        // this.cameras.main.startFollow(this.player)
+        this.player.turnRight()
+        this.player.turnRight()
+
+        this.player.step(1)
+        this.player.turnRight()
+        this.player.step(3)
+        // this.player.turnRight()
+        // this.player.step(4)
+
+        // this.player.turnRight()
+        // this.player.step(2)
+
+
+        this.map.createTweenChain()
+    }
+
+    /**
+     * 每一帧都执行
+     */
+    update(){
+
     }
 
     addOnEvent(){

@@ -20,20 +20,21 @@ export default class Player extends Object {
         this.setOrigin(-1.1, 0.8)
         this.setInteractive()
 
-
         this.moving = false
         this.moveSpace = map.moveSpace
 
         this.direction = DOWN
 
         this.directionImage = {
-            UP: 7,
-            RIGHT: 4,
-            DOWN: 1,
-            LEFT: 10,
+            up: 7,
+            right: 4,
+            down: 1,
+            left: 10,
         }
 
         this.info = new ItemInfo(this)
+
+        this.addAnimations()
 
         map.playerList.push(this)
     }
@@ -69,43 +70,83 @@ export default class Player extends Object {
         this.anims.create({
             key: "upToRight",
             frames: this.anims.generateFrameNumbers("player", { frames: [7, 4] }),
-            frameRate: 8
+            duration: 1000
         })
         this.anims.create({
             key: "rightToDown",
             frames: this.anims.generateFrameNumbers("player", { frames: [4, 1] }),
-            frameRate: 8
+            duration: 1000
         })
         this.anims.create({
             key: "downToLeft",
             frames: this.anims.generateFrameNumbers("player", { frames: [1, 10] }),
-            frameRate: 8
+            duration: 1000
         })
         this.anims.create({
             key: "leftToUp",
             frames: this.anims.generateFrameNumbers("player", { frames: [10, 7] }),
-            dframeRate: 8
+            duration: 1000
         })
         this.anims.create({
             key: "rightToUp",
             frames: this.anims.generateFrameNumbers("player", { frames: [4, 7] }),
-            frameRate: 8
+            duration: 1000
         })
         this.anims.create({
             key: "downToRight",
             frames: this.anims.generateFrameNumbers("player", { frames: [1, 4] }),
-            frameRate: 8
+            duration: 1000
         })
         this.anims.create({
             key: "leftToDown",
             frames: this.anims.generateFrameNumbers("player", { frames: [10, 1] }),
-            frameRate: 8
+            duration: 1000
         })
         this.anims.create({
             key: "upToLeft",
             frames: this.anims.generateFrameNumbers("player", { frames: [7, 10] }),
-            frameRate: 8
+            duration: 1000
         })
+    }
+
+    getMoveTween(config) {
+
+        const from = new Phaser.Math.Vector2()
+        const to = new Phaser.Math.Vector2()
+        this.map.tilemap.tileToWorldXY(config.from.x, config.from.y, from)
+        this.map.tilemap.tileToWorldXY(config.to.x, config.to.y, to)
+
+        const tween = {
+            targets: this,
+            props: {
+                x: to.x,
+                y: to.y,
+                gridX: config.to.x,
+                gridY: config.to.y
+            },
+            duration: 1000,
+            onStart: () => {
+                this.anims.play(config.direction)
+            },
+            onComplete: () => {
+                this.anims.stop(config.direction)
+            }
+        }
+        return tween
+    }
+    
+    getTurnTween(config){
+        const tween = {
+            targets:this,
+            duration: 1000,
+            onStart: () => {
+               this.anims.play(config.turn)
+            },
+            onComplete: () => {
+                this.setFrame(this.directionImage[config.direction])
+            },
+        }
+        return tween
     }
 
     /**
@@ -129,98 +170,85 @@ export default class Player extends Object {
         return !isOver && this.moveSpace[gridY][gridX] >= 0
     }
 
-    getMoveTween(from, to) {
-        this.map.tilemap.tileToWorldXY(from.x, from.y, from)
-        this.map.tilemap.tileToWorldXY(to.x, to.y, to)
-        const tween = {
-            targets: this,
-            props: {
-                x: to.x,
-                y: to.y
-            },
-            duration: 1000,
-            onStart: () => {
-                this.anims.play(this.direction)
-            },
-            onComplete: () => {
-                this.anims.stop(this.direction)
-            }
-        }
-        return tween
-    }
-    
-    getTurnTween(turn){
-        const tween = {
-            targets:this,
-            duration: 1000,
-            onStart: () => {
-                this.anims.play(turn)
-            },
-            onComplete: () => {
-                if (this.direction === UP) this.setFrame(7)
-                else if (this.direction === RIGHT) this.setFrame(4)
-                else if (this.direction === DOWN) this.setFrame(1)
-                else if (this.direction === LEFT) this.setFrame(10)
-            },
-        }
-        return tween
-    }
 
-    step(val) {
-        const tweens = []
+    step(step) {
 
-        for (let i = 0; i < val; i++) {
+        for (let i = 0; i < step; i++) {
+
+            let isCanMove = true
             const from = new Phaser.Math.Vector2(this.gridX, this.gridY)
             if (this.direction === UP && this.canMove(UP)) this.gridY = this.gridY - 1
             else if (this.direction === RIGHT && this.canMove(RIGHT)) this.gridX = this.gridX + 1
             else if (this.direction === DOWN && this.canMove(DOWN)) this.gridY = this.gridY + 1
             else if (this.direction === LEFT && this.canMove(LEFT)) this.gridX = this.gridX - 1
+            else {
+                isCanMove = false
+            }
 
             const to = new Phaser.Math.Vector2(this.gridX, this.gridY)
-            tweens.push(this.getMoveTween(from, to))
+            
+            const data = {
+                target: this,
+                type: "move",
+                direction: this.direction,
+                from: from,
+                to: to,
+                isCanMove: isCanMove
+            }
+            this.map.moveData.push(data)
+
+            if(!isCanMove) return  
         }
-        return tweens
+
     }
 
     turnLeft() {
-        let turnTween
+        const data = {
+            target: this,
+            type: "turn",
+        }
         if (this.direction === UP) {
-            this.direction = LEFT
-            turnTween = this.getTurnTween("upToLeft")
+            data.fromDirection = UP
+            data.direction = LEFT
         }
         else if (this.direction === RIGHT) {
-            this.direction = UP
-            turnTween = this.getTurnTween("rightToUp")
+            data.fromDirection = RIGHT
+            data.direction = UP
         }
         else if (this.direction === DOWN) {
-            this.direction = RIGHT
-            turnTween = this.getTurnTween("downToRight")
+            data.fromDirection = DOWN
+            data.direction = RIGHT
         }
         else if (this.direction === LEFT) {
-            this.direction = DOWN
-            turnTween = this.getTurnTween("leftToDown")
+            data.fromDirection = LEFT
+            data.direction = DOWN
         }
-        return turnTween
+        this.direction = data.direction
+        this.map.moveData.push(data)
     }
 
     turnRight() {
-        let turnTween
+        const data = {
+            target: this,
+            type: "turn",
+        }
         if (this.direction === UP) {
-            this.direction = RIGHT
-            turnTween = this.getTurnTween("upToRight")
+            data.fromDirection = UP
+            data.direction = RIGHT
         }
         else if (this.direction === RIGHT) {
-            this.direction = DOWN
-            turnTween = this.getTurnTween("rightToDown")
+            data.fromDirection = RIGHT
+            data.direction = DOWN
         }
         else if (this.direction === DOWN) {
-            this.direction = LEFT
-            turnTween = this.getTurnTween("downToLeft")
+            data.fromDirection = DOWN
+            data.direction = LEFT
         }
         else if (this.direction === LEFT) {
-            this.direction = UP
-            turnTween = this.getTurnTween("leftToUp")
+            data.fromDirection = LEFT
+            data.direction = UP
         }
-        return turnTween
+        this.direction = data.direction
+        this.map.moveData.push(data)
     }
 }

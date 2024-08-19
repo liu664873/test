@@ -27,13 +27,27 @@ export default class Map{
         this.layerList = []
         this.propList = []
         this.playerList = []
-        this.tweenChain = []
+        this.moveData = []
 
         this.moveSpace = new Array(this.height)
 
         this.initLayers()
         this.initMoveSapce(0, 1)
         this.addOnEvent()
+        this.init()
+        console.log(this.moveSpace)
+    }
+
+    init(){
+        this.scene.physics.add.overlap(this.playerList, this.propList, 
+            (player, star) => {
+                // this.scene.sound.play("star")
+                star.destroy()
+            },
+            (player, star) => {
+                return player.gridX === star.gridX && player.gridY === star.gridY
+            }
+        )
     }
 
     /**
@@ -87,6 +101,25 @@ export default class Map{
     }
 
     /**
+     * 创造补间动画链
+     */
+    createTweenChain(){
+        const chain = []
+        console.log(this.moveData)
+        for(let i = 0; i < this.moveData.length; i++){
+            if(this.moveData[i].type === "turn"){
+                const tween = this.moveData[i].target.getTurnTween(this.moveData[i])
+                chain.push(tween)
+            } else if(this.moveData[i].type === "move"){
+                if(!this.moveData[i].isCanMove) break
+                const tween = this.moveData[i].target.getMoveTween(this.moveData[i])
+                chain.push(tween)
+            }
+        }
+        this.scene.tweens.chain({tweens: chain})
+    }
+
+    /**
      * 初始化图层
      */
     initLayers(){
@@ -119,15 +152,15 @@ export default class Map{
     initMoveSapce(layerIndex1 = 0, layerIndex2 = 1){
         const layer1 = this.layerList[layerIndex1] ? this.layerList[layerIndex1].layer.data : undefined
         const layer2 = this.layerList[layerIndex2] ?  this.layerList[layerIndex2].layer.data : undefined
-        console.log(layer1, layer2, this.layerList)
         for(let i = 0; i < this.height; i++){
             this.moveSpace[i] = new Array(this.width)
             for(let j = 0; j < this.width; j++){
                 this.moveSpace[i][j] = -1
                 const tilePro1 = layer1 ? this.tilePros[layer1[i][j].index] : undefined
                 const tilePro2 = layer2 ? this.tilePros[layer2[i][j].index] : undefined
+                console.log(tilePro2)
                 if(tilePro1 && tilePro1.collide
-                    && (!tilePro2 ||  tilePro2.collide) 
+                    && (!tilePro2 ||  !tilePro2.collide) 
                 ) this.moveSpace[i][j] = 0
             }
         }

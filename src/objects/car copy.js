@@ -1,6 +1,5 @@
 import Phaser from "phaser"
 import ItemInfo from "./itemInfo"
-import Object from "./object"
 
 const LEFT = "left"
 const RIGHT = "right"
@@ -8,7 +7,7 @@ const UP = "up"
 const DOWN = "down"
 const IDLE = "idle"
 
-export default class Car extends Object{
+export default class Car extends Phaser.GameObjects.Sprite{
     constructor(scene, x, y, name){
         const vec = new Phaser.Math.Vector2()
         scene.map.tileToWorldXY(x, y, vec)
