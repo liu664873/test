@@ -62,7 +62,6 @@ export default class Loader extends Phaser.Scene {
      */
     loadImage(){
         this.load.image("amplify", "assets/images/amplify.png")
-        this.load.image("car", "assets/images/car.png")
         this.load.image("floor1", "assets/images/floor1.png")
         this.load.image("floor2", "assets/images/floor2.png")
         this.load.image("floor3", "assets/images/floor3.png")
@@ -83,6 +82,7 @@ export default class Loader extends Phaser.Scene {
      * 加载精灵图
      */
     loadSprite(){
-        this.load.spritesheet("player", "assets/images/player.png", {frameWidth: 40, frameHeight: 36})
+        this.load.spritesheet("player", "assets/images/player.png", {frameWidth: 48, frameHeight: 48})
+        this.load.spritesheet("ship", "assets/images/ship.png", {frameWidth: 80, frameHeight: 60})
     }
 }

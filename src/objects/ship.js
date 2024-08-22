@@ -7,105 +7,104 @@ const RIGHT = "right"
 const UP = "up"
 const DOWN = "down"
 
-/**
- * 玩家类
- */
-export default class Player extends Object {
-    constructor(map, name, gridX = 0, gridY = 0, depth = 0) {
-
+export default class Ship extends Object{
+    constructor(map, name, gridX, gridY, depth){
         super(map, name, gridX, gridY, depth)
-
+  
         this.scene.add.existing(this)
         this.scene.physics.add.existing(this)
-        this.setOrigin(-0.7, 0.8)
+        this.setDepth(1.4)
+        this.setScale(0.9)
+        this.setOrigin(-0.3, 0.5)
         this.setInteractive()
 
-        this.moving = false
+        this.directionImage = {
+            up: 2,
+            right: 0,
+            down: 1,
+            left: 3,
+        }
+        this.direction = RIGHT
+        this.setFrame(this.directionImage[this.direction])
+
+        this.driver = null  //驾驶者，实际就是代表是否载人
         this.moveSpace = map.moveSpace
 
-        this.direction = DOWN
-
-        this.directionImage = {
-            up: 9,
-            right: 3,
-            down: 0,
-            left: 1,
-        }
-
         this.info = new ItemInfo(this)
-
         this.addAnimations()
-        this.anims.frameRate
 
-        map.playerList.push(this)
+        this.moveSpace[gridY][gridX] = 1
+
+        map.shipList.push(this)
+
     }
-
+    
     /**
      * 添加玩家动画
      */
-    addAnimations() {
+       addAnimations() {
         this.anims.create({
             key: LEFT,
-            frames: this.anims.generateFrameNumbers("player", { frames: [1, 5, 9, 13] }),
+            frames: this.anims.generateFrameNumbers("ship", { start: 3, end: 3 }),
             repeat: -1,
             frameRate: 8
         })
         this.anims.create({
             key: RIGHT,
-            frames: this.anims.generateFrameNumbers("player", { frames: [3, 7, 11, 15] }),
+            frames: this.anims.generateFrameNumbers("ship", { start: 0, end: 0}),
             repeat: -1,
             frameRate: 8
         })
         this.anims.create({
             key: UP,
-            frames: this.anims.generateFrameNumbers("player", { frames: [2, 6, 10, 14] }),
+            frames: this.anims.generateFrameNumbers("ship", { start: 2, end: 2 }),
             repeat: -1,
             frameRate: 8
         })
         this.anims.create({
             key: DOWN,
-            frames: this.anims.generateFrameNumbers("player", { frames: [0, 4, 8, 12] }),
+            frames: this.anims.generateFrameNumbers("ship", { start: 1, end: 1 }),
             repeat: -1,
             frameRate: 8
         })
         this.anims.create({
             key: "upToRight",
-            frames: this.anims.generateFrameNumbers("player", { frames: [2, 3] }),
-            duration: 1000,
+            frames: this.anims.generateFrameNumbers("ship", { frames: [2, 0] }),
+            duration: 1000
         })
         this.anims.create({
             key: "rightToDown",
-            frames: this.anims.generateFrameNumbers("player", { frames: [3, 0] }),
+            frames: this.anims.generateFrameNumbers("ship", { frames: [0, 1] }),
             duration: 1000
         })
         this.anims.create({
             key: "downToLeft",
-            frames: this.anims.generateFrameNumbers("player", { frames: [0, 1] }),
+            frames: this.anims.generateFrameNumbers("ship", { frames: [1, 3] }),
             duration: 1000
         })
         this.anims.create({
             key: "leftToUp",
-            frames: this.anims.generateFrameNumbers("player", { frames: [1, 2] }),
+            frames: this.anims.generateFrameNumbers("ship", { frames: [3, 2] }),
             duration: 1000
         })
         this.anims.create({
             key: "rightToUp",
-            frames: this.anims.generateFrameNumbers("player", { frames: [3, 2] }),
+            frames: this.anims.generateFrameNumbers("ship", { frames: [0, 2] }),
             duration: 1000
         })
         this.anims.create({
             key: "downToRight",
-            frames: this.anims.generateFrameNumbers("player", { frames: [0, 3] }),
+            frames: this.anims.generateFrameNumbers("ship", { frames: [1, 0] }),
             duration: 1000
         })
         this.anims.create({
             key: "leftToDown",
-            frames: this.anims.generateFrameNumbers("player", { frames: [1, 0] }),
+            frames: this.anims.generateFrameNumbers("ship", { frames: [3, 1] }),
             duration: 1000
         })
         this.anims.create({
             key: "upToLeft",
-            frames: this.anims.generateFrameNumbers("player", { frames: [2, 1] }),
+            frames: this.anims.generateFrameNumbers("ship", { frames: [2, 3] }),
             duration: 1000
         })
     }
@@ -124,18 +123,20 @@ export default class Player extends Object {
         this.map.tilemap.tileToWorldXY(config.to.x, config.to.y, to)
 
         const tween = {
-            targets: this,
+            targets: config.driver ? [this, config.driver] : this,
             props: {
                 x: to.x,
                 y: to.y,
             },
             duration: 1000,
             onStart: () => {
-                
+                this.gridX = config.from.x
+                this.gridY = config.from.y
                 this.anims.play(config.direction)
-            }, 
+            },
             onComplete: () => {
-               
+                this.gridX = config.to.x
+                this.gridY = config.to.y
                 this.anims.stop(config.direction)
             }
         }
@@ -159,26 +160,19 @@ export default class Player extends Object {
         return tween
     }
 
-    /**
-     * 
-     * @param {*} direction 
-     * @returns 
-     */
-    canMove(direction) {
-
+    canMove(direction){
         let gridX = this.gridX
         let gridY = this.gridY
-
-        if (LEFT === direction) gridX -= 1
-        else if (RIGHT === direction) gridX += 1
-        else if (UP === direction) gridY -= 1
-        else if (DOWN === direction) gridY += 1
-
-        const isOver = gridX < 0 || gridX >= this.map.width ||
-            gridY < 0 || gridY >= this.map.height
-        return !isOver && this.moveSpace[gridY][gridX] >= 0
+        if(direction === LEFT) gridX -= 1
+        else if(direction === RIGHT) gridX += 1
+        else if(direction === UP) gridY -= 1
+        else if(direction === DOWN) gridY += 1 
+        const  isOver = gridX < 0|| gridX >= this.map.width ||
+                        gridY < 0 || gridY >= this.map.height
+        return !isOver && this.moveSpace[gridY][gridX] === -1
     }
 
+    
     /**
      * 调用这个函数
      * @param {*} step 
@@ -208,7 +202,15 @@ export default class Player extends Object {
                 to: to,
                 isCanMove: isCanMove
             }
+           
+            this.moveSpace[from.y][from.x] = -1
+            this.moveSpace[to.y][to.x] = 1
             this.map.moveData.push(data)
+
+            if(this.driver) {
+                this.driver.gridX = to.gridX
+                this.driver.gridY = to.gridY
+            }
 
             if(!isCanMove) return  
         }
@@ -272,4 +274,5 @@ export default class Player extends Object {
         this.direction = data.direction
         this.map.moveData.push(data)
     }
+    
 }

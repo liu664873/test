@@ -19,28 +19,29 @@ export default class Game extends Phaser.Scene {
 
     create(){
         this.map = new Map(this, this.level, 950, 100)
-        this.map.openGrid()
+        // this.map.openGrid()
         this.player = Generator.generatePlayer(this.map, "player", 3, 2, 2)
-        this.map.setScale(0.75)
-        this.map.setPosition(300, 300)
+        this.ship = Generator.generateShip(this.map, "ship", 4, 0, 1)
+        this.map.setPosition(900, 150)
         this.showGrid = this.add.sprite(1500, 50, "showGrid").setScale(0.75).setInteractive()
         this.amplify = this.add.sprite(1600, 50, "amplify").setScale(0.75).setInteractive()
         this.reduce = this.add.sprite(1700, 50, "reduce").setScale(0.75).setInteractive()
         this.addOnEvent()
-        this.player.turnRight()
-        this.player.turnRight()
 
+        this.player.turnRight()
+        this.player.turnRight()
         this.player.step(1)
         this.player.turnRight()
-        this.player.step(3)
-        // this.player.turnRight()
-        // this.player.step(4)
-
-        // this.player.turnRight()
-        // this.player.step(2)
-
+        this.player.step(1)
+        this.player.turnLeft()
+        this.player.step(1)
+        this.ship.turnRight()
+        this.ship.turnRight()
+        this.ship.step(2)
 
         this.map.createTweenChain()
+        // this.cameras.main.startFollow(this.player)
+        // this.cameras.main.stopFollow(this.player)
     }
 
     /**

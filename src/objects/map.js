@@ -27,6 +27,7 @@ export default class Map{
         this.layerList = []
         this.propList = []
         this.playerList = []
+        this.shipList = []
         this.moveData = []
 
         this.moveSpace = new Array(this.height)
@@ -35,10 +36,10 @@ export default class Map{
         this.initMoveSapce(0, 1)
         this.addOnEvent()
         this.init()
-        console.log(this.moveSpace)
     }
 
     init(){
+        //玩家和道具重叠检测
         this.scene.physics.add.overlap(this.playerList, this.propList, 
             (player, star) => {
                 // this.scene.sound.play("star")
@@ -46,6 +47,28 @@ export default class Map{
             },
             (player, star) => {
                 return player.gridX === star.gridX && player.gridY === star.gridY
+            }
+        )
+        //船和道具重叠检测
+        // this.scene.physics.add.overlap(this.shipList, this.propList,
+        //     (ship, star) => {
+        //         // this.scene.sound.play("star")
+        //         ship.destroy()
+        //     },
+        //     (ship, star) => {
+        //         return ship.gridX === star.gridX && ship.gridY === star.gridY
+        //     }
+        // )
+        //飞船ship和玩家player重叠检测
+        this.scene.physics.add.overlap(this.shipList, this.playerList,
+            (ship, player) => {
+                ship.driver = player
+            },
+            (ship, player) => {
+                const isOverlap = ship.gridX === player.gridX && ship.gridY === player.gridY
+                if(!isOverlap) ship.driver = null
+                console.log(ship.gridX, ship.gridY, player.gridX, player.gridY)
+                return isOverlap
             }
         )
     }
@@ -105,7 +128,6 @@ export default class Map{
      */
     createTweenChain(){
         const chain = []
-        console.log(this.moveData)
         for(let i = 0; i < this.moveData.length; i++){
             if(this.moveData[i].type === "turn"){
                 const tween = this.moveData[i].target.getTurnTween(this.moveData[i])
@@ -116,7 +138,8 @@ export default class Map{
                 chain.push(tween)
             }
         }
-        this.scene.tweens.chain({tweens: chain})
+        console.log(chain)
+        this.scene.tweens.chain({ tweens: chain })
     }
 
     /**
@@ -151,14 +174,13 @@ export default class Map{
      */
     initMoveSapce(layerIndex1 = 0, layerIndex2 = 1){
         const layer1 = this.layerList[layerIndex1] ? this.layerList[layerIndex1].layer.data : undefined
-        const layer2 = this.layerList[layerIndex2] ?  this.layerList[layerIndex2].layer.data : undefined
+        const layer2 = this.layerList[layerIndex2] ? this.layerList[layerIndex2].layer.data : undefined
         for(let i = 0; i < this.height; i++){
             this.moveSpace[i] = new Array(this.width)
             for(let j = 0; j < this.width; j++){
                 this.moveSpace[i][j] = -1
                 const tilePro1 = layer1 ? this.tilePros[layer1[i][j].index] : undefined
                 const tilePro2 = layer2 ? this.tilePros[layer2[i][j].index] : undefined
-                console.log(tilePro2)
                 if(tilePro1 && tilePro1.collide
                     && (!tilePro2 ||  !tilePro2.collide) 
                 ) this.moveSpace[i][j] = 0
@@ -198,6 +220,9 @@ export default class Map{
         this.playerList.forEach(player => {
             player.setScale(scale)
         });
+        this.shipList.forEach(ship => {
+            ship.setScale(scale)
+        })
         this.tilesets.forEach(tileset => {
             tileset.tileOffset = new Phaser.Math.Vector2(tileset.offset.x*scale, tileset.offset.y*scale)
         });
@@ -218,6 +243,9 @@ export default class Map{
         });
         this.playerList.forEach(player => {
             player.setGridPosition(player.gridX, player.gridY)
+        })
+        this.shipList.forEach(ship => {
+            ship.setGridPosition(ship.gridX, ship.gridY)
         })
         this.grid.setPosition(this.x, this.y)
     }

@@ -1,5 +1,4 @@
-import {propConfig} from "../configs/config"
-import {playerConfig} from "../configs/config"
+import { playerConfig, propConfig, shipConfig } from "../configs/config"
 
 export default class Generator {
 
@@ -14,6 +13,11 @@ export default class Generator {
 
     static generateProp(map, name, x, y, depth){
         if(propConfig[name]) return new propConfig[name](map, name, x, y, depth)
+        else return null
+    }
+
+    static generateShip(map, name, x, y, depth){
+        if(shipConfig[name]) return new shipConfig[name](map, name, x, y, depth)
         else return null
     }
 }

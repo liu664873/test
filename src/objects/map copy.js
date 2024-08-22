@@ -15,6 +15,7 @@ export default class Map{
         this.x = x
         this.y = y
         this.depth = depth
+        this.scale = 1
         this.width = this.tilemap.width
         this.height = this.tilemap.height
         this.tileWidth = this.tilemap.tileWidth
@@ -26,29 +27,55 @@ export default class Map{
         this.layerList = []
         this.propList = []
         this.playerList = []
+        this.shipList = []
+        this.moveData = []
 
         this.moveSpace = new Array(this.height)
 
         this.initLayers()
-        this.initMoveSapce(1, 2)
+        this.initMoveSapce(0, 1)
         this.addOnEvent()
+        this.init()
+        console.log(this.moveSpace)
     }
 
+    init(){
+        this.scene.physics.add.overlap(this.playerList, this.propList, 
+            (player, star) => {
+                // this.scene.sound.play("star")
+                star.destroy()
+            },
+            (player, star) => {
+                return player.gridX === star.gridX && player.gridY === star.gridY
+            }
+        )
+        this.scene.physics.add.overlap(this.shipList, this.propList,
+            (ship, star) => {
+                // this.scene.sound.play("star")
+                ship.destroy()
+            },
+            (ship, star) => {
+                return ship.gridX === star.gridX && ship.gridY === star.gridY
+            }
+        )
+    }
+
+    /**
+     * 未做完，有缺陷
+     */
     addOnEvent(){
         let dragX, dragY;   
         let dragging = false;  
   
         // 鼠标按下事件  
-        this.grid.setInteractive();  
-        this.grid.on('pointerdown', (pointer) => {  
+        this.scene.input.on('pointerdown', (pointer) => {  
             dragging = true;  
             dragX = pointer.x - this.x;  
             dragY = pointer.y - this.y;  
         });  
     
         // 鼠标移动事件  
-        this.grid.on('pointermove', (pointer) => {  
-            console.log(dragging)
+        this.scene.input.on('pointermove', (pointer) => {  
             if (dragging) {  
                 const x = pointer.x - dragX;  
                 const y = pointer.y - dragY; 
@@ -57,7 +84,7 @@ export default class Map{
         });  
     
         // 鼠标释放事件  
-        this.grid.on('pointerup', () => {  
+        this.scene.input.on('pointerup', () => {  
             dragging = false;  
         });  
     }
@@ -82,6 +109,26 @@ export default class Map{
     closeGrid(){
         this.grid.setVisible(false)
     }
+
+    /**
+     * 创造补间动画链
+     */
+    // createTweenChain(){
+    //     const chain = []
+    //     console.log(this.moveData)
+    //     for(let i = 0; i < this.moveData.length; i++){
+    //         if(this.moveData[i].type === "turn"){
+    //             const tween = this.moveData[i].target.getTurnTween(this.moveData[i])
+    //             chain.push(tween)
+    //         } else if(this.moveData[i].type === "move"){
+    //             if(!this.moveData[i].isCanMove) break
+    //             const tween = this.moveData[i].target.getMoveTween(this.moveData[i])
+    //             chain.push(tween)
+    //         }
+    //     }
+    //     this.a = this.scene.tweens.chain({tweens: chain})
+    //     console.log(chain)
+    // }
 
     /**
      * 初始化图层
@@ -116,7 +163,6 @@ export default class Map{
     initMoveSapce(layerIndex1 = 0, layerIndex2 = 1){
         const layer1 = this.layerList[layerIndex1] ? this.layerList[layerIndex1].layer.data : undefined
         const layer2 = this.layerList[layerIndex2] ?  this.layerList[layerIndex2].layer.data : undefined
-        console.log(layer1, layer2, this.layerList)
         for(let i = 0; i < this.height; i++){
             this.moveSpace[i] = new Array(this.width)
             for(let j = 0; j < this.width; j++){
@@ -124,7 +170,7 @@ export default class Map{
                 const tilePro1 = layer1 ? this.tilePros[layer1[i][j].index] : undefined
                 const tilePro2 = layer2 ? this.tilePros[layer2[i][j].index] : undefined
                 if(tilePro1 && tilePro1.collide
-                    && (!tilePro2 ||  tilePro2.collide) 
+                    && (!tilePro2 ||  !tilePro2.collide) 
                 ) this.moveSpace[i][j] = 0
             }
         }
@@ -151,6 +197,7 @@ export default class Map{
      * 放大和缩小
      */
     setScale(scale){
+        this.scale = scale
         this.layerList.forEach(layer => {
             layer.setScale(scale)
         });
@@ -161,6 +208,9 @@ export default class Map{
         this.playerList.forEach(player => {
             player.setScale(scale)
         });
+        this.shipList.forEach(ship => {
+            ship.setScale(scale)
+        })
         this.tilesets.forEach(tileset => {
             tileset.tileOffset = new Phaser.Math.Vector2(tileset.offset.x*scale, tileset.offset.y*scale)
         });
@@ -181,6 +231,9 @@ export default class Map{
         });
         this.playerList.forEach(player => {
             player.setGridPosition(player.gridX, player.gridY)
+        })
+        this.shipList.forEach(ship => {
+            ship.setGridPosition(ship.gridX, ship.gridY)
         })
         this.grid.setPosition(this.x, this.y)
     }
