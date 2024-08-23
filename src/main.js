@@ -7,7 +7,7 @@ import Test from "./scenes/test"
 
 const config = {
     type: Phaser.AUTO,
-    width: 2000,
+    width: 1000,
     height: 1000,
     scale:{
         mode: Phaser.Scale.FIT

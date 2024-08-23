@@ -1,0 +1,9 @@
+.code textarea{
+    width:500px;
+    height:1000px;
+}
+
+.game {
+    display: flex;
+    /* float: left; */
+}
