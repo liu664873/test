@@ -30,6 +30,9 @@ export default class Ship extends Object{
         this.driver = null  //驾驶者，实际就是代表是否载人
         this.moveSpace = map.moveSpace
 
+        this.logicX = this.gridX
+        this.logicY = this.gridY
+
         this.info = new ItemInfo(this)
         this.addAnimations()
 
@@ -127,16 +130,14 @@ export default class Ship extends Object{
             props: {
                 x: to.x,
                 y: to.y,
+                gridX: config.to.x,
+                gridY: config.to.y,
             },
             duration: 1000,
             onStart: () => {
-                this.gridX = config.from.x
-                this.gridY = config.from.y
                 this.anims.play(config.direction)
             },
             onComplete: () => {
-                this.gridX = config.to.x
-                this.gridY = config.to.y
                 this.anims.stop(config.direction)
             }
         }
@@ -161,15 +162,15 @@ export default class Ship extends Object{
     }
 
     canMove(direction){
-        let gridX = this.gridX
-        let gridY = this.gridY
-        if(direction === LEFT) gridX -= 1
-        else if(direction === RIGHT) gridX += 1
-        else if(direction === UP) gridY -= 1
-        else if(direction === DOWN) gridY += 1 
-        const  isOver = gridX < 0|| gridX >= this.map.width ||
-                        gridY < 0 || gridY >= this.map.height
-        return !isOver && this.moveSpace[gridY][gridX] === -1
+        let logicX = this.logicX
+        let logicY = this.logicY
+        if(direction === LEFT) logicX -= 1
+        else if(direction === RIGHT) logicX += 1
+        else if(direction === UP) logicY -= 1
+        else if(direction === DOWN) logicY += 1 
+        const  isOver = logicX < 0|| logicX >= this.map.width ||
+                        logicY < 0 || logicY >= this.map.height
+        return !isOver && this.moveSpace[logicY][logicX] === -1
     }
 
     
@@ -183,16 +184,16 @@ export default class Ship extends Object{
         for (let i = 0; i < step; i++) {
 
             let isCanMove = true
-            const from = new Phaser.Math.Vector2(this.gridX, this.gridY)
-            if (this.direction === UP && this.canMove(UP)) this.gridY = this.gridY - 1
-            else if (this.direction === RIGHT && this.canMove(RIGHT)) this.gridX = this.gridX + 1
-            else if (this.direction === DOWN && this.canMove(DOWN)) this.gridY = this.gridY + 1
-            else if (this.direction === LEFT && this.canMove(LEFT)) this.gridX = this.gridX - 1
+            const from = new Phaser.Math.Vector2(this.logicX, this.logicY)
+            if (this.direction === UP && this.canMove(UP)) this.logicY = this.logicY - 1
+            else if (this.direction === RIGHT && this.canMove(RIGHT)) this.logicX = this.logicX + 1
+            else if (this.direction === DOWN && this.canMove(DOWN)) this.logicY = this.logicY + 1
+            else if (this.direction === LEFT && this.canMove(LEFT)) this.logicX = this.logicX - 1
             else {
                 isCanMove = false
             }
 
-            const to = new Phaser.Math.Vector2(this.gridX, this.gridY)
+            const to = new Phaser.Math.Vector2(this.logicX, this.logicY)
             
             const data = {
                 target: this,
@@ -202,15 +203,15 @@ export default class Ship extends Object{
                 to: to,
                 isCanMove: isCanMove
             }
+
+            if(this.driver) {
+                this.driver.logicX = this.logicX
+                this.driver.logicY = this.logicY
+            }
            
             this.moveSpace[from.y][from.x] = -1
             this.moveSpace[to.y][to.x] = 1
             this.map.moveData.push(data)
-
-            if(this.driver) {
-                this.driver.gridX = to.gridX
-                this.driver.gridY = to.gridY
-            }
 
             if(!isCanMove) return  
         }

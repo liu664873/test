@@ -65,9 +65,9 @@ export default class Map{
                 ship.driver = player
             },
             (ship, player) => {
-                const isOverlap = ship.gridX === player.gridX && ship.gridY === player.gridY
+                const isOverlap = ship.logicX === player.logicX && ship.logicY === player.logicY
                 if(!isOverlap) ship.driver = null
-                console.log(ship.gridX, ship.gridY, player.gridX, player.gridY)
+                console.log(ship.logicX, ship.logicY, player.logicX, player.logicY)
                 return isOverlap
             }
         )
