@@ -4,11 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="./static/css/index.css" defer>
+    <link rel="stylesheet" href="./static/css/index.css">
 </head>
-<body class="game">
-    <div class="code">
-        <input>
+<body style="display: flex;">
+    <div id="game" style="width: 300px; height: 300px;"></div>
+    <div id="code" class="code">
+        <div id="codeContext" style="width: 300px; height: 300px;">
+        </div>
+        <button id="codeButton">运行</button>
     </div>
 </body>
 </html>

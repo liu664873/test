@@ -28,18 +28,18 @@ export default class Game extends Phaser.Scene {
         this.reduce = this.add.sprite(250, 50, "reduce").setScale(0.5).setInteractive()
         this.addOnEvent()
 
-        this.player.turnRight()
-        this.player.turnRight()
-        this.player.step(1)
-        this.player.turnRight()
-        this.player.step(1)
-        this.player.turnLeft()
-        this.player.step(1)
-        this.ship.turnRight()
-        this.ship.turnRight()
-        this.ship.step(2)
+        // this.player.turnRight()
+        // this.player.turnRight()
+        // this.player.step(1)
+        // this.player.turnRight()
+        // this.player.step(1)
+        // this.player.turnLeft()
+        // this.player.step(1)
+        // this.ship.turnRight()
+        // this.ship.turnRight()
+        // this.ship.step(2)
 
-        this.map.createTweenChain()
+        // this.map.createTweenChain()
         // this.cameras.main.startFollow(this.player)
         // this.cameras.main.stopFollow(this.player)
     }
@@ -48,7 +48,15 @@ export default class Game extends Phaser.Scene {
      * 每一帧都执行
      */
     update(){
-
+        const code = this.registry.get("code")
+        if(code.click){
+            this.map.moveData = []
+            eval(code.context)
+            if(this.map.moveData.length > 0) this.map.createTweenChain()
+            console.log(code, this.map.moveData)
+            code.click = false
+            code.context = null
+        }
     }
 
     addOnEvent(){
