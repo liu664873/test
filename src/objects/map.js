@@ -2,7 +2,7 @@ import Phaser from "phaser"
 import Grid from "./grid"
 import LayerPro from "./layerPro"
 import Generator from "./generator"
-
+import Tip from "./tip"
 /**
  * 维护地图的类
  */
@@ -138,8 +138,11 @@ export default class Map{
                 chain.push(tween)
             }
         }
-        console.log(chain)
-        this.scene.tweens.chain({ tweens: chain })
+        //console.log(chain)
+        if(chain.length)this.scene.tweens.chain({ tweens: chain })
+        else {
+            this.tip = new Tip(this)
+        }
     }
 
     /**

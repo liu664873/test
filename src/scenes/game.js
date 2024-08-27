@@ -27,7 +27,6 @@ export default class Game extends Phaser.Scene {
         this.amplify = this.add.sprite(150, 50, "amplify").setScale(0.5).setInteractive()
         this.reduce = this.add.sprite(250, 50, "reduce").setScale(0.5).setInteractive()
         this.addOnEvent()
-
         // this.player.turnRight()
         // this.player.turnRight()
         // this.player.step(1)
@@ -56,6 +55,7 @@ export default class Game extends Phaser.Scene {
             console.log(code, this.map.moveData)
             code.click = false
             code.context = null
+
         }
     }
 
