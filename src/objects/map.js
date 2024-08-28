@@ -133,13 +133,13 @@ export default class Map{
                 const tween = this.moveData[i].target.getTurnTween(this.moveData[i])
                 chain.push(tween)
             } else if(this.moveData[i].type === "move"){
-                if(!this.moveData[i].isCanMove) break
+                //if(!this.moveData[i].isCanMove) break
                 const tween = this.moveData[i].target.getMoveTween(this.moveData[i])
                 chain.push(tween)
             }
         }
         //console.log(chain)
-        if(chain.length)this.scene.tweens.chain({ tweens: chain })
+        if(chain.length)this.chainTween = this.scene.tweens.chain({ tweens: chain })
         else {
             this.tip = new Tip(this)
         }
