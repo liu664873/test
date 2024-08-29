@@ -55,7 +55,6 @@ export default class Game extends Phaser.Scene {
             console.log(code, this.map.moveData)
             code.click = false
             code.context = null
-
         }
     }
 

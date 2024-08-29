@@ -139,10 +139,8 @@ export default class Map{
             }
         }
         //console.log(chain)
-        if(chain.length)this.chainTween = this.scene.tweens.chain({ tweens: chain })
-        else {
-            this.tip = new Tip(this)
-        }
+        this.chainTween = this.scene.tweens.chain({ tweens: chain })
+           
     }
 
     /**

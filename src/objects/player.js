@@ -250,7 +250,7 @@ export default class Player extends Object {
             data.direction = DOWN
             data.turn = "leftToDown"
         }
-        //this.direction = data.direction
+        this.direction = data.direction
         this.map.moveData.push(data)
     }
 
