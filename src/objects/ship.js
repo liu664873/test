@@ -173,6 +173,14 @@ export default class Ship extends Object{
         return !isOver && this.moveSpace[logicY][logicX] === -1
     }
 
+    checkDriver(){
+        this.map.playerList.forEach(player => {
+            if(player.logicX === this.logicX && player.logicY === this.logicY){
+                this.driver = player
+            }
+        });
+    }
+
     
     /**
      * 调用这个函数
@@ -180,6 +188,7 @@ export default class Ship extends Object{
      * @returns 
      */
     step(step) {
+        this.checkDriver()
 
         for (let i = 0; i < step; i++) {
 
@@ -197,6 +206,7 @@ export default class Ship extends Object{
             
             const data = {
                 target: this,
+                driver: this.driver,
                 type: "move",
                 direction: this.direction,
                 from: from,

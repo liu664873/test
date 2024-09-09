@@ -59,18 +59,18 @@ export default class Map{
         //         return ship.gridX === star.gridX && ship.gridY === star.gridY
         //     }
         // )
-        //飞船ship和玩家player重叠检测
-        this.scene.physics.add.overlap(this.shipList, this.playerList,
-            (ship, player) => {
-                ship.driver = player
-            },
-            (ship, player) => {
-                const isOverlap = ship.logicX === player.logicX && ship.logicY === player.logicY
-                if(!isOverlap) ship.driver = null
-                console.log(ship.logicX, ship.logicY, player.logicX, player.logicY)
-                return isOverlap
-            }
-        )
+        // 飞船ship和玩家player重叠检测
+        // this.scene.physics.add.overlap(this.shipList, this.playerList,
+        //     (ship, player) => {
+        //         ship.driver = player
+        //     },
+        //     (ship, player) => {
+        //         const isOverlap = ship.logicX === player.logicX && ship.logicY === player.logicY
+        //         if(!isOverlap) ship.driver = null
+        //         console.log(ship.logicX, ship.logicY, player.logicX, player.logicY)
+        //         return isOverlap
+        //     }
+        // )
     }
 
     /**
@@ -128,17 +128,42 @@ export default class Map{
      */
     createTweenChain(){
         const chain = []
+        const start = {
+            targets: this.playerList[0],
+            onComplete: () => {
+                this.scene.cameras.main.startFollow(this.playerList[0])
+            }
+        }
+        chain.push(start)
         for(let i = 0; i < this.moveData.length; i++){
             if(this.moveData[i].type === "turn"){
                 const tween = this.moveData[i].target.getTurnTween(this.moveData[i])
                 chain.push(tween)
             } else if(this.moveData[i].type === "move"){
-                if(!this.moveData[i].isCanMove) break
+                if(!this.moveData[i].isCanMove) {
+                    const tween = {
+                        targets: this.moveData[i].target,
+                        duration: 2000,
+                        onComplete: () => {
+                            //提示
+                            //动画效果
+                            this.scene.scene.start("transform", {level: "level1", score: 0})
+                        }
+                    }
+                    chain.push(tween)
+                    break
+                }
                 const tween = this.moveData[i].target.getMoveTween(this.moveData[i])
                 chain.push(tween)
             }
         }
-        console.log(chain)
+        const end = {
+            targets: this.playerList[0],
+            onComplete: () => {
+                this.scene.cameras.main.stopFollow(this.playerList[0])
+            }
+        }
+        chain.push(end)
         this.scene.tweens.chain({ tweens: chain })
     }
 

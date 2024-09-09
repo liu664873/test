@@ -35,16 +35,16 @@ window.onload = function () {
     }
     game.registry.set("code", code) 
   
-    document.getElementById('codeButton').addEventListener('doubleclick', function() {  
+    document.getElementById('codeButton').addEventListener('click', function() {  
         // 这里不能直接控制Phaser游戏，但你可以通过全局变量、事件或Phaser的API来影响游戏  
         // 例如，你可以发送一个自定义事件给Phaser游戏，并在游戏内部监听这个事件 
         // var code = {
         //     click: true,
         //     context : document.getElementById('codeContext').value 
         // }
-        // game.registry.set("code", code) 
         code.click = true
         code.context = Editor.state.doc.toString(); 
+        game.registry.set("code", code) 
         console.log(code.context)
     });  
 };
