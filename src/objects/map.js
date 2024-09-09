@@ -2,7 +2,7 @@ import Phaser from "phaser"
 import Grid from "./grid"
 import LayerPro from "./layerPro"
 import Generator from "./generator"
-
+import Tip from "./tip"
 /**
  * 维护地图的类
  */
@@ -140,6 +140,7 @@ export default class Map{
                 const tween = this.moveData[i].target.getTurnTween(this.moveData[i])
                 chain.push(tween)
             } else if(this.moveData[i].type === "move"){
+<<<<<<< HEAD
                 if(!this.moveData[i].isCanMove) {
                     const tween = {
                         targets: this.moveData[i].target,
@@ -153,10 +154,14 @@ export default class Map{
                     chain.push(tween)
                     break
                 }
+=======
+                //if(!this.moveData[i].isCanMove) break
+>>>>>>> b4b74a49584f82209a5a77e79dbcd998633026c6
                 const tween = this.moveData[i].target.getMoveTween(this.moveData[i])
                 chain.push(tween)
             }
         }
+<<<<<<< HEAD
         const end = {
             targets: this.playerList[0],
             onComplete: () => {
@@ -165,6 +170,11 @@ export default class Map{
         }
         chain.push(end)
         this.scene.tweens.chain({ tweens: chain })
+=======
+        //console.log(chain)
+        this.chainTween = this.scene.tweens.chain({ tweens: chain })
+           
+>>>>>>> b4b74a49584f82209a5a77e79dbcd998633026c6
     }
 
     /**

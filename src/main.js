@@ -45,6 +45,6 @@ window.onload = function () {
         code.click = true
         code.context = Editor.state.doc.toString(); 
         game.registry.set("code", code) 
-        console.log(code.context)
+
     });  
 };

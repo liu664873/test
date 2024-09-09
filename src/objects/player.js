@@ -1,7 +1,7 @@
 import Phaser from "phaser"
 import ItemInfo from "./itemInfo"
 import Object from "./object"
-
+import Tip from "./tip"
 const LEFT = "left"
 const RIGHT = "right"
 const UP = "up"
@@ -135,7 +135,12 @@ export default class Player extends Object {
                 gridY: config.to.y,
             },
             duration: 1000,
-            onStart: () => {     
+            onStart: (tween,targets) => {  
+                if(!config.isCanMove)  {
+                    this.scene.tweens.remove(tween); 
+                    this.map.chainTween.stop()
+                    this.tip = new Tip(this)
+                }
                 this.anims.play(config.direction)
             }, 
             onComplete: () => {
@@ -157,6 +162,7 @@ export default class Player extends Object {
                this.anims.play(config.turn)
             },
             onComplete: () => {
+                this.direction = config.direction
                 this.setFrame(this.directionImage[config.direction])
             },
         }

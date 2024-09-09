@@ -27,6 +27,20 @@ export default class Game extends Phaser.Scene {
         this.amplify = this.add.sprite(150, 50, "amplify").setScale(0.5).setInteractive().setScrollFactor(0)
         this.reduce = this.add.sprite(250, 50, "reduce").setScale(0.5).setInteractive().setScrollFactor(0)
         this.addOnEvent()
+        // this.player.turnRight()
+        // this.player.turnRight()
+        // this.player.step(1)
+        // this.player.turnRight()
+        // this.player.step(1)
+        // this.player.turnLeft()
+        // this.player.step(1)
+        // this.ship.turnRight()
+        // this.ship.turnRight()
+        // this.ship.step(2)
+
+        // this.map.createTweenChain()
+        // this.cameras.main.startFollow(this.player)
+        // this.cameras.main.stopFollow(this.player)
     }
 
     /**
