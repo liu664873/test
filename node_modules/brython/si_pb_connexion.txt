@@ -1,0 +1,3 @@
+Si la connection échoue, désactiver IPv6...
+Paramètres > Réseau et Internet > Centre Réseau et Partage > (sous Internet, ex Wifi Livebox-0094)
+> Propriétés

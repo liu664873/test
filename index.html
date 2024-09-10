@@ -4,14 +4,48 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-   
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/brython@3.9.5/brython.min.js"></script>  
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/brython@3.9.5/brython_stdlib.js"></script>
 </head>
-<body style="display: flex;">
+<body style="display: flex;" onload="brython()">
     <div id="game" style="width: 300px; height: 300px;"></div>
     <div id="code" class="code">
-        <div id="codeContext" style="width: 300px; height: 300px;">
+        <div id="editor" style="width: 300px; height: 300px;">
         </div>
+        <button id="run">run</button>
+        <button id="ref_ans">ref_ans</button>
+        <button id="clear">clear</button>
     </div>
-    <button id="codeButton">运行</button>
+
+<script type="text/python3">
+    from browser import document as doc, window
+    import sys
+    game = window.game
+    def run(ev):
+        player = game.registry.get("player")
+        ship = game.registry.get("ship")
+        mapd = game.registry.get("mapd")
+        exec(window.editor.getValue())
+        mapd.createTweenChain()
+    def ref_ans(ev):
+        code = '''player.turnLeft()
+        player.turnLeft()
+        player.step(1)
+        player.turnRight()
+        player.step(1)
+        player.turnLeft()
+        player.step(1)
+        ship.turnLeft()
+        ship.turnLeft()
+        for i in range(3):
+            ship.step(1)'''
+        window.editor.setValue(code)
+    def clear(ev):
+        window.editor.setValue("")
+    doc["run"].bind('click', run)
+    doc["ref_ans"].bind("click", ref_ans)
+    doc["clear"].bind("click", clear)
+</script>
+    
 </body>
 </html>

@@ -12,6 +12,7 @@
   "dependencies": {
     "@codemirror/lang-javascript": "^6.2.2",
     "ace-builds": "^1.36.2",
+    "brython": "^3.12.4",
     "codemirror": "^6.0.1",
     "html-webpack-plugin": "^5.6.0",
     "phaser": "^3.80.0",
