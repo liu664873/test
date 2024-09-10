@@ -28,17 +28,18 @@
         exec(window.editor.getValue())
         mapd.createTweenChain()
     def ref_ans(ev):
-        code = '''player.turnLeft()
-        player.turnLeft()
-        player.step(1)
-        player.turnRight()
-        player.step(1)
-        player.turnLeft()
-        player.step(1)
-        ship.turnLeft()
-        ship.turnLeft()
-        for i in range(3):
-            ship.step(1)'''
+        code = '''
+            player.turnLeft()
+            player.turnLeft()
+            player.step(1)
+            player.turnRight()
+            player.step(1)
+            player.turnLeft()
+            player.step(1)
+            ship.turnLeft()
+            ship.turnLeft()
+            for i in range(3):
+                ship.step(1)'''
         window.editor.setValue(code)
     def clear(ev):
         window.editor.setValue("")

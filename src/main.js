@@ -29,12 +29,3 @@ var game = new Phaser.Game(config);
 window.game = game
 
 import "./codeEditor/editor"
-
-window.onload = function () {  
-    brython()
-    var code = {
-        click: false,
-        context: null,
-    }
-    game.registry.set("code", code) 
-};

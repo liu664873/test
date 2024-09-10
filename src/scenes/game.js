@@ -1,6 +1,7 @@
 import Phaser from "phaser"
 import Map from "../objects/map"
 import Generator from "../objects/generator"
+import SceneEffect from "../objects/sceneEffect"
 
 /**
  * 游戏场景的类
@@ -18,6 +19,9 @@ export default class Game extends Phaser.Scene {
     }
 
     create(){
+        this.width = this.sys.game.config.width
+        this.height = this.sys.game.config.height
+
         this.map = new Map(this, this.level, 950, 100)
         // this.map.openGrid()
         this.player = Generator.generatePlayer(this.map, "player", 3, 2, 2)

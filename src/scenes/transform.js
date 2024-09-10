@@ -1,4 +1,5 @@
 import Phaser from "phaser"
+import SceneEffect from "../objects/sceneEffect"
 
 /**
  * 转换场景的类
@@ -22,7 +23,14 @@ export default class Transform extends Phaser.Scene {
     }
 
     create(){
-        this.toNext()
+        console.log(this)
+        console.log(this.tweens)
+        this.time.delayedCall(
+            500,
+            () => {
+                this.toNext()
+            }
+        )
     }
     
     /**
@@ -32,7 +40,10 @@ export default class Transform extends Phaser.Scene {
         const data = {
             level: this.level
         }
-        if(this.level) this.scene.start(`game`, data)
-        // this.scene.start("test")
+        if(this.level) {
+            SceneEffect.openScene(this, () => {
+                this.scene.start(`game`, data)
+            })
+        }
     }
 }
