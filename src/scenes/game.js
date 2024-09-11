@@ -2,6 +2,7 @@ import Phaser from "phaser"
 import Map from "../objects/map"
 import Generator from "../objects/generator"
 import SceneEffect from "../objects/sceneEffect"
+import UI from "../objects/ui/ui"
 
 /**
  * 游戏场景的类
@@ -30,7 +31,11 @@ export default class Game extends Phaser.Scene {
         this.showGrid = this.add.sprite(50, 50, "showGrid").setScale(0.5).setInteractive().setScrollFactor(0)
         this.amplify = this.add.sprite(150, 50, "amplify").setScale(0.5).setInteractive().setScrollFactor(0)
         this.reduce = this.add.sprite(250, 50, "reduce").setScale(0.5).setInteractive().setScrollFactor(0)
+        this.move = this.add.sprite(350, 50, "move").setScale(0.5).setInteractive().setScrollFactor(0)
         this.addOnEvent()
+
+        this.popUp = UI.popUp(this, this.width/2, this.height/2, 10, "呵呵呵呵呵呵呵", () => {}, () => {})
+
         
         this.registry.set("player", this.player)
         this.registry.set("ship", this.ship)
