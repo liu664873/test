@@ -170,7 +170,7 @@ export default class Map{
                 targets: data.targets,
                 onComplete: () => {
                     this.scene.cameras.main.stopFollow(data.targets)
-                    let info = info = `${data.target.name}在坐标(${data.from.x},${data.from.y})\n不能向${data.direction}移动到\n(${data.to.x},${data.to.y}),是否重新开始？`
+                    let info = `${data.target.name}在坐标(${data.from.x},${data.from.y})\n不能向${data.direction}移动到\n(${data.to.x},${data.to.y}),是否重新开始？`
                     const width = this.scene.sys.game.config.width 
                     const height = this.scene.sys.game.config.height
                     const popUp = UI.popUp(this.scene, width/2, height/2, this.depth + 10, info, () => {}, () => {this.scene.scene.start("transform", {level: this.scene.level})})
