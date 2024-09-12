@@ -25,7 +25,7 @@ for i in range(3):
 `;
 
 editor.setValue(testContent)
-editor.gotoLine(10, 0, true)
+editor.gotoLine(3, 0, true)
 
 editor.container.addEventListener('click', (e) => {
     console.log('Clicked at', e.clientX, e.clientY)
