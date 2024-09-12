@@ -17,7 +17,6 @@ export default class Button extends Phaser.GameObjects.Container {
 
     addEvents(){
         this.bg.on("pointerdown", () => {
-            console.log("hhhhh")
             this.bg.setTint(0xff0000)
             this.info.setColor(0xff0000)
             if(this.callback) this.callback()

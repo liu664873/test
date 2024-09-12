@@ -1,5 +1,7 @@
 import Phaser from "phaser"
 import Button from "./button"
+import ProgressBar from "./progressBar"
+import IconButton from "./iconButton"
 import Prompt from "./prompt"
 
 /**
@@ -10,6 +12,13 @@ export default class UI {
     static button(scene, x, y,  depth, info, callback){
         const button = new Button(scene, x, y, depth, info, callback)
         return button
+    }
+    static progressBar(scene, x, y){
+        return new ProgressBar(scene, x, y)
+    }
+    static iconButton(scene, x, y, texture){
+        const iconButton = new IconButton(scene, x, y, texture)
+        return iconButton
     }
     static prompt(scene, x, y, depth, info, children){
         const  prompt = new Prompt(scene, x, y, depth, info, children)
