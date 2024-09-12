@@ -44,6 +44,7 @@ export default class Map{
             (player, star) => {
                 // this.scene.sound.play("star")
                 this.scene.score++
+                this.scene.progressBar.updateProgress(this.scene.score/this.propList.length)
                 star.destroy()
             },
             (player, star) => {
@@ -77,7 +78,7 @@ export default class Map{
     /**
      * 未做完，有缺陷
      */
-    // addOnEvent(){
+    // addOnMoveEvent(){
     //     let dragX, dragY;   
     //     let dragging = false;  
     //     let gameWidth = this.scene.sys.game.config.width
@@ -198,8 +199,9 @@ export default class Map{
                     let info = `是否进入下一关！`
                     const width = this.scene.sys.game.config.width 
                     const height = this.scene.sys.game.config.height
-                    const popUp = UI.popUp(this.scene, width/2, height/2, this.depth + 1, info, () => {this.scene.scene.start("transform", {level: this.scene.level})}, () => {this.scene.scene.start("transform", {level: this.scene.level})})
-                    
+                    const popUp = UI.popUp(this.scene, width/2, height/2, this.depth + 1, info, 
+                        () => {this.scene.scene.start("transform", {level: this.scene.level})}, 
+                        () => {this.scene.scene.start("transform", {level: this.scene.level})})
                 }
             }
         }
