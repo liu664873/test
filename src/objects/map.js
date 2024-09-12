@@ -2,7 +2,7 @@ import Phaser from "phaser"
 import Grid from "./grid"
 import LayerPro from "./layerPro"
 import Generator from "./generator"
-import Tip from "./tip"
+import UI from "./ui/ui"
 /**
  * 维护地图的类
  */
@@ -43,6 +43,7 @@ export default class Map{
         this.scene.physics.add.overlap(this.playerList, this.propList, 
             (player, star) => {
                 // this.scene.sound.play("star")
+                this.scene.score++
                 star.destroy()
             },
             (player, star) => {
@@ -134,45 +135,77 @@ export default class Map{
      */
     createTweenChain(){
         const chain = []
+
+        //开始动画，主要设置摄像头跟随
         const start = {
-            targets: this.playerList[0],
+            targets: this.moveData[0].targets,
             onComplete: () => {
                 this.scene.cameras.main.startFollow(this.playerList[0])
             }
         }
         chain.push(start)
+
+        let data = null
+        
         for(let i = 0; i < this.moveData.length; i++){
             if(this.moveData[i].type === "turn"){
                 const tween = this.moveData[i].target.getTurnTween(this.moveData[i])
                 chain.push(tween)
-            } else if(this.moveData[i].type === "move"){
-                if(!this.moveData[i].isCanMove) {
-                    const tween = {
-                        targets: this.moveData[i].target,
-                        duration: 2000,
-                        onComplete: () => {
-                            //提示
-                            //动画效果
-                            this.scene.scene.start("transform", {level: "level1", score: 0})
-                        }
-                    }
+            } else if(this.moveData[i].type === "move") {
+                if(this.moveData[i].isCanMove){
+                    const tween = this.moveData[i].target.getMoveTween(this.moveData[i])
                     chain.push(tween)
+                } else {
+                    data = this.moveData[i]
                     break
                 }
-                //if(!this.moveData[i].isCanMove) break
-                const tween = this.moveData[i].target.getMoveTween(this.moveData[i])
-                chain.push(tween)
             }
         }
-        const end = {
-            targets: this.playerList[0],
-            onComplete: () => {
-                this.scene.cameras.main.stopFollow(this.playerList[0])
+
+        let end
+
+        if(data) {
+            end = {
+                targets: data.targets,
+                onComplete: () => {
+                    this.scene.cameras.main.stopFollow(data.targets)
+                    let info = info = `${data.target.name}在坐标(${data.from.x},${data.from.y})\n不能向${data.direction}移动到\n(${data.to.x},${data.to.y}),是否重新开始？`
+                    const width = this.scene.sys.game.config.width 
+                    const height = this.scene.sys.game.config.height
+                    const popUp = UI.popUp(this.scene, width/2, height/2, this.depth + 10, info, () => {}, () => {this.scene.scene.start("transform", {level: this.scene.level})})
+                    
+                }
+            }
+        } else if(this.scene.score < this.propList.length){
+            data = this.moveData[this.moveData.length - 1]
+            end = {
+                targets: data.targets,
+                onComplete: () => {
+                    this.scene.cameras.main.stopFollow(data.targets)
+                    let info =  `已经收集道具${this.scene.score},还有${this.propList.length - this.scene.score}个\n未收集,是否重新开始？`
+                    const width = this.scene.sys.game.config.width 
+                    const height = this.scene.sys.game.config.height
+                    const popUp = UI.popUp(this.scene, width/2, height/2, this.depth + 10, info, () => {}, () => {this.scene.scene.start("transform", {level: this.scene.level})})
+                    
+                }
+            }
+        } else {
+            data = this.moveData[this.moveData.length - 1]
+            end = {
+                targets: data.targets,
+                onComplete: () => {
+                    this.scene.cameras.main.stopFollow(data.targets)
+                    let info = `是否进入下一关！`
+                    const width = this.scene.sys.game.config.width 
+                    const height = this.scene.sys.game.config.height
+                    const popUp = UI.popUp(this.scene, width/2, height/2, this.depth + 1, info, () => {this.scene.scene.start("transform", {level: this.scene.level})}, () => {this.scene.scene.start("transform", {level: this.scene.level})})
+                    
+                }
             }
         }
+
         chain.push(end)
         this.scene.tweens.chain({ tweens: chain })
-        //console.log(chain)
         this.chainTween = this.scene.tweens.chain({ tweens: chain })
         this.moveData = []
     }

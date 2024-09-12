@@ -23,6 +23,8 @@ export default class Game extends Phaser.Scene {
         this.width = this.sys.game.config.width
         this.height = this.sys.game.config.height
 
+        this.score = 0
+
         this.map = new Map(this, this.level, 950, 100)
         // this.map.openGrid()
         this.player = Generator.generatePlayer(this.map, "player", 3, 2, 2)
@@ -33,9 +35,6 @@ export default class Game extends Phaser.Scene {
         this.reduce = this.add.sprite(250, 50, "reduce").setScale(0.5).setInteractive().setScrollFactor(0)
         this.move = this.add.sprite(350, 50, "move").setScale(0.5).setInteractive().setScrollFactor(0)
         this.addOnEvent()
-
-        this.popUp = UI.popUp(this, this.width/2, this.height/2, 10, "呵呵呵呵呵呵呵", () => {}, () => {})
-
         
         this.registry.set("player", this.player)
         this.registry.set("ship", this.ship)
@@ -43,6 +42,7 @@ export default class Game extends Phaser.Scene {
         this.events.addListener("runCode", function() {
             this.map.createTweenChain()
         }, this)
+
     }
 
     /**
