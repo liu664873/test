@@ -61,6 +61,40 @@ export default class Game extends Phaser.Scene {
     }
 
     addOnEvent(){
+        let dragX, dragY;   
+        let dragging = false;  
+        let gameWidth = this.sys.game.config.width
+        let gameHeight = this.sys.game.config.height
+
+        this.move.on("pointerup", (pointer) => {
+            dragging = !dragging  
+            if(dragging){
+                this.move.setTint(0xff0000)
+            } else {
+                this.move.clearTint()
+            }
+        })
+  
+        // 鼠标按下事件  
+        this.input.on('pointerdown', (pointer) => {  
+            if(dragging){
+                dragX = pointer.x - this.map.x;  
+                dragY = pointer.y - this.map.y;  
+            }
+        });  
+    
+        // 鼠标移动事件  
+        this.input.on('pointermove', (pointer) => {  
+            if (dragging && this.input.activePointer.isDown) {  
+                let x = pointer.x - dragX;  
+                let y = pointer.y - dragY; 
+                //将x，y束缚在游戏界面内，不要超界
+                x = Phaser.Math.Clamp(x, 0, gameWidth)
+                y = Phaser.Math.Clamp(y, 0, gameHeight)
+                this.map.setPosition(x, y) 
+            }  
+        });  
+        
         this.showGrid.on("pointerdown", () => {
             if(this.map.grid.visible) this.map.closeGrid()
             else this.map.openGrid()

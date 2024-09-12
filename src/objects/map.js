@@ -34,7 +34,7 @@ export default class Map{
 
         this.initLayers()
         this.initMoveSapce(0, 1)
-        this.addOnEvent()
+        // this.addOnEvent()
         this.init()
     }
 
@@ -77,37 +77,37 @@ export default class Map{
     /**
      * 未做完，有缺陷
      */
-    addOnEvent(){
-        let dragX, dragY;   
-        let dragging = false;  
-        let gameWidth = this.scene.sys.game.config.width
-        let gameHeight = this.scene.sys.game.config.height
+    // addOnEvent(){
+    //     let dragX, dragY;   
+    //     let dragging = false;  
+    //     let gameWidth = this.scene.sys.game.config.width
+    //     let gameHeight = this.scene.sys.game.config.height
   
-        // 鼠标按下事件  
-        this.scene.input.on('pointerdown', (pointer) => {  
-            dragging = true;  
-            dragX = pointer.x - this.x;  
-            dragY = pointer.y - this.y;  
+    //     // 鼠标按下事件  
+    //     this.scene.input.on('pointerdown', (pointer) => {  
+    //         dragging = true;  
+    //         dragX = pointer.x - this.x;  
+    //         dragY = pointer.y - this.y;  
 
-        });  
+    //     });  
     
-        // 鼠标移动事件  
-        this.scene.input.on('pointermove', (pointer) => {  
-            if (dragging) {  
-                let x = pointer.x - dragX;  
-                let y = pointer.y - dragY; 
-                //将x，y束缚在游戏界面内，不要超界
-                x = Phaser.Math.Clamp(x, 0, gameWidth)
-                y = Phaser.Math.Clamp(y, 0, gameHeight)
-                this.setPosition(x, y) 
-            }  
-        });  
+    //     // 鼠标移动事件  
+    //     this.scene.input.on('pointermove', (pointer) => {  
+    //         if (dragging) {  
+    //             let x = pointer.x - dragX;  
+    //             let y = pointer.y - dragY; 
+    //             //将x，y束缚在游戏界面内，不要超界
+    //             x = Phaser.Math.Clamp(x, 0, gameWidth)
+    //             y = Phaser.Math.Clamp(y, 0, gameHeight)
+    //             this.setPosition(x, y) 
+    //         }  
+    //     });  
     
-        // 鼠标释放事件  
-        this.scene.input.on('pointerup', () => {  
-            dragging = false;  
-        });  
-    }
+    //     // 鼠标释放事件  
+    //     this.scene.input.on('pointerup', () => {  
+    //         dragging = false;  
+    //     });  
+    // }
 
     /**
      * 添加瓦片集
