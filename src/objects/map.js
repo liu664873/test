@@ -194,7 +194,7 @@ export default class Map{
                     const height = this.scene.sys.game.config.height
                     const popUp = UI.popUp(this.scene, width/2, height/2, this.depth + 10, info,
                          () => {}, 
-                         ()=>SceneEffect.closeScene(this.scene,() => {this.scene.scene.start("transform", {level: this.scene.level})}))
+                         ()=>SceneEffect.closeScene(this.scene,() => {this.scene.scene.start("transform", {level: "level2"})}))
                         } else {
                                     this.scene.cameras.main.stopFollow(data.targets)
                                     let info = `是否进入下一关！`
@@ -202,7 +202,7 @@ export default class Map{
                                     const height = this.scene.sys.game.config.height
                                     const popUp = UI.popUp(this.scene, width/2, height/2, this.depth + 1, info, 
                                         () => {this.scene.scene.start("transform", {level: this.scene.level})}, 
-                                        ()=>SceneEffect.closeScene(this.scene,() => {this.scene.scene.start("transform", {level: this.scene.level})}))
+                                        ()=>SceneEffect.closeScene(this.scene,() => {this.scene.scene.start("transform", {level: "level2"})}))
                         }
                     }
                 }

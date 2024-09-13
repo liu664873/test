@@ -25,7 +25,7 @@ export default class UI {
         return prompt
     }
     static popUp(scene, x, y, depth, info, callback1, callback2){
-        const popUp = UI.prompt(scene, x, y, depth, info)
+        const popUp = UI.prompt(scene, x, y, depth, info).setScrollFactor(0)
         const cancellBtn = UI.button(scene, -100, 120, 10, "取消", function(){
             popUp.destroy()
             callback1()

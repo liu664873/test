@@ -25,6 +25,7 @@ export default class Game extends Phaser.Scene {
 
         this.score = 0
 
+
         this.map = new Map(this, this.level, 950, 100)
         // this.map.openGrid()
         this.player = Generator.generatePlayer(this.map, "player", 3, 2, 2)
