@@ -1,4 +1,3 @@
-/* .game {  
-    display: flex;  
-    justify-content: space-around; 
-}  */
+.highlight-line {  
+    background-color: yellow; /* 或其他你想要的背景颜色 */  
+}

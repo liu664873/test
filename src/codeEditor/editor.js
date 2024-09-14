@@ -1,6 +1,10 @@
-import ace from "ace-builds"
+import ace, { edit } from "ace-builds"
 import 'ace-builds/src-min-noconflict/mode-python' //导入语言包
 import 'ace-builds/src-min-noconflict/ext-language_tools' //自动补全代码
+import 'ace-builds/src-min-noconflict/ext-static_highlight'
+import 'ace-builds/src-min-noconflict/ext-beautify'
+import 'ace-builds/esm-resolver'
+
 var editor = ace.edit("editor", {
     maxLines: 20,
     minLines:20,
@@ -25,7 +29,7 @@ for i in range(3):
 `;
 
 editor.setValue(testContent)
-editor.gotoLine(10, 0, true)
+editor.clearSelection()
 
 editor.container.addEventListener('click', (e) => {
     console.log('Clicked at', e.clientX, e.clientY)
@@ -33,17 +37,19 @@ editor.container.addEventListener('click', (e) => {
     console.log('Cursor position:', currsorPostion.row, currsorPostion.column)
 })
 
-ace.require("ace/ext/language_tools");
 
 editor.setOptions({
+    highlightActiveLine: true,
     enableBasicAutocompletion: true,
     enableSnippets: true,
     enableLiveAutocompletion: true
 });
+
+editor.gotoLine(4, 0, true)
+editor.line
 
 // editor.commands.addCommand({
 //     name: 'serach',
 //     bindKey: {win: 'Ctrl-F'},
 //     exec: function(editor){
 //     }
-// })
