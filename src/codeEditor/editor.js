@@ -5,15 +5,13 @@ import 'ace-builds/src-min-noconflict/ext-static_highlight'
 import 'ace-builds/src-min-noconflict/ext-beautify'
 import 'ace-builds/esm-resolver'
 
-var editor = ace.edit("editor", {
+const editor = ace.edit("editor", {
     maxLines: 20,
-    minLines:20,
+    minLines: 20,
     fontSize: 10,
     theme: 'ace/theme/chrome',
     mode: 'ace/mode/python',
 })
-
-window.editor = editor
 
 let testContent = `player.turnLeft()
 player.turnLeft()
@@ -37,7 +35,6 @@ editor.container.addEventListener('click', (e) => {
     console.log('Cursor position:', currsorPostion.row, currsorPostion.column)
 })
 
-
 editor.setOptions({
     highlightActiveLine: true,
     enableBasicAutocompletion: true,
@@ -45,11 +42,24 @@ editor.setOptions({
     enableLiveAutocompletion: true
 });
 
-editor.gotoLine(4, 0, true)
-editor.line
+editor.highlightLines = new Map()
 
-// editor.commands.addCommand({
-//     name: 'serach',
-//     bindKey: {win: 'Ctrl-F'},
-//     exec: function(editor){
-//     }
+editor.highlightLine = function (lineNumber, className = "highlight-line") {
+    if(editor.highlightLines.get(lineNumber)) return
+    var range = new ace.Range(lineNumber - 1, 0, lineNumber - 1, 1);
+    var markerId = editor.session.addMarker(range, className, "fullLine", true);
+    // editor.gotoLine(lineNumber)
+    // 可以选择将markerId存储起来以便后续取消高亮  
+    editor.highlightLines.set(lineNumber, markerId)
+    return markerId;
+}
+
+editor.removeHighlight = function (lineNumber) {
+    let markerId = editor.highlightLines.get(lineNumber)
+    if (markerId) {
+        editor.highlightLines.delete(lineNumber)
+        editor.session.removeMarker(markerId);
+    }
+}
+
+export default editor

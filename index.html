@@ -1,18 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/brython@3.9.5/brython.min.js"></script>  
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/brython@3.9.5/brython_stdlib.js"></script> 
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/brython@3.9.5/brython.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/brython@3.9.5/brython_stdlib.js"></script>
     <style>
-        .highlight-line {  
-            background-color: yellow; /* 或其他你想要的背景颜色 */  
+        .highlight-line {
+            position: absolute;  
+            background: rgba(255, 0, 0, 0.2); /* 黄色半透明背景 */  
+            z-index: 1;  
+            left: 0;  
+            right: 0; 
         }
     </style>
 </head>
-<body style="display: flex;" onload="brython()">
+
+<body style="display: flex;">
     <div id="game" style="width: 300px; height: 300px;"></div>
     <div id="code" class="code">
         <div id="editor" style="width: 300px; height: 300px;">
@@ -22,7 +28,7 @@
         <button id="clear">clear</button>
     </div>
 
-<script type="text/python3">
+    <!-- <script type="text/python3">
     from browser import document as doc, window
     import sys
     game = window.game
@@ -52,7 +58,124 @@
     doc["run"].bind('click', run)
     doc["ref_ans"].bind("click", ref_ans)
     doc["clear"].bind("click", clear)
-</script>
+</script> -->
+<script type="text/python3">
+    from browser import document as doc, window
+    import javascript
+    import sys
+    import traceback
+    import re
+
+    code_head = '''
+
+    game = window.game
+    player = game.registry.get("player")
+    ship = game.registry.get("ship")
+    mapd = game.registry.get("mapd")
     
+    '''
+
+    code_tail = '''
+    mapd.createTweenChain()
+    '''
+
+    def handleOneStep(lineNumber):
+        window.gameAndEditor_data.set('runningCodeLine', lineNumber)
+
+    def getStartSpaceCount(str):
+        count = 0
+        for w in str:
+            if w == ' ':
+                count += 1
+            else:
+                break
+        return count
+    
+    
+    SKIPS = (
+        '.step',
+        '.turnLeft',
+        '.turnRight',
+    )
+    FORBIDDEN_ACT = (
+        'eval',
+        'exec',
+        'complie',
+        'isinstance',
+        'dict',
+        'getattr',
+        'input',
+        'clearCurrentSteps',
+        'browser',
+        'Dev["',
+        'Spaceship["',
+        'Airship["',
+        'Item["',
+        'Flyer["',
+        'Energy["',
+        'Airship',
+        '__turnBack',
+        ';',
+    )
+    REC_SKIPS = re.compile('|'.join([re.escape(x) for x in SKIPS]), re.I)
+    FOR_SKIPS = re.compile('|'.join([re.escape(x) for x in FORBIDDEN_ACT]), re.I)
+
+    def echo(event):
+        error_str = ""
+        
+        # 获取编辑器上输入的代码
+        code = window.editor.getValue()
+        
+        old_lines = code.split('\n')
+
+        old_lines = list(map(lambda e: e.replace('\t', '    '), old_lines))
+        
+        line_dict = []
+
+        old_lines = list(map(lambda e: e.replace('\t', '    '), old_lines))
+
+        for i in range(len(old_lines)):
+                line = old_lines[i]
+                
+                line_stripped = line.strip()
+                
+                #过滤掉为空的行数
+                if len(line_stripped) <= 0:
+                    continue
+
+                #过滤掉注释行
+                if (line_stripped[0] == '#'):
+                    continue
+
+                if len(line_stripped)>80:
+                    raise Exception(":One line of code cannot exceed 80 characters")
+                    
+                line_dict.append([i + 1, line, 1])
+
+        #print('line_dict', line_dict)
+
+        newLines = []
+
+        for i in range(len(line_dict)):
+
+            spaceCount = getStartSpaceCount(line_dict[i][1])
+
+            newLines.append(' ' * (spaceCount) +
+                            'handleOneStep(' + str(line_dict[i][0]) + ')')
+            
+            newLines.append(line_dict[i][1])
+
+        new_code = '\n'.join(newLines)
+        
+        code = code_head + new_code + code_tail
+        print(code)
+
+        exec(code)
+
+    doc["run"].bind("click", echo)
+
+</script>
+
 </body>
+
 </html>
