@@ -1,7 +1,7 @@
 import Phaser from "phaser"
 
 export default class Button extends Phaser.GameObjects.Container {
-    constructor(scene, x, y, depth, info, callback){
+    constructor(scene, x, y, depth, info, callback, tx){
         super(scene, x, y)
         this.scene.add.existing(this)
         this.info = info

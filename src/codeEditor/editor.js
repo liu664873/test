@@ -1,15 +1,17 @@
-import ace from "ace-builds"
+import ace, { edit } from "ace-builds"
 import 'ace-builds/src-min-noconflict/mode-python' //导入语言包
 import 'ace-builds/src-min-noconflict/ext-language_tools' //自动补全代码
-var editor = ace.edit("editor", {
+import 'ace-builds/src-min-noconflict/ext-static_highlight'
+import 'ace-builds/src-min-noconflict/ext-beautify'
+import 'ace-builds/esm-resolver'
+
+const editor = ace.edit("editor", {
     maxLines: 20,
-    minLines:20,
+    minLines: 20,
     fontSize: 10,
     theme: 'ace/theme/chrome',
     mode: 'ace/mode/python',
 })
-
-window.editor = editor
 
 let testContent = `player.turnLeft()
 player.turnLeft()
@@ -25,7 +27,7 @@ for i in range(3):
 `;
 
 editor.setValue(testContent)
-editor.gotoLine(3, 0, true)
+editor.clearSelection()
 
 editor.container.addEventListener('click', (e) => {
     console.log('Clicked at', e.clientX, e.clientY)
@@ -33,17 +35,31 @@ editor.container.addEventListener('click', (e) => {
     console.log('Cursor position:', currsorPostion.row, currsorPostion.column)
 })
 
-ace.require("ace/ext/language_tools");
-
 editor.setOptions({
+    highlightActiveLine: true,
     enableBasicAutocompletion: true,
     enableSnippets: true,
     enableLiveAutocompletion: true
 });
 
-// editor.commands.addCommand({
-//     name: 'serach',
-//     bindKey: {win: 'Ctrl-F'},
-//     exec: function(editor){
-//     }
-// })
+editor.highlightLines = new Map()
+
+editor.highlightLine = function (lineNumber, className = "highlight-line") {
+    if(editor.highlightLines.get(lineNumber)) return
+    var range = new ace.Range(lineNumber - 1, 0, lineNumber - 1, 1);
+    var markerId = editor.session.addMarker(range, className, "fullLine", true);
+    // editor.gotoLine(lineNumber)
+    // 可以选择将markerId存储起来以便后续取消高亮  
+    editor.highlightLines.set(lineNumber, markerId)
+    return markerId;
+}
+
+editor.removeHighlight = function (lineNumber) {
+    let markerId = editor.highlightLines.get(lineNumber)
+    if (markerId) {
+        editor.highlightLines.delete(lineNumber)
+        editor.session.removeMarker(markerId);
+    }
+}
+
+export default editor

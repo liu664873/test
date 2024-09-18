@@ -78,41 +78,6 @@ export default class Map{
     }
 
     /**
-     * 未做完，有缺陷
-     */
-    // addOnMoveEvent(){
-    //     let dragX, dragY;   
-    //     let dragging = false;  
-    //     let gameWidth = this.scene.sys.game.config.width
-    //     let gameHeight = this.scene.sys.game.config.height
-  
-    //     // 鼠标按下事件  
-    //     this.scene.input.on('pointerdown', (pointer) => {  
-    //         dragging = true;  
-    //         dragX = pointer.x - this.x;  
-    //         dragY = pointer.y - this.y;  
-
-    //     });  
-    
-    //     // 鼠标移动事件  
-    //     this.scene.input.on('pointermove', (pointer) => {  
-    //         if (dragging) {  
-    //             let x = pointer.x - dragX;  
-    //             let y = pointer.y - dragY; 
-    //             //将x，y束缚在游戏界面内，不要超界
-    //             x = Phaser.Math.Clamp(x, 0, gameWidth)
-    //             y = Phaser.Math.Clamp(y, 0, gameHeight)
-    //             this.setPosition(x, y) 
-    //         }  
-    //     });  
-    
-    //     // 鼠标释放事件  
-    //     this.scene.input.on('pointerup', () => {  
-    //         dragging = false;  
-    //     });  
-    // }
-
-    /**
      * 添加瓦片集
      */
     addTilesetImages(){
@@ -175,8 +140,21 @@ export default class Map{
                     const width = this.scene.sys.game.config.width 
                     const height = this.scene.sys.game.config.height
                     const popUp = UI.popUp(this.scene, width/2, height/2, this.depth + 10, info, 
-                        () => {}, 
-                        ()=>SceneEffect.closeScene(this.scene,() => {this.scene.scene.start("transform", {level: this.scene.level})}))
+                        () => {}, () => {this.scene.scene.start("transform", {level: this.scene.level})})
+                    
+                }
+            }
+        } else if(this.scene.score < this.propList.length){
+            data = this.moveData[this.moveData.length - 1]
+            end = {
+                targets: data.targets,
+                onComplete: () => {
+                    this.scene.cameras.main.stopFollow(data.targets)
+                    let info =  `已经收集道具${this.scene.score},还有${this.propList.length - this.scene.score}个\n未收集,是否重新开始？`
+                    const width = this.scene.sys.game.config.width 
+                    const height = this.scene.sys.game.config.height
+                    const popUp = UI.popUp(this.scene, width/2, height/2, this.depth + 10, info, 
+                        () => {}, () => {this.scene.scene.start("transform", {level: this.scene.level})})
                     
                 }
             }

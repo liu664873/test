@@ -2,6 +2,7 @@ import Phaser from "phaser"
 import Game from "./scenes/game"
 import Loader from "./scenes/loader"
 import Transform from "./scenes/transform"
+import editor from "./codeEditor/editor"
 
 
 import Test from "./scenes/test"
@@ -25,7 +26,9 @@ const config = {
     scene: [Loader, Game, Transform, Test]
 }
 
-var game = new Phaser.Game(config); 
-window.game = game
-
-import "./codeEditor/editor"
+window.onload = function() {
+    brython()
+    window.game = new Phaser.Game(config); 
+    window.editor = editor
+    window.gameAndEditor_data = new Map()
+}

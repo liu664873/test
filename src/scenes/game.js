@@ -36,7 +36,6 @@ export default class Game extends Phaser.Scene {
         this.reduce = this.add.sprite(250, 50, "reduce").setScale(0.5).setInteractive().setScrollFactor(0)
         this.move = this.add.sprite(350, 50, "move").setScale(0.5).setInteractive().setScrollFactor(0)
         this.progressBar = UI.progressBar(this, 450, 50).setScrollFactor(0)
-        console.log(this.progressBar)
         this.addOnEvent()
         
         this.registry.set("player", this.player)
