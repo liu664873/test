@@ -3,6 +3,7 @@ import Grid from "./grid"
 import LayerPro from "./layerPro"
 import Generator from "./generator"
 import UI from "./ui/ui"
+import SceneEffect from "./sceneEffect"
 /**
  * 维护地图的类
  */
@@ -43,7 +44,8 @@ export default class Map{
         this.scene.physics.add.overlap(this.playerList, this.propList, 
             (player, star) => {
                 // this.scene.sound.play("star")
-                this.scene.score++
+                ++this.scene.score
+                console.log(this.scene.score)
                 this.scene.progressBar.updateProgress(this.scene.score/this.propList.length)
                 star.destroy()
             },
@@ -129,7 +131,6 @@ export default class Map{
         }
 
         let end
-
         if(data) {
             end = {
                 targets: data.targets,
@@ -159,19 +160,32 @@ export default class Map{
             }
         } else {
             data = this.moveData[this.moveData.length - 1]
+            console.log(this.scene.score,this.propList.length)
             end = {
                 targets: data.targets,
                 onComplete: () => {
+                    if(this.scene.score < this.propList.length){
+                    console.log(this.scene.score,this.propList.length)
                     this.scene.cameras.main.stopFollow(data.targets)
-                    let info = `是否进入下一关！`
+                    let info =  `已经收集道具${this.scene.score},还有${this.propList.length - this.scene.score}个\n未收集,是否重新开始？`
                     const width = this.scene.sys.game.config.width 
                     const height = this.scene.sys.game.config.height
-                    const popUp = UI.popUp(this.scene, width/2, height/2, this.depth + 1, info, 
-                        () => {this.scene.scene.start("transform", {level: this.scene.level})}, 
-                        () => {this.scene.scene.start("transform", {level: this.scene.level})}).setScrollFactor(0)
+                    const popUp = UI.popUp(this.scene, width/2, height/2, this.depth + 10, info,
+                         () => {}, 
+                         ()=>SceneEffect.closeScene(this.scene,() => {this.scene.scene.start("transform", {level: "level2"})}))
+                        } else {
+                                    this.scene.cameras.main.stopFollow(data.targets)
+                                    let info = `是否进入下一关！`
+                                    const width = this.scene.sys.game.config.width 
+                                    const height = this.scene.sys.game.config.height
+                                    const popUp = UI.popUp(this.scene, width/2, height/2, this.depth + 1, info, 
+                                        () => {this.scene.scene.start("transform", {level: this.scene.level})}, 
+                                        ()=>SceneEffect.closeScene(this.scene,() => {this.scene.scene.start("transform", {level: "level2"})})).setScrollFactor(0)
+                        }
+                    }
                 }
             }
-        }
+       
 
         chain.push(end)
         this.scene.tweens.chain({ tweens: chain })
