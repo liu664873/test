@@ -4,9 +4,6 @@ import Loader from "./scenes/loader"
 import Transform from "./scenes/transform"
 import editor from "./codeEditor/editor"
 
-
-import Test from "./scenes/test"
-
 const config = {
     type: Phaser.AUTO,
     width: 800,
@@ -23,7 +20,7 @@ const config = {
             }
         }
     },
-    scene: [Loader, Game, Transform, Test]
+    scene: [Loader, Game, Transform]
 }
 
 window.onload = function() {

@@ -29,11 +29,13 @@ export default class UI {
         const cancellBtn = UI.button(scene, -100, 120, 10, "取消", function(){
             popUp.destroy()
             callback1()
-        })
+        }).setScrollFactor(0)
         const sureBtn = UI.button(scene, 100, 120, 10, "确定", function(){
             popUp.destroy()
             callback2()
-        })
+        }).setScrollFactor(0)
+        cancellBtn.bg.setScrollFactor(0)
+        sureBtn.bg.setScrollFactor(0)
         popUp.add([cancellBtn, sureBtn])
         return popUp
     }

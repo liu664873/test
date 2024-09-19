@@ -139,7 +139,7 @@ export default class Map{
                     const width = this.scene.sys.game.config.width 
                     const height = this.scene.sys.game.config.height
                     const popUp = UI.popUp(this.scene, width/2, height/2, this.depth + 10, info, 
-                        () => {}, () => {this.scene.scene.start("transform", {level: this.scene.level})})
+                        () => {}, () => {this.scene.scene.start("transform", {level: this.scene.level})}).setScrollFactor(0)
                     
                 }
             }
@@ -153,7 +153,7 @@ export default class Map{
                     const width = this.scene.sys.game.config.width 
                     const height = this.scene.sys.game.config.height
                     const popUp = UI.popUp(this.scene, width/2, height/2, this.depth + 10, info, 
-                        () => {}, () => {this.scene.scene.start("transform", {level: this.scene.level})})
+                        () => {}, () => {this.scene.scene.start("transform", {level: this.scene.level})}).setScrollFactor(0)
                     
                 }
             }
@@ -168,7 +168,7 @@ export default class Map{
                     const height = this.scene.sys.game.config.height
                     const popUp = UI.popUp(this.scene, width/2, height/2, this.depth + 1, info, 
                         () => {this.scene.scene.start("transform", {level: this.scene.level})}, 
-                        () => {this.scene.scene.start("transform", {level: this.scene.level})})
+                        () => {this.scene.scene.start("transform", {level: this.scene.level})}).setScrollFactor(0)
                 }
             }
         }
