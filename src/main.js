@@ -3,6 +3,7 @@ import Game from "./scenes/game"
 import Loader from "./scenes/loader"
 import Transform from "./scenes/transform"
 import editor from "./codeEditor/editor"
+import Manager from "./Manager"
 
 const config = {
     type: Phaser.AUTO,
@@ -28,4 +29,6 @@ window.onload = function() {
     window.game = new Phaser.Game(config); 
     window.editor = editor
     window.gameAndEditor_data = new Map()
+    window.manager = new Manager()
+    console.log(window.manager)
 }
