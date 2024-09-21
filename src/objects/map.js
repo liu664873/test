@@ -144,26 +144,19 @@ export default class Map{
                     
                 }
             }
-        } else if(this.scene.score < this.propList.length){
-            data = this.moveData[this.moveData.length - 1]
-            end = {
-                targets: data.targets,
-                onComplete: () => {
-                    this.scene.cameras.main.stopFollow(data.targets)
-                    let info =  `已经收集道具${this.scene.score},还有${this.propList.length - this.scene.score}个\n未收集,是否重新开始？`
-                    const width = this.scene.sys.game.config.width 
-                    const height = this.scene.sys.game.config.height
-                    const popUp = UI.popUp(this.scene, width/2, height/2, this.depth + 10, info, 
-                        () => {}, () => {this.scene.scene.start("transform", {level: this.scene.level})}).setScrollFactor(0)
-                    
-                }
-            }
-        } else {
+        }  else {
             data = this.moveData[this.moveData.length - 1]
             console.log(this.scene.score,this.propList.length)
             end = {
-                targets: data.targets,
+                targets: data.target,
+                props:{
+                  z:0.5
+                },
+                onUpdate: ()=>{
+                    console.log("zhengzaizhixing")
+                },
                 onComplete: () => {
+                    console.log(data.target)
                     if(this.scene.score < this.propList.length){
                     console.log(this.scene.score,this.propList.length)
                     this.scene.cameras.main.stopFollow(data.targets)
@@ -171,16 +164,16 @@ export default class Map{
                     const width = this.scene.sys.game.config.width 
                     const height = this.scene.sys.game.config.height
                     const popUp = UI.popUp(this.scene, width/2, height/2, this.depth + 10, info,
-                         () => {}, 
-                         ()=>SceneEffect.closeScene(this.scene,() => {this.scene.scene.start("transform", {level: "level2"})}))
+                        ()=>{SceneEffect.closeScene(this.scene,() => {this.scene.scene.start("transform", {level: "level2"})})}, 
+                         ()=>{SceneEffect.closeScene(this.scene,() => {this.scene.scene.start("transform", {level: "level2"})})})
                         } else {
                                     this.scene.cameras.main.stopFollow(data.targets)
                                     let info = `是否进入下一关！`
                                     const width = this.scene.sys.game.config.width 
                                     const height = this.scene.sys.game.config.height
-                                    const popUp = UI.popUp(this.scene, width/2, height/2, this.depth + 1, info, 
-                                        () => {this.scene.scene.start("transform", {level: this.scene.level})}, 
-                                        ()=>SceneEffect.closeScene(this.scene,() => {this.scene.scene.start("transform", {level: "level2"})})).setScrollFactor(0)
+                                    const popUp = UI.popUp(this.scene, width/2, height/2, this.depth + 10, info, 
+                                        ()=>{SceneEffect.closeScene(this.scene,() => {this.scene.scene.start("transform", {level: "level2"})})}, 
+                                        ()=>{SceneEffect.closeScene(this.scene,() => {this.scene.scene.start("transform", {level: "level2"})})})
                         }
                     }
                 }
@@ -188,7 +181,7 @@ export default class Map{
        
 
         chain.push(end)
-        this.scene.tweens.chain({ tweens: chain })
+        //this.scene.tweens.chain({ tweens: chain })
         this.chainTween = this.scene.tweens.chain({ tweens: chain })
         this.moveData = []
     }

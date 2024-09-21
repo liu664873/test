@@ -26,6 +26,7 @@
         <button id="run">run</button>
         <button id="ref_ans">ref_ans</button>
         <button id="clear">clear</button>
+        <button id="new">new</button>
     </div>
 
     <!-- <script type="text/python3">
@@ -171,7 +172,11 @@
         print(code)
 
         exec(code)
+    
+    def new(event):
+        window.game.scene.start("transform",{'level':'level2'})
 
+    doc["new"].bind("click",new)    
     doc["run"].bind("click", echo)
 
 </script>
