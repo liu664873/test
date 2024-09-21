@@ -48,6 +48,9 @@ def getStartSpaceCount(str):
             break
     return count
 
+def new(event):
+        window.game.scene.start("transform",{'level':'level2'})
+
 
 SKIPS = (
     '.step',
@@ -139,7 +142,7 @@ def echo(event):
         print("出错了！！")
         window.manager.showPopup(str(exc))
 
-
+doc["new"].bind("click",new)  
 doc["run"].bind("click", echo)
 #doc["stop"].bind("click", stop)
 #doc["refresh"].bind("click", refresh)
