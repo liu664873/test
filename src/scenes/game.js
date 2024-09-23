@@ -41,10 +41,7 @@ export default class Game extends Phaser.Scene {
         this.registry.set("player", this.player)
         this.registry.set("ship", this.ship)
         this.registry.set("mapd", this.map)
-        this.events.addListener("runCode", function() {
-            this.map.createTweenChain()
-        }, this)
-
+    
     }
 
     /**

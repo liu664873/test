@@ -105,25 +105,41 @@ export default class Manager {
         return result
     }
 
-    showPopup(popupText) {  
+    showPopup(popupText, call1, call2) {  
         var popup = document.getElementById('popup');  
         popup.style.display = 'flex';  
         if(popupText) document.getElementById('popupText').textContent = popupText
-    }  
-    
-    cancelPopup(callback) {  
-        var popup = document.getElementById('popup');  
-        popup.style.display = 'none';  
-        if(callback && typeof callback === 'function'){
-            callback()
+        var confirmBtn = document.getElementById('confirmPopup')
+        var cancelBtn = document.getElementById('cancel-button')
+        confirmBtn.onclick =   () => {
+            popup.style.display = 'none';  
+            if (clal1 && typeof call1 == 'function') {
+                call1()
+            }
+            confirmBtn.click = null
         }
-    }  
-    
-    confirmPopup(callback) {  
-        var popup = document.getElementById('popup');  
-        popup.style.display = 'none';  
-        if(callback && typeof callback === 'function'){
-            callback()
+        cancelBtn.onclick =   () => {
+            popup.style.display = 'none';  
+            if (call2 && typeof call2 == 'function') {
+                call2()
+            }
+            cancelBtn.click = null
         }
+
     }
+    // cancelPopup(callback) {  
+    //     var popup = document.getElementById('popup');  
+    //     popup.style.display = 'none';  
+    //     if(callback && typeof callback === 'function'){
+    //         callback()
+    //     }
+    // }  
+    
+    // confirmPopup(callback) {  
+    //     var popup = document.getElementById('popup');  
+    //     popup.style.display = 'none';  
+    //     if(callback && typeof callback === 'function'){
+    //         callback()
+    //     }
+    // }
 }
