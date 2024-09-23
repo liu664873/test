@@ -145,6 +145,7 @@ export default class Player extends Object {
             }, 
             onUpdate: () => {
                 window.editor.highlightLine(config.lineNumber)
+                
             },
             onComplete: () => {
                 this.anims.stop(config.direction)
