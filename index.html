@@ -16,37 +16,34 @@
         <div id="editor" style="width: 300px; height: 300px;">
         </div>
         <button id="run">run</button>
-        <button id="ref_ans">ref_ans</button>
-        <button id="clear">clear</button>
         <button id="new">new</button>
-        <button id="fast">fast</button>
+        <button id="clear">clear</button>
     </div>
     <!-- 弹窗 -->  
     <div id="popup" class="popup-hidden">  
         <div class="popup-content">  
             <p id="popupText">这里是弹窗的文本内容，如果内容很长很长很长，它应该会在这里被截断或者显示滚动条，而不会破坏弹窗的布局。</p>  
-            <button class="cancel-button" onclick="cancelPopup()">取消</button>  
-            <button onclick="confirmPopup()">确定</button>  
+            <button id='cancel-button' class="cancel-button">取消</button>  
+            <button id='confirm-button' >确定</button>  
         </div>  
     </div>  
       
     <!-- 触发弹窗的按钮 -->  
-    <button onclick="showPopup()">显示弹窗</button>
+    <button onclick="showPopup()">step</button>
 
 <script type="text/python3" src="./py/run.py"></script>
 
 <script>
     function showPopup() {  
-       window.manager.showPopup() 
+    //    window.manager.showPopup() 
+       const game = window.game
+        const player = game.registry.get("player")
+        const map = game.registry.get("mapd")
+        console.log('player', player)
+        console.log('game', game)
+        player.step(1)
+        map.createTweenChain()
     }  
-    
-    function cancelPopup() {  
-        window.manager.cancelPopup()  
-    }  
-    
-    function confirmPopup() {  
-        window.manager.confirmPopup()
-    }
   
 </script>
 
