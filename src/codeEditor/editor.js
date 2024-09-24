@@ -44,8 +44,9 @@ editor.setOptions({
 
 editor.highlightLines = new Map()
 
-editor.highlightLine = function (lineNumber, className = "highlight-line") {
-    if(editor.highlightLines.get(lineNumber)) return
+editor.highlightLine = function (lineNumber, error=false, className = "highlight-line") {
+    if(editor.highlightLines.get(lineNumber)) editor.removeHighlight(lineNumber)
+    if(error) className='highlight-line-error'
     var range = new ace.Range(lineNumber - 1, 0, lineNumber - 1, 1);
     var markerId = editor.session.addMarker(range, className, "fullLine", true);
     // editor.gotoLine(lineNumber)
@@ -61,5 +62,7 @@ editor.removeHighlight = function (lineNumber) {
         editor.session.removeMarker(markerId);
     }
 }
+
+editor.session.Marker
 
 export default editor

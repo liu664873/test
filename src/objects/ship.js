@@ -135,15 +135,10 @@ export default class Ship extends Object{
             },
             duration: 1000,
             onStart: () => {
-                window.editor.highlightLine(config.lineNumber)
                 this.anims.play(config.direction)
-            },
-            onUpdate: () => {
-                window.editor.highlightLine(config.lineNumber)
             },
             onComplete: () => {
                 this.anims.stop(config.direction)
-                window.editor.removeHighlight(config.lineNumber)
             }
         }
         return tween
@@ -157,15 +152,10 @@ export default class Ship extends Object{
                 z: 1    //巨坑，必须有变化的值，不然不执行tween
             },
             onStart: () => {
-                window.editor.highlightLine(config.lineNumber)
                this.anims.play(config.turn)
-            },
-            onUpdate: () => {
-                window.editor.highlightLine(config.lineNumber)
             },
             onComplete: () => {
                 this.setFrame(this.directionImage[config.direction])
-                window.editor.removeHighlight(config.lineNumber)
             },
         }
         return tween
@@ -198,7 +188,6 @@ export default class Ship extends Object{
      * @returns 
      */
     step(step) {
-        const lineNumber = window.gameAndEditor_data.get('runningCodeLine')
         this.checkDriver()
 
         for (let i = 0; i < step; i++) {
@@ -223,7 +212,6 @@ export default class Ship extends Object{
                 from: from,
                 to: to,
                 isCanMove: isCanMove,
-                lineNumber: lineNumber
             }
 
             if(this.driver) {
@@ -244,7 +232,6 @@ export default class Ship extends Object{
         const data = {
             target: this,
             type: "turn",
-            lineNumber: window.gameAndEditor_data.get('runningCodeLine')
         }
         if (this.direction === UP) {
             data.fromDirection = UP
@@ -274,7 +261,6 @@ export default class Ship extends Object{
         const data = {
             target: this,
             type: "turn",
-            lineNumber: window.gameAndEditor_data.get('runningCodeLine')
         }
         if (this.direction === UP) {
             data.fromDirection = UP

@@ -2,7 +2,10 @@ import editor from "./codeEditor/editor";
 
 export default class Manager {
 
-    constructor(){}
+    constructor(game, editor){
+        this.game = game
+        this.editor = editor
+    }
 
     // analysisPythonCode(code) {
     //     // 清除注释部分
@@ -105,15 +108,19 @@ export default class Manager {
         return result
     }
 
+    highlightLine(lineNumber, error){
+        this.editor.highlightLine(lineNumber, error)
+    }
+
     showPopup(popupText, call1, call2) {  
         var popup = document.getElementById('popup');  
         popup.style.display = 'flex';  
         if(popupText) document.getElementById('popupText').textContent = popupText
-        var confirmBtn = document.getElementById('confirmPopup')
+        var confirmBtn = document.getElementById('confirm-button')
         var cancelBtn = document.getElementById('cancel-button')
         confirmBtn.onclick =   () => {
             popup.style.display = 'none';  
-            if (clal1 && typeof call1 == 'function') {
+            if (clall1 && typeof call1 == 'function') {
                 call1()
             }
             confirmBtn.click = null

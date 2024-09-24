@@ -29,6 +29,6 @@ window.onload = function() {
     window.game = new Phaser.Game(config); 
     window.editor = editor
     window.gameAndEditor_data = new Map()
-    window.manager = new Manager()
+    window.manager = new Manager(window.game, window.editor)
     console.log(window.manager)
 }

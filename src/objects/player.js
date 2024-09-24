@@ -143,13 +143,8 @@ export default class Player extends Object {
                 // window.editor.highlightLine()
                 this.anims.play(config.direction)
             }, 
-            onUpdate: () => {
-                window.editor.highlightLine(config.lineNumber)
-                
-            },
             onComplete: () => {
                 this.anims.stop(config.direction)
-                window.editor.removeHighlight(config.lineNumber)
             }
         }
         return tween
@@ -163,16 +158,11 @@ export default class Player extends Object {
                 z: 1    //巨坑，必须有变化的值，不然不执行tween
             },
             onStart: () => {
-                window.editor.highlightLine(config.lineNumber)
                this.anims.play(config.turn)
-            },
-            onUpdate: () => {
-                window.editor.highlightLine(config.lineNumber)
             },
             onComplete: () => {
                 this.direction = config.direction
                 this.setFrame(this.directionImage[config.direction])
-                window.editor.removeHighlight(config.lineNumber)
             },
         }
         return tween
@@ -204,7 +194,6 @@ export default class Player extends Object {
      * @returns 
      */
     step(step) {
-        const lineNumber = window.gameAndEditor_data.get('runningCodeLine')
 
         for (let i = 0; i < step; i++) {
 
@@ -227,7 +216,6 @@ export default class Player extends Object {
                 from: from,
                 to: to,
                 isCanMove: isCanMove,
-                lineNumber: lineNumber
             }
             this.map.moveData.push(data)
 
@@ -240,7 +228,6 @@ export default class Player extends Object {
         const data = {
             target: this,
             type: "turn",
-            lineNumber: window.gameAndEditor_data.get('runningCodeLine')
         }
         if (this.direction === UP) {
             data.fromDirection = UP
@@ -270,7 +257,6 @@ export default class Player extends Object {
         const data = {
             target: this,
             type: "turn",
-            lineNumber: window.gameAndEditor_data.get('runningCodeLine')
         }
         if (this.direction === UP) {
             data.fromDirection = UP
