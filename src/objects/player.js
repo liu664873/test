@@ -142,8 +142,14 @@ export default class Player extends Object {
                 // }
                 // window.editor.highlightLine()
                 this.anims.play(config.direction)
+                if(config.lineNumber){
+                    window.editor.highlightLine(config.lineNumber)
+                }   
             }, 
             onComplete: () => {
+                if(config.lineNumber){
+                    window.editor.removeHighlight(config.lineNumber)
+                }
                 this.anims.stop(config.direction)
             }
         }
@@ -159,8 +165,14 @@ export default class Player extends Object {
             },
             onStart: () => {
                this.anims.play(config.turn)
+               if(config.lineNumber){
+                window.editor.highlightLine(config.lineNumber)
+            }   
             },
             onComplete: () => {
+                if(config.lineNumber){
+                    window.editor.removeHighlight(config.lineNumber)
+                }
                 this.direction = config.direction
                 this.setFrame(this.directionImage[config.direction])
             },
@@ -217,6 +229,9 @@ export default class Player extends Object {
                 to: to,
                 isCanMove: isCanMove,
             }
+
+            if(window.code_running) data.lineNumber =  window.gameAndEditor_data.get('runningCodeLine')
+
             this.map.moveData.push(data)
 
             if(!isCanMove) return  
@@ -229,6 +244,9 @@ export default class Player extends Object {
             target: this,
             type: "turn",
         }
+
+        if(window.code_running) data.lineNumber =  window.gameAndEditor_data.get('runningCodeLine')
+
         if (this.direction === UP) {
             data.fromDirection = UP
             data.direction = LEFT
@@ -254,10 +272,14 @@ export default class Player extends Object {
     }
 
     turnRight() {
+
         const data = {
             target: this,
             type: "turn",
         }
+
+        if(window.code_running) data.lineNumber =  window.gameAndEditor_data.get('runningCodeLine')
+
         if (this.direction === UP) {
             data.fromDirection = UP
             data.direction = RIGHT

@@ -136,9 +136,15 @@ export default class Ship extends Object{
             duration: 1000,
             onStart: () => {
                 this.anims.play(config.direction)
+                if(config.lineNumber){
+                    window.editor.highlightLine(config.lineNumber)
+                }   
             },
             onComplete: () => {
                 this.anims.stop(config.direction)
+                if(config.lineNumber){
+                    window.editor.removeHighlight(config.lineNumber)
+                }
             }
         }
         return tween
@@ -153,9 +159,15 @@ export default class Ship extends Object{
             },
             onStart: () => {
                this.anims.play(config.turn)
+               if(config.lineNumber){
+                window.editor.highlightLine(config.lineNumber)
+            }   
             },
             onComplete: () => {
                 this.setFrame(this.directionImage[config.direction])
+                if(config.lineNumber){
+                    window.editor.removeHighlight(config.lineNumber)
+                }
             },
         }
         return tween
@@ -214,6 +226,8 @@ export default class Ship extends Object{
                 isCanMove: isCanMove,
             }
 
+            if(window.code_running) data.lineNumber =  window.gameAndEditor_data.get('runningCodeLine')
+
             if(this.driver) {
                 this.driver.logicX = this.logicX
                 this.driver.logicY = this.logicY
@@ -233,6 +247,9 @@ export default class Ship extends Object{
             target: this,
             type: "turn",
         }
+
+        if(window.code_running) data.lineNumber =  window.gameAndEditor_data.get('runningCodeLine')
+
         if (this.direction === UP) {
             data.fromDirection = UP
             data.direction = LEFT
@@ -262,6 +279,9 @@ export default class Ship extends Object{
             target: this,
             type: "turn",
         }
+
+        if(window.code_running) data.lineNumber =  window.gameAndEditor_data.get('runningCodeLine')
+
         if (this.direction === UP) {
             data.fromDirection = UP
             data.direction = RIGHT

@@ -4,7 +4,11 @@ import sys
 import traceback
 import re
 
+window.code_running = False
+
 code_head = '''
+
+window.code_running = True
 
 game = window.game
 player = game.registry.get("player")
@@ -14,6 +18,7 @@ mapd = game.registry.get("mapd")
 '''
 
 code_tail = '''
+window.code_running = False
 mapd.createTweenChain()
 '''
 
