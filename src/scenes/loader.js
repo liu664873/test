@@ -71,6 +71,9 @@ export default class Loader extends Phaser.Scene {
         this.load.image("showGrid", "assets/images/showGrid.png")
         this.load.image("star", "assets/images/star.png")
         this.load.image("textBg", "assets/images/textBg.png")
+        this.load.image("speedX1","assets/images/speedX1.png")
+        this.load.image("speedX2","assets/images/speedX2.png")
+        this.load.image("speedX4","assets/images/speedX4.png")
     }
 
     /**

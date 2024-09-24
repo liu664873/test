@@ -24,8 +24,7 @@ export default class Game extends Phaser.Scene {
         this.height = this.sys.game.config.height
 
         this.score = 0
-
-
+        this.cureSpeed = 1
         this.map = new Map(this, this.level, 950, 100)
         // this.map.openGrid()
         this.player = Generator.generatePlayer(this.map, "player", 3, 2, 2)
@@ -35,6 +34,7 @@ export default class Game extends Phaser.Scene {
         this.amplify = this.add.sprite(150, 50, "amplify").setScale(0.5).setInteractive().setScrollFactor(0)
         this.reduce = this.add.sprite(250, 50, "reduce").setScale(0.5).setInteractive().setScrollFactor(0)
         this.move = this.add.sprite(350, 50, "move").setScale(0.5).setInteractive().setScrollFactor(0)
+        this.speed = this.add.sprite(50,100,`speedX${this.cureSpeed}`).setInteractive().setScrollFactor(0)
         this.progressBar = UI.progressBar(this, 450, 50).setScrollFactor(0)
         this.addOnEvent()
         
@@ -44,6 +44,7 @@ export default class Game extends Phaser.Scene {
         this.events.addListener("runCode", function() {
             this.map.createTweenChain()
         }, this)
+        //this.tweens.chain
 
     }
 
@@ -116,6 +117,15 @@ export default class Game extends Phaser.Scene {
                 else this.map.setScale(this.map.scale)
                 this.reduce.clicked = false
             }
+        })
+        this.speed.on("pointerdown",()=>{
+            // 重新计算 speed 的值
+            this.cureSpeed = this.cureSpeed === 4 ? 1 : this.cureSpeed * 2;
+    
+            // 创建新的 sprite 
+            this.speed.setTexture(`speedX${this.cureSpeed}`)
+        
+            if(this.map.chainTween)this.map.chainTween.timeScale = this.cureSpeed
         })
     }
 }

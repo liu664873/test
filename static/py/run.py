@@ -3,7 +3,7 @@ import javascript
 import sys
 import traceback
 import re
-
+game = window.game
 code_head = '''
 
 game = window.game
@@ -51,6 +51,9 @@ def getStartSpaceCount(str):
 def new(event):
         window.game.scene.start("transform",{'level':'level2'})
 
+def fast(event):
+    mapd = game.registry.get("mapd")
+    mapd.chainTween.timeScale = 2
 
 SKIPS = (
     '.step',
@@ -142,6 +145,7 @@ def echo(event):
         print("出错了！！")
         window.manager.showPopup(str(exc))
 
+doc["fast"].bind("click",fast)  
 doc["new"].bind("click",new)  
 doc["run"].bind("click", echo)
 #doc["stop"].bind("click", stop)

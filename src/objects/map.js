@@ -30,9 +30,8 @@ export default class Map{
         this.playerList = []
         this.shipList = []
         this.moveData = []
-
+        
         this.moveSpace = new Array(this.height)
-
         this.initLayers()
         this.initMoveSapce(0, 1)
         // this.addOnEvent()
@@ -164,7 +163,7 @@ export default class Map{
                     const width = this.scene.sys.game.config.width 
                     const height = this.scene.sys.game.config.height
                     const popUp = UI.popUp(this.scene, width/2, height/2, this.depth + 10, info,
-                        ()=>{SceneEffect.closeScene(this.scene,() => {this.scene.scene.start("transform", {level: "level2"})})}, 
+                        ()=>{}, 
                          ()=>{SceneEffect.closeScene(this.scene,() => {this.scene.scene.start("transform", {level: "level2"})})})
                         } else {
                                     this.scene.cameras.main.stopFollow(data.targets)
@@ -172,7 +171,7 @@ export default class Map{
                                     const width = this.scene.sys.game.config.width 
                                     const height = this.scene.sys.game.config.height
                                     const popUp = UI.popUp(this.scene, width/2, height/2, this.depth + 10, info, 
-                                        ()=>{SceneEffect.closeScene(this.scene,() => {this.scene.scene.start("transform", {level: "level2"})})}, 
+                                        ()=>{}, 
                                         ()=>{SceneEffect.closeScene(this.scene,() => {this.scene.scene.start("transform", {level: "level2"})})})
                         }
                     }
@@ -183,6 +182,7 @@ export default class Map{
         chain.push(end)
         //this.scene.tweens.chain({ tweens: chain })
         this.chainTween = this.scene.tweens.chain({ tweens: chain })
+        this.chainTween.timeScale = this.scene.cureSpeed
         this.moveData = []
     }
 
