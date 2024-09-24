@@ -142,6 +142,7 @@ export default class Player extends Object {
                 // }
                 // window.editor.highlightLine()
                 this.anims.play(config.direction)
+                this.map.scene.lineNumber = config.lineNumber
                 if(config.lineNumber){
                     window.editor.highlightLine(config.lineNumber)
                 }   

@@ -120,7 +120,7 @@ export default class Manager {
         var cancelBtn = document.getElementById('cancel-button')
         confirmBtn.onclick =   () => {
             popup.style.display = 'none';  
-            if (clall1 && typeof call1 == 'function') {
+            if (call1 && typeof call1 == 'function') {
                 call1()
             }
             confirmBtn.click = null

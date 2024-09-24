@@ -183,8 +183,16 @@ def echo(event):
         # window.py_error_str = str(exc)
         #print(str(exc))
 
+def new(event):
+    game = window.game
+    mapd = game.registry.get("mapd")
+    mapd.chainTween.stop()
+    window.editor.removeHighlight(mapd.scene.lineNumber)
+    game.scene.start("transform",{'level':'level1'})
+    
 
 
 doc["run"].bind("click", echo)
+doc["new"].bind("click", new)
 #doc["stop"].bind("click", stop)
 #doc["refresh"].bind("click", refresh)
