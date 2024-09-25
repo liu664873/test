@@ -154,10 +154,11 @@ def echo(event):
     except Exception as exc:
         if(window.error_lineNumber > 0): 
             window.manager.highlightLine(window.error_lineNumber, True)
-            error_str = 'Error ' + ('[Line ' + str(window._err_line_num_ace) +
+            error_str = 'Error ' + ('[Line ' + str(window.error_lineNumber) +
                                 ']: ') + str(exc)
         else:
             error_str = 'Error: ' + str(exc) 
+        window.manager.showPopup(error_str, window.error_lineNumber)
         # window.manager.showPopup(error_str, function() {window.manager.removeHighlight(window.error_lineNumber)})
         # tb_str = traceback.format_exc()
         # window.manager.showPopup(str(tb_str))
