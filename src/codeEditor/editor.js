@@ -64,7 +64,7 @@ editor.removeHighlight = function (lineNumber) {
 }
 
 editor.removeAllHighlight = function (){
-    for (let value of editor.highlightLine.values()) {  
+    for (let value of editor.highlightLines.values()) {  
         editor.session.removeMarker(value)
       }  
     editor.highlightLines.clear()

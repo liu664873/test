@@ -37,10 +37,11 @@ export default class Game extends Phaser.Scene {
         this.speed = this.add.sprite(50,100,`speedX${this.cureSpeed}`).setInteractive().setScrollFactor(0)
         this.progressBar = UI.progressBar(this, 450, 50).setScrollFactor(0)
         this.addOnEvent()
-        this.lineNumber = 0
+        // this.isRunning = true
         this.registry.set("player", this.player)
         this.registry.set("ship", this.ship)
         this.registry.set("mapd", this.map)
+        //this.tweens.chain
     
     }
 

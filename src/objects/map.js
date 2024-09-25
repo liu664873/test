@@ -30,12 +30,13 @@ export default class Map{
         this.playerList = []
         this.shipList = []
         this.moveData = []
-        this.isRunning = false
         this.moveSpace = new Array(this.height)
         this.initLayers()
         this.initMoveSapce(0, 1)
         // this.addOnEvent()
         this.init()
+        window.chainTween = null
+
     }
 
     init(){
@@ -101,7 +102,7 @@ export default class Map{
      * 创造补间动画链
      */
     createTweenChain(){
-        if(this.isRunning) return
+        if(this.chainTween) return
         const chain = []
 
         //开始动画，主要设置摄像头跟随
@@ -109,7 +110,6 @@ export default class Map{
             targets: this.moveData[0].targets,
             onComplete: () => {
                 this.scene.cameras.main.startFollow(this.playerList[0])
-                this.isRunning = true
             }
         }
         chain.push(start)
@@ -142,7 +142,8 @@ export default class Map{
                     const height = this.scene.sys.game.config.height
                     const popUp = UI.popUp(this.scene, width/2, height/2, this.depth + 10, info, 
                         () => {}, () => {this.scene.scene.start("transform", {level: this.scene.level})}).setScrollFactor(0)
-                    this.isRunning = false
+                    window.chainTween = null
+
                 }
             }
         }  else {
@@ -174,7 +175,7 @@ export default class Map{
                                         ()=>{}, 
                                         ()=>{SceneEffect.closeScene(this.scene,() => {this.scene.scene.start("transform", {level: "level2"})})})
                         }
-                    this.isRunning = false
+                    window.chainTween = null
                     }
                 }
             }
@@ -182,6 +183,7 @@ export default class Map{
         chain.push(end)
         this.chainTween = this.scene.tweens.chain({ tweens: chain })
         this.chainTween.timeScale = this.scene.cureSpeed
+        window.chainTween = this.chainTween
         this.moveData = []
     }
 

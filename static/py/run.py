@@ -186,17 +186,33 @@ def echo(event):
         # window.py_error_str = str(exc)
         #print(str(exc))
 
+def stop(event):
+    game = window.game
+    mapd = game.registry.get("mapd")
+    if(window.chainTween):
+        if(game.isRunning):
+            mapd.chainTween.pause()
+            game.isRunning = False
+        else:
+            mapd.chainTween.resume()
+            game.isRunning = True
+    # else :
+    #     raise Exception('No chainTween!')
+    #mapd.chainTween.play()
+    # window.editor.removeHighlight(mapd.scene.lineNumber)
+    #window.editor.removeAllHighlight()
+    #game.scene.start("transform",{'level':'level1'})
 def new(event):
     game = window.game
     mapd = game.registry.get("mapd")
-    mapd.chainTween.stop()
-    # window.editor.removeHighlight(mapd.scene.lineNumber)
-    window.editor.removeAllHighlight()
+    if(window.chainTween):
+        mapd.chainTween.stop()
+        window.editor.removeAllHighlight()
     game.scene.start("transform",{'level':'level1'})
-    
 
 
 doc["run"].bind("click", echo)
 doc["new"].bind("click", new)
+doc["stop"].bind("click", stop)
 #doc["stop"].bind("click", stop)
 #doc["refresh"].bind("click", refresh)

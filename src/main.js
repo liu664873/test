@@ -31,5 +31,6 @@ window.onload = function() {
     window.editor = editor
     window.gameAndEditor_data = new Map()
     window.manager = new Manager(window.game, window.editor)
+    window.game.isRunning = true
     console.log(window.manager)
 }
