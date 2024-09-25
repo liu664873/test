@@ -27,6 +27,7 @@ const config = {
 window.onload = function() {
     brython()
     window.game = new Phaser.Game(config); 
+    window.game
     window.editor = editor
     window.gameAndEditor_data = new Map()
     window.manager = new Manager(window.game, window.editor)

@@ -63,6 +63,13 @@ editor.removeHighlight = function (lineNumber) {
     }
 }
 
+editor.removeAllHighlight = function (){
+    for (let value of editor.highlightLine.values()) {  
+        editor.session.removeMarker(value)
+      }  
+    editor.highlightLines.clear()
+}
+
 editor.session.Marker
 
 export default editor

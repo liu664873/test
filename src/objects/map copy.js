@@ -30,8 +30,9 @@ export default class Map{
         this.playerList = []
         this.shipList = []
         this.moveData = []
-        this.isRunning = false
+
         this.moveSpace = new Array(this.height)
+
         this.initLayers()
         this.initMoveSapce(0, 1)
         // this.addOnEvent()
@@ -101,7 +102,6 @@ export default class Map{
      * 创造补间动画链
      */
     createTweenChain(){
-        if(this.isRunning) return
         const chain = []
 
         //开始动画，主要设置摄像头跟随
@@ -109,7 +109,6 @@ export default class Map{
             targets: this.moveData[0].targets,
             onComplete: () => {
                 this.scene.cameras.main.startFollow(this.playerList[0])
-                this.isRunning = true
             }
         }
         chain.push(start)
@@ -142,11 +141,12 @@ export default class Map{
                     const height = this.scene.sys.game.config.height
                     const popUp = UI.popUp(this.scene, width/2, height/2, this.depth + 10, info, 
                         () => {}, () => {this.scene.scene.start("transform", {level: this.scene.level})}).setScrollFactor(0)
-                    this.isRunning = false
+                    
                 }
             }
         }  else {
             data = this.moveData[this.moveData.length - 1]
+            console.log(this.scene.score,this.propList.length)
             end = {
                 targets: data.target,
                 props:{
@@ -158,12 +158,13 @@ export default class Map{
                 onComplete: () => {
                     console.log(data.target)
                     if(this.scene.score < this.propList.length){
+                    console.log(this.scene.score,this.propList.length)
                     this.scene.cameras.main.stopFollow(data.targets)
                     let info =  `已经收集道具${this.scene.score},还有${this.propList.length - this.scene.score}个\n未收集,是否重新开始？`
                     const width = this.scene.sys.game.config.width 
                     const height = this.scene.sys.game.config.height
                     const popUp = UI.popUp(this.scene, width/2, height/2, this.depth + 10, info,
-                        ()=>{}, 
+                        ()=>{SceneEffect.closeScene(this.scene,() => {this.scene.scene.start("transform", {level: "level2"})})}, 
                          ()=>{SceneEffect.closeScene(this.scene,() => {this.scene.scene.start("transform", {level: "level2"})})})
                         } else {
                                     this.scene.cameras.main.stopFollow(data.targets)
@@ -171,17 +172,15 @@ export default class Map{
                                     const width = this.scene.sys.game.config.width 
                                     const height = this.scene.sys.game.config.height
                                     const popUp = UI.popUp(this.scene, width/2, height/2, this.depth + 10, info, 
-                                        ()=>{}, 
+                                        ()=>{SceneEffect.closeScene(this.scene,() => {this.scene.scene.start("transform", {level: "level2"})})}, 
                                         ()=>{SceneEffect.closeScene(this.scene,() => {this.scene.scene.start("transform", {level: "level2"})})})
                         }
-                    this.isRunning = false
                     }
                 }
             }
 
         chain.push(end)
         this.chainTween = this.scene.tweens.chain({ tweens: chain })
-        this.chainTween.timeScale = this.scene.cureSpeed
         this.moveData = []
     }
 

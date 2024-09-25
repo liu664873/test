@@ -167,8 +167,8 @@ export default class Player extends Object {
             onStart: () => {
                this.anims.play(config.turn)
                if(config.lineNumber){
-                window.editor.highlightLine(config.lineNumber)
-            }   
+                    window.editor.highlightLine(config.lineNumber)
+                }   
             },
             onComplete: () => {
                 if(config.lineNumber){

@@ -27,23 +27,10 @@
             <button id='confirm-button' >确定</button>  
         </div>  
     </div>  
-      
-    <!-- 触发弹窗的按钮 -->  
-    <button onclick="showPopup2()">step</button>
 
 <script type="text/python3" src="./py/run.py"></script>
 
 <script>
-    function showPopup2() {  
-    //    window.manager.showPopup() 
-       const game = window.game
-        const player = game.registry.get("player")
-        const map = game.registry.get("mapd")
-        console.log('player', player)
-        console.log('game', game)
-        player.step(1)
-        map.createTweenChain()
-    }  
     function showPopup(){
         window.manager.showPopup("是否重置代码",
             ()=>{

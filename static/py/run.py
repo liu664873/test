@@ -33,15 +33,16 @@ class ProgramStepCountOverflowException(Exception):
 # record program step  
 program_step_count = 0
         
-def recordOneStep():
+def recordOneStep(lineNumber):
     global program_step_count
     program_step_count += 1
     if program_step_count > 5000:
         program_step_count = 0
+        window.error_lineNumber = lineNumber
         raise ProgramStepCountOverflowException('Program step exceed! Dead loop?')
 
 def handleOneStep(lineNumber):
-    recordOneStep()
+    recordOneStep(lineNumber)
     window.gameAndEditor_data.set('runningCodeLine', lineNumber)
 
 def getStartSpaceCount(str):
@@ -120,9 +121,10 @@ def echo(event):
 
         #print('line_dict', line_dict)
         analysis_result = window.manager.analysisPythonCode(line_dict)
-        if len(analysis_result) > 0:
-            error_str = analysis_result
-            raise Exception(analysis_result)
+        if analysis_result.lineNumber > 0:
+            error_str = analysis_result.error
+            window.error_lineNumber = analysis_result.lineNumber
+            raise Exception(analysis_result.error)
 
         newLines = []
 
@@ -158,7 +160,7 @@ def echo(event):
                                 ']: ') + str(exc)
         else:
             error_str = 'Error: ' + str(exc) 
-        window.manager.showPopup(error_str, window.error_lineNumber)
+        window.manager.showError(error_str, window.error_lineNumber)
         # window.manager.showPopup(error_str, function() {window.manager.removeHighlight(window.error_lineNumber)})
         # tb_str = traceback.format_exc()
         # window.manager.showPopup(str(tb_str))
@@ -188,7 +190,8 @@ def new(event):
     game = window.game
     mapd = game.registry.get("mapd")
     mapd.chainTween.stop()
-    window.editor.removeHighlight(mapd.scene.lineNumber)
+    # window.editor.removeHighlight(mapd.scene.lineNumber)
+    window.editor.removeAllHighlight()
     game.scene.start("transform",{'level':'level1'})
     
 
