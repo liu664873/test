@@ -1,0 +1,74 @@
+{ "compressionlevel":-1,
+ "height":10,
+ "infinite":false,
+ "layers":[
+        {
+         "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 6, 6, 0, 0, 0, 6, 6, 0, 0,
+            0, 0, 6, 0, 0, 0, 6, 0, 0, 0,
+            0, 0, 6, 7, 7, 7, 6, 0, 0, 0,
+            0, 6, 6, 0, 0, 0, 6, 6, 0, 0,
+            0, 8, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+         "height":10,
+         "id":1,
+         "name":"layer1",
+         "opacity":1,
+         "type":"tilelayer",
+         "visible":true,
+         "width":10,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+         "height":10,
+         "id":2,
+         "name":"layer2",
+         "opacity":1,
+         "type":"tilelayer",
+         "visible":true,
+         "width":10,
+         "x":0,
+         "y":0
+        }],
+ "nextlayerid":3,
+ "nextobjectid":1,
+ "orientation":"isometric",
+ "renderorder":"right-down",
+ "tiledversion":"1.11.0",
+ "tileheight":84,
+ "tilesets":[
+        {
+         "firstgid":1,
+         "source":":\/automap-tiles.tsx"
+        }, 
+        {
+         "firstgid":6,
+         "source":"..\/..\/..\/..\/floor1.tsx"
+        }, 
+        {
+         "firstgid":7,
+         "source":"..\/..\/..\/..\/floor2.tsx"
+        }, 
+        {
+         "firstgid":8,
+         "source":"..\/..\/..\/..\/floor3.tsx"
+        }],
+ "tilewidth":120,
+ "type":"map",
+ "version":"1.10",
+ "width":10
+}

@@ -1,146 +1,145 @@
 { "compressionlevel":-1,
- "height":10,
+ "height":7,
  "infinite":false,
  "layers":[
         {
-         "id":3,
-         "layers":[
-                {
-                 "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                    0, 1, 1, 1, 1, 1, 1, 0, 0, 0,
-                    0, 1, 0, 1, 0, 1, 1, 0, 0, 0,
-                    0, 1, 0, 1, 0, 0, 1, 0, 0, 0,
-                    0, 1, 0, 1, 2, 2, 1, 0, 0, 0,
-                    0, 1, 0, 0, 0, 0, 1, 0, 0, 0,
-                    0, 1, 0, 0, 0, 0, 1, 0, 0, 0,
-                    0, 1, 1, 1, 1, 1, 1, 0, 0, 0,
-                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                 "height":10,
-                 "id":1,
-                 "name":"layer1",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"depth",
-                         "type":"int",
-                         "value":1
-                        }, 
-                        {
-                         "name":"type",
-                         "type":"string",
-                         "value":"build"
-                        }],
-                 "type":"tilelayer",
-                 "visible":true,
-                 "width":10,
-                 "x":0,
-                 "y":0
-                }],
+         "data":[0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 4, 0, 0, 0,
+            0, 4, 0, 0, 0, 4, 0, 4, 0,
+            0, 4, 4, 4, 4, 4, 4, 4, 0,
+            0, 4, 0, 0, 0, 4, 0, 4, 0,
+            0, 0, 0, 0, 0, 4, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0],
+         "height":7,
+         "id":1,
          "name":"layer1",
          "opacity":1,
-         "type":"group",
+         "properties":[
+                {
+                 "name":"depth",
+                 "type":"int",
+                 "value":1
+                }, 
+                {
+                 "name":"type",
+                 "type":"string",
+                 "value":"build"
+                }],
+         "type":"tilelayer",
          "visible":true,
+         "width":9,
          "x":0,
          "y":0
         }, 
         {
+         "data":[71, 71, 71, 71, 71, 71, 71, 71, 71,
+            71, 71, 71, 71, 71, 71, 71, 71, 71,
+            71, 71, 71, 71, 71, 71, 71, 71, 71,
+            71, 71, 71, 71, 71, 71, 71, 71, 71,
+            71, 71, 71, 71, 71, 71, 71, 71, 71,
+            71, 71, 71, 71, 71, 71, 71, 71, 71,
+            71, 71, 71, 71, 71, 71, 71, 71, 71],
+         "height":7,
          "id":4,
-         "layers":[
+         "name":"grid",
+         "opacity":1,
+         "properties":[
                 {
-                 "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                    0, 0, 0, 4, 4, 0, 0, 0, 0, 0,
-                    0, 0, 0, 0, 0, 4, 0, 0, 0, 0,
-                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                    0, 0, 0, 0, 0, 0, 4, 0, 0, 0,
-                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                 "height":10,
-                 "id":6,
-                 "name":"layer2_prop",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"depth",
-                         "type":"int",
-                         "value":2
-                        }, 
-                        {
-                         "name":"type",
-                         "type":"string",
-                         "value":"prop"
-                        }],
-                 "type":"tilelayer",
-                 "visible":true,
-                 "width":10,
-                 "x":0,
-                 "y":0
+                 "name":"depth",
+                 "type":"int",
+                 "value":2
                 }, 
                 {
-                 "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                    0, 3, 3, 0, 0, 3, 3, 0, 0, 0,
-                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                 "height":10,
-                 "id":2,
-                 "name":"layer2",
-                 "opacity":1,
-                 "properties":[
-                        {
-                         "name":"depth",
-                         "type":"int",
-                         "value":2
-                        }, 
-                        {
-                         "name":"type",
-                         "type":"string",
-                         "value":"build"
-                        }],
-                 "type":"tilelayer",
-                 "visible":true,
-                 "width":10,
-                 "x":0,
-                 "y":0
+                 "name":"type",
+                 "type":"string",
+                 "value":"grid"
                 }],
-         "name":"layer2",
-         "opacity":1,
-         "type":"group",
+         "type":"tilelayer",
          "visible":true,
+         "width":9,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "data":[0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 4, 0, 0, 0,
+            0, 0, 0, 0, 0, 1, 0, 0, 0,
+            0, 4, 1, 1, 1, 1, 1, 4, 0,
+            0, 0, 0, 0, 0, 1, 0, 0, 0,
+            0, 0, 0, 0, 0, 4, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0],
+         "height":7,
+         "id":2,
+         "name":"layer2",
+         "offsetx":0,
+         "offsety":-50,
+         "opacity":1,
+         "properties":[
+                {
+                 "name":"depth",
+                 "type":"int",
+                 "value":2
+                }, 
+                {
+                 "name":"type",
+                 "type":"string",
+                 "value":"build"
+                }],
+         "type":"tilelayer",
+         "visible":true,
+         "width":9,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "data":[0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 11, 0, 0, 0, 7, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0],
+         "height":7,
+         "id":3,
+         "name":"layer2_obj",
+         "offsetx":0,
+         "offsety":-50,
+         "opacity":1,
+         "properties":[
+                {
+                 "name":"depth",
+                 "type":"int",
+                 "value":2
+                }, 
+                {
+                 "name":"type",
+                 "type":"string",
+                 "value":"obj"
+                }],
+         "type":"tilelayer",
+         "visible":true,
+         "width":9,
          "x":0,
          "y":0
         }],
- "nextlayerid":11,
+ "nextlayerid":5,
  "nextobjectid":1,
  "orientation":"isometric",
  "renderorder":"right-down",
  "tiledversion":"1.11.0",
- "tileheight":84,
+ "tileheight":145,
  "tilesets":[
         {
-         "columns":1,
+         "columns":10,
          "firstgid":1,
-         "image":"..\/images\/floor1.png",
-         "imageheight":115,
-         "imagewidth":120,
+         "image":"..\/..\/..\/..\/..\/images\/images.png",
+         "imageheight":2450,
+         "imagewidth":1780,
          "margin":0,
-         "name":"floor1",
+         "name":"images",
          "spacing":0,
-         "tilecount":1,
-         "tileheight":115,
-         "tileoffset":
-            {
-             "x":0,
-             "y":42
-            },
+         "tilecount":70,
+         "tileheight":350,
          "tiles":[
                 {
                  "id":0,
@@ -148,149 +147,170 @@
                         {
                          "name":"collide",
                          "type":"bool",
-                         "value":true
-                        }, 
+                         "value":false
+                        }]
+                }, 
+                {
+                 "id":3,
+                 "properties":[
                         {
-                         "name":"name",
+                         "name":"collide",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
+                 "id":4,
+                 "properties":[
+                        {
+                         "name":"collide",
+                         "type":"bool",
+                         "value":false
+                        }]
+                }, 
+                {
+                 "id":6,
+                 "properties":[
+                        {
+                         "name":"type",
                          "type":"string",
-                         "value":"floor1"
+                         "value":"energy"
                         }]
-                }],
-         "tilewidth":120
-        }, 
-        {
-         "columns":1,
-         "firstgid":2,
-         "image":"..\/images\/floor2.png",
-         "imageheight":111,
-         "imagewidth":120,
-         "margin":0,
-         "name":"floor2",
-         "properties":[
+                }, 
                 {
-                 "name":"collide",
-                 "type":"bool",
-                 "value":true
-                }],
-         "spacing":0,
-         "tilecount":1,
-         "tileheight":111,
-         "tileoffset":
-            {
-             "x":0,
-             "y":42
-            },
-         "tiles":[
-                {
-                 "id":0,
+                 "id":7,
                  "properties":[
                         {
-                         "name":"collide",
-                         "type":"bool",
-                         "value":true
-                        }]
-                }],
-         "tilewidth":120
-        }, 
-        {
-         "columns":1,
-         "firstgid":3,
-         "image":"..\/images\/floor3.png",
-         "imageheight":111,
-         "imagewidth":120,
-         "margin":0,
-         "name":"floor3",
-         "properties":[
-                {
-                 "name":"collide",
-                 "type":"bool",
-                 "value":true
-                }],
-         "spacing":0,
-         "tilecount":1,
-         "tileheight":111,
-         "tileoffset":
-            {
-             "x":0,
-             "y":72
-            },
-         "tiles":[
-                {
-                 "id":0,
-                 "properties":[
-                        {
-                         "name":"collide",
-                         "type":"bool",
-                         "value":true
-                        }]
-                }],
-         "tilewidth":120
-        }, 
-        {
-         "class":"Star",
-         "columns":1,
-         "firstgid":4,
-         "image":"..\/images\/star.png",
-         "imageheight":40,
-         "imagewidth":40,
-         "margin":0,
-         "name":"star",
-         "spacing":0,
-         "tilecount":1,
-         "tileheight":40,
-         "tileoffset":
-            {
-             "x":40,
-             "y":-30
-            },
-         "tiles":[
-                {
-                 "id":0,
-                 "properties":[
-                        {
-                         "name":"name",
+                         "name":"direction",
                          "type":"string",
-                         "value":"star"
+                         "value":"north"
                         }, 
                         {
                          "name":"type",
                          "type":"string",
-                         "value":"prop"
+                         "value":"ship"
                         }]
-                }],
-         "tilewidth":40
-        }, 
-        {
-         "columns":2,
-         "firstgid":5,
-         "image":"..\/images\/floor1.png",
-         "imageheight":115,
-         "imagewidth":120,
-         "margin":0,
-         "name":"aa",
-         "properties":[
-                {
-                 "name":"A",
-                 "type":"int",
-                 "value":0
                 }, 
                 {
-                 "name":"aa",
-                 "type":"bool",
-                 "value":true
+                 "id":10,
+                 "properties":[
+                        {
+                         "name":"direction",
+                         "type":"string",
+                         "value":"east"
+                        }, 
+                        {
+                         "name":"type",
+                         "type":"string",
+                         "value":"player"
+                        }]
+                }, 
+                {
+                 "id":11,
+                 "properties":[
+                        {
+                         "name":"direction",
+                         "type":"string",
+                         "value":"north"
+                        }, 
+                        {
+                         "name":"type",
+                         "type":"string",
+                         "value":"player"
+                        }]
+                }, 
+                {
+                 "id":12,
+                 "properties":[
+                        {
+                         "name":"direction",
+                         "type":"string",
+                         "value":"south"
+                        }, 
+                        {
+                         "name":"type",
+                         "type":"string",
+                         "value":"player"
+                        }]
+                }, 
+                {
+                 "id":13,
+                 "properties":[
+                        {
+                         "name":"direction",
+                         "type":"string",
+                         "value":"west"
+                        }, 
+                        {
+                         "name":"type",
+                         "type":"string",
+                         "value":"player"
+                        }]
+                },
+            
+                {
+                 "id":16,
+                 "properties":[
+                        {
+                         "name":"direction",
+                         "type":"string",
+                         "value":"east"
+                        }, 
+                        {
+                         "name":"type",
+                         "type":"string",
+                         "value":"ship"
+                        }]
+                }, 
+                {
+                 "id":17,
+                 "properties":[
+                        {
+                         "name":"direction",
+                         "type":"string",
+                         "value":"south"
+                        }, 
+                        {
+                         "name":"type",
+                         "type":"string",
+                         "value":"ship"
+                        }]
+                }, 
+                {
+                 "id":18,
+                 "properties":[
+                        {
+                         "name":"direction",
+                         "type":"string",
+                         "value":"west"
+                        }, 
+                        {
+                         "name":"type",
+                         "type":"string",
+                         "value":"ship"
+                        }]
                 }],
+         "tilewidth":178
+        }, 
+        {
+         "columns":6,
+         "firstgid":71,
+         "image":"..\/images\/grid.png",
+         "imageheight":700,
+         "imagewidth":1092,
+         "margin":0,
+         "name":"grid",
          "spacing":0,
-         "tilecount":2,
-         "tileheight":84,
-         "tileoffset":
-            {
-             "x":0,
-             "y":10
-            },
-         "tilewidth":60
+         "tilecount":12,
+         "tileheight":350,
+         "tilewidth":182
+        }, 
+        {
+         "firstgid":83,
+         "source":"images.json"
         }],
- "tilewidth":120,
+ "tilewidth":185,
  "type":"map",
  "version":"1.10",
- "width":10
+ "width":9
 }

@@ -63,6 +63,7 @@ export default class Loader extends Phaser.Scene {
     loadImage(){
         this.load.image("amplify", "assets/images/amplify.png")
         this.load.image("button", "assets/images/button.png")
+        this.load.image("bg", "assets/images/bg.png")
         this.load.image("floor1", "assets/images/floor1.png")
         this.load.image("floor2", "assets/images/floor2.png")
         this.load.image("floor3", "assets/images/floor3.png")
@@ -74,6 +75,7 @@ export default class Loader extends Phaser.Scene {
         this.load.image("speedX1","assets/images/speedX1.png")
         this.load.image("speedX2","assets/images/speedX2.png")
         this.load.image("speedX4","assets/images/speedX4.png")
+        // this.load.image("images", "assets/images/images.png")
     }
 
     /**
@@ -82,6 +84,10 @@ export default class Loader extends Phaser.Scene {
     loadMapData(){
         this.load.tilemapTiledJSON("level1", "assets/mapData/level1.json")
         this.load.tilemapTiledJSON("level2", "assets/mapData/level2.json")
+        this.load.tilemapTiledJSON("level3", "assets/mapData/level3.json")
+        this.load.tilemapTiledJSON("level4", "assets/mapData/level4.json")
+        this.load.tilemapTiledJSON("level5", "assets/mapData/level5.json")
+        this.load.tilemapTiledJSON("level6", "assets/mapData/level6.json")
     }
 
     /**
@@ -90,5 +96,7 @@ export default class Loader extends Phaser.Scene {
     loadSprite(){
         this.load.spritesheet("player", "assets/images/player.png", {frameWidth: 48, frameHeight: 48})
         this.load.spritesheet("ship", "assets/images/ship.png", {frameWidth: 80, frameHeight: 60})
+        this.load.spritesheet("images", "assets/images/images.png", {frameWidth: 178, frameHeight: 350})
+        this.load.spritesheet("grid", 'assets/images/grid.png', {frameWidth: 182, frameHeight: 350})
     }
 }

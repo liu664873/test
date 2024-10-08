@@ -23,25 +23,24 @@ export default class Game extends Phaser.Scene {
         this.width = this.sys.game.config.width
         this.height = this.sys.game.config.height
 
+        this.add.image(0, 0, 'bg').setScale(1.5).setOrigin(0).setScrollFactor(0)
+
         this.score = 0
         this.cureSpeed = 1
         this.map = new Map(this, this.level, 950, 100)
-        // this.map.openGrid()
-        this.player = Generator.generatePlayer(this.map, "player", 3, 2, 2)
-        this.ship = Generator.generateShip(this.map, "ship", 4, 0, 1)
-        this.map.setPosition(400, 150)
+        this.map.closeGrid()
+        this.map.setScale(0.6)
+        this.map.setPosition(350, 100)
         this.showGrid = this.add.sprite(50, 50, "showGrid").setScale(0.5).setInteractive().setScrollFactor(0)
-        this.amplify = this.add.sprite(150, 50, "amplify").setScale(0.5).setInteractive().setScrollFactor(0)
-        this.reduce = this.add.sprite(250, 50, "reduce").setScale(0.5).setInteractive().setScrollFactor(0)
+        this.amplify = this.add.sprite(150, 50, "amplify").setScale(1).setInteractive().setScrollFactor(0)
+        this.reduce = this.add.sprite(250, 50, "reduce").setScale(1).setInteractive().setScrollFactor(0)
         this.move = this.add.sprite(350, 50, "move").setScale(0.5).setInteractive().setScrollFactor(0)
         this.speed = this.add.sprite(50,100,`speedX${this.cureSpeed}`).setInteractive().setScrollFactor(0)
         this.progressBar = UI.progressBar(this, 450, 50).setScrollFactor(0)
         this.addOnEvent()
-        // this.isRunning = true
-        this.registry.set("player", this.player)
-        this.registry.set("ship", this.ship)
+        this.registry.set("player", this.map.playerList[0])
+        this.registry.set("ship", this.map.shipList[0])
         this.registry.set("mapd", this.map)
-        //this.tweens.chain
     
     }
 

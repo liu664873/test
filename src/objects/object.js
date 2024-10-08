@@ -14,14 +14,13 @@ export default class Object extends Phaser.GameObjects.Sprite {
      * @param {*} y 网格坐标y,默认为0
      * @param {*} depth 这里深度相对于map，显示对象在哪一图层级,默认为0
      */
-    constructor(map, name, gridX = 0, gridY = 0, depth = 0){
+    constructor(map, name, gridX = 0, gridY = 0, depth = 0, frame = 1){
 
         const vec = new Phaser.Math.Vector2()
         map.tilemap.tileToWorldXY(gridX, gridY, vec)    //将网格坐标转换为世界坐标
-        super(map.scene, vec.x, vec.y, name) 
+        super(map.scene, vec.x, vec.y, name, frame) 
 
         this.map = map
-        this.name = name
         this.gridX = gridX
         this.gridY = gridY
         this.depth = depth

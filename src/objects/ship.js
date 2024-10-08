@@ -1,30 +1,35 @@
 import Phaser from "phaser"
 import ItemInfo from "./itemInfo"
 import Object from "./object"
+import { GAME_DATA } from "../configs/mapConfig"
 
-const LEFT = "left"
-const RIGHT = "right"
-const UP = "up"
-const DOWN = "down"
+const EAST = GAME_DATA.DIECTION_EAST
+const SOUTH = GAME_DATA.DIECTION_SOUTH
+const WEST = GAME_DATA.DIECTION_WEST
+const NORTH = GAME_DATA.DIECTION_NORTH
+
 
 export default class Ship extends Object{
-    constructor(map, name, gridX, gridY, depth){
-        super(map, name, gridX, gridY, depth)
+    constructor(map, name, gridX, gridY, depth, direction=EAST){
+        super(map, "images", gridX, gridY, depth, 7)
   
         this.scene.add.existing(this)
         this.scene.physics.add.existing(this)
-        this.setDepth(1.4)
-        this.setScale(0.9)
-        this.setOrigin(-0.3, 0.5)
+        this.setDepth(depth)
+        // this.setScale(0.9)
+        this.setOrigin(0, 0.7)
         this.setInteractive()
+        this.name = name
+
+        this.direction = direction
 
         this.directionImage = {
-            up: 2,
-            right: 0,
-            down: 1,
-            left: 3,
+            east : 16,
+            south: 17,
+            west: 18,
+            north: 7
         }
-        this.direction = RIGHT
+        
         this.setFrame(this.directionImage[this.direction])
 
         this.driver = null  //驾驶者，实际就是代表是否载人
@@ -45,69 +50,69 @@ export default class Ship extends Object{
     /**
      * 添加玩家动画
      */
-       addAnimations() {
+    addAnimations() {
         this.anims.create({
-            key: LEFT,
-            frames: this.anims.generateFrameNumbers("ship", { start: 3, end: 3 }),
+            key: EAST,
+            frames: this.anims.generateFrameNumbers("images", { frames: [16]}),
             repeat: -1,
             frameRate: 8
         })
         this.anims.create({
-            key: RIGHT,
-            frames: this.anims.generateFrameNumbers("ship", { start: 0, end: 0}),
+            key: SOUTH,
+            frames: this.anims.generateFrameNumbers("images", { frames: [17] }),
             repeat: -1,
             frameRate: 8
         })
         this.anims.create({
-            key: UP,
-            frames: this.anims.generateFrameNumbers("ship", { start: 2, end: 2 }),
+            key: WEST,
+            frames: this.anims.generateFrameNumbers("images", { frames: [18] }),
             repeat: -1,
             frameRate: 8
         })
         this.anims.create({
-            key: DOWN,
-            frames: this.anims.generateFrameNumbers("ship", { start: 1, end: 1 }),
+            key: NORTH,
+            frames: this.anims.generateFrameNumbers("images", { frames: [7] }),
             repeat: -1,
             frameRate: 8
         })
         this.anims.create({
-            key: "upToRight",
-            frames: this.anims.generateFrameNumbers("ship", { frames: [2, 0] }),
+            key: "northToEast",
+            frames: this.anims.generateFrameNumbers("images", { frames: [7, 16] }),
+            duration: 1000,
+        })
+        this.anims.create({
+            key: "eastToSouth",
+            frames: this.anims.generateFrameNumbers("images", { frames: [16, 17] }),
             duration: 1000
         })
         this.anims.create({
-            key: "rightToDown",
-            frames: this.anims.generateFrameNumbers("ship", { frames: [0, 1] }),
+            key: "southToWest",
+            frames: this.anims.generateFrameNumbers("images", { frames: [17, 18] }),
             duration: 1000
         })
         this.anims.create({
-            key: "downToLeft",
-            frames: this.anims.generateFrameNumbers("ship", { frames: [1, 3] }),
+            key:"westToNorth",
+            frames: this.anims.generateFrameNumbers("images", { frames: [18, 7] }),
             duration: 1000
         })
         this.anims.create({
-            key: "leftToUp",
-            frames: this.anims.generateFrameNumbers("ship", { frames: [3, 2] }),
+            key: "eastToNorth",
+            frames: this.anims.generateFrameNumbers("images", { frames: [16, 7] }),
             duration: 1000
         })
         this.anims.create({
-            key: "rightToUp",
-            frames: this.anims.generateFrameNumbers("ship", { frames: [0, 2] }),
+            key: "southToEast",
+            frames: this.anims.generateFrameNumbers("images", { frames: [17, 16] }),
             duration: 1000
         })
         this.anims.create({
-            key: "downToRight",
-            frames: this.anims.generateFrameNumbers("ship", { frames: [1, 0] }),
+            key: "westToSouth",
+            frames: this.anims.generateFrameNumbers("images", { frames: [18, 17] }),
             duration: 1000
         })
         this.anims.create({
-            key: "leftToDown",
-            frames: this.anims.generateFrameNumbers("ship", { frames: [3, 1] }),
-            duration: 1000
-        })
-        this.anims.create({
-            key: "upToLeft",
-            frames: this.anims.generateFrameNumbers("ship", { frames: [2, 3] }),
+            key: "northToWest",
+            frames: this.anims.generateFrameNumbers("images", { frames: [7, 18] }),
             duration: 1000
         })
     }
@@ -176,13 +181,14 @@ export default class Ship extends Object{
     canMove(direction){
         let logicX = this.logicX
         let logicY = this.logicY
-        if(direction === LEFT) logicX -= 1
-        else if(direction === RIGHT) logicX += 1
-        else if(direction === UP) logicY -= 1
-        else if(direction === DOWN) logicY += 1 
-        const  isOver = logicX < 0|| logicX >= this.map.width ||
-                        logicY < 0 || logicY >= this.map.height
-        return !isOver && this.moveSpace[logicY][logicX] === -1
+        if (WEST === direction) logicX -= 1
+        else if (EAST === direction) logicX += 1
+        else if (NORTH === direction) logicY -= 1
+        else if (SOUTH === direction) logicY += 1
+
+        const isOver = logicX < 0 || logicX >= this.map.width ||
+            logicY < 0 || logicY >= this.map.height
+        return !isOver && this.moveSpace[logicY][logicX] == -1
     }
 
     checkDriver(){
@@ -206,10 +212,10 @@ export default class Ship extends Object{
 
             let isCanMove = true
             const from = new Phaser.Math.Vector2(this.logicX, this.logicY)
-            if (this.direction === UP && this.canMove(UP)) this.logicY = this.logicY - 1
-            else if (this.direction === RIGHT && this.canMove(RIGHT)) this.logicX = this.logicX + 1
-            else if (this.direction === DOWN && this.canMove(DOWN)) this.logicY = this.logicY + 1
-            else if (this.direction === LEFT && this.canMove(LEFT)) this.logicX = this.logicX - 1
+            if (this.direction === NORTH && this.canMove(NORTH)) this.logicY = this.logicY - 1
+            else if (this.direction === EAST && this.canMove(EAST)) this.logicX = this.logicX + 1
+            else if (this.direction === SOUTH && this.canMove(SOUTH)) this.logicY = this.logicY + 1
+            else if (this.direction === WEST && this.canMove(WEST)) this.logicX = this.logicX - 1
             else {
                 isCanMove = false
             }
@@ -250,25 +256,25 @@ export default class Ship extends Object{
 
         if(window.code_running) data.lineNumber =  window.gameAndEditor_data.get('runningCodeLine')
 
-        if (this.direction === UP) {
-            data.fromDirection = UP
-            data.direction = LEFT
-            data.turn = "upToLeft"
+        if (this.direction === NORTH) {
+            data.fromDirection = NORTH
+            data.direction = WEST
+            data.turn = "northToWest"
         }
-        else if (this.direction === RIGHT) {
-            data.fromDirection = RIGHT
-            data.direction = UP
-            data.turn = "rightToUp"
+        else if (this.direction === EAST) {
+            data.fromDirection = EAST
+            data.direction = NORTH
+            data.turn = "eastToNorth"
         }
-        else if (this.direction === DOWN) {
-            data.fromDirection = DOWN
-            data.direction = RIGHT
-            data.turn = "downToRight"
+        else if (this.direction === SOUTH) {
+            data.fromDirection = SOUTH
+            data.direction = EAST
+            data.turn = "southToEast"
         }
-        else if (this.direction === LEFT) {
-            data.fromDirection = LEFT
-            data.direction = DOWN
-            data.turn = "leftToDown"
+        else if (this.direction === WEST) {
+            data.fromDirection = WEST
+            data.direction = SOUTH
+            data.turn = "westToSouth"
         }
         this.direction = data.direction
         this.map.moveData.push(data)
@@ -282,25 +288,25 @@ export default class Ship extends Object{
 
         if(window.code_running) data.lineNumber =  window.gameAndEditor_data.get('runningCodeLine')
 
-        if (this.direction === UP) {
-            data.fromDirection = UP
-            data.direction = RIGHT
-            data.turn = "upToRight"
+        if (this.direction === NORTH) {
+            data.fromDirection = NORTH
+            data.direction = EAST
+            data.turn = "northToEast"
         }
-        else if (this.direction === RIGHT) {
-            data.fromDirection = RIGHT
-            data.direction = DOWN
-            data.turn = "rightToDown"
+        else if (this.direction === EAST) {
+            data.fromDirection = EAST
+            data.direction = SOUTH
+            data.turn = "eastToSouth"
         }
-        else if (this.direction === DOWN) {
-            data.fromDirection = DOWN
-            data.direction = LEFT
-            data.turn = "downToLeft"
+        else if (this.direction === SOUTH) {
+            data.fromDirection = SOUTH
+            data.direction = WEST
+            data.turn = "southToWest"
         }
-        else if (this.direction === LEFT) {
-            data.fromDirection = LEFT
-            data.direction = UP
-            data.turn = "leftToUp"
+        else if (this.direction === WEST) {
+            data.fromDirection = WEST
+            data.direction = NORTH
+            data.turn ="westToNorth"
         }
         this.direction = data.direction
         this.map.moveData.push(data)

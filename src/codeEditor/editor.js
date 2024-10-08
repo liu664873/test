@@ -49,8 +49,7 @@ editor.highlightLine = function (lineNumber, error=false, className = "highlight
     if(error) className='highlight-line-error'
     var range = new ace.Range(lineNumber - 1, 0, lineNumber - 1, 1);
     var markerId = editor.session.addMarker(range, className, "fullLine", true);
-    // editor.gotoLine(lineNumber)
-    // 可以选择将markerId存储起来以便后续取消高亮  
+    editor.gotoLine(lineNumber)
     editor.highlightLines.set(lineNumber, markerId)
     return markerId;
 }

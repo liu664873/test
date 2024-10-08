@@ -6,13 +6,12 @@ import ItemInfo from "./itemInfo";
  */
 
 export default class Prop extends Object{
-    constructor(map, name, gridX = 0, gridY = 0, depth = 0){
+    constructor(map, name, gridX = 0, gridY = 0, depth = 0, frame = 1){
         
-        super(map, name, gridX, gridY, depth)
+        super(map, name, gridX, gridY, depth, frame)
         this.scene.add.existing(this)
         this.scene.physics.add.existing(this)
 
         this.setInteractive()
-        this.info = new ItemInfo(this)
     }
 }
