@@ -1,5 +1,9 @@
 import { playerConfig, propConfig, shipConfig } from "../configs/config"
+import Map from "./map"
 
+/**
+ * 地图及玩家等生成的类
+ */
 export default class Generator {
 
     static generateMap(){

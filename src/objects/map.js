@@ -32,8 +32,8 @@ export default class Map {
         this.playerList = []
         this.shipList = []
         this.moveData = []
-        this.moveSpace = Array.from({ length: this.height }, (_, i) =>  
-            Array.from({ length: this.width }, (_, j) => -1)  
+        this.moveSpace = Array.from({ length: this.height }, () =>  
+            Array.from({ length: this.width }, () => -1)  
         ); 
         this.activeLayerIndex = 0
         this.initLayers()
@@ -100,7 +100,7 @@ export default class Map {
      * 关闭显示网格
      */
     closeGrid() {
-        this.grid.setVisible(false)
+        // this.grid.setVisible(false)
         if (this.gridLayer != null) this.gridLayer.setVisible(false)
     }
 
@@ -159,11 +159,7 @@ export default class Map {
                 props: {
                     z: 0.5
                 },
-                onUpdate: () => {
-                    console.log("zhengzaizhixing")
-                },
                 onComplete: () => {
-                    console.log(data.target)
                     if (this.scene.score < this.propList.length) {
                         this.scene.cameras.main.stopFollow(data.targets)
                         let info = `已经收集道具${this.scene.score},还有${this.propList.length - this.scene.score}个\n未收集,是否重新开始？`
@@ -270,7 +266,7 @@ export default class Map {
      * 显示网格
      */
     openGrid() {
-        this.grid.setVisible(true)
+        // this.grid.setVisible(true)
         if (this.gridLayer != null) this.gridLayer.setVisible(true)
     }
 

@@ -7,8 +7,8 @@ import Manager from "./Manager"
 
 const config = {
     type: Phaser.AUTO,
-    width: 800,
-    height: 800,
+    width: 2000,
+    height: 2000,
     parent: "game",
     scale:{
         mode: Phaser.Scale.FIT

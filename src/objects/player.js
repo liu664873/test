@@ -44,7 +44,6 @@ export default class Player extends Object {
         this.info = new ItemInfo(this)
 
         this.addAnimations()
-        this.anims.frameRate
 
         map.playerList.push(this)
     }
@@ -142,11 +141,6 @@ export default class Player extends Object {
             },
             duration: 1000,
             onStart: () => { 
-                // if(!config.isCanMove)  {
-                //     this.scene.tweens.remove(tween); 
-                //     this.map.chainTween.stop()
-                // }
-                // window.editor.highlightLine()
                 this.anims.play(config.direction)
                 if(config.lineNumber){
                     window.editor.highlightLine(config.lineNumber)

@@ -23,14 +23,14 @@ export default class Game extends Phaser.Scene {
         this.width = this.sys.game.config.width
         this.height = this.sys.game.config.height
 
-        this.add.image(0, 0, 'bg').setScale(1.5).setOrigin(0).setScrollFactor(0)
+        this.add.image(0, 0, 'bg').setScale(4).setOrigin(0).setScrollFactor(0)
 
         this.score = 0
         this.cureSpeed = 1
         this.map = new Map(this, this.level, 950, 100)
         this.map.closeGrid()
         this.map.setScale(0.6)
-        this.map.setPosition(350, 100)
+        this.map.setPosition(700, 300)
         this.showGrid = this.add.sprite(50, 50, "showGrid").setScale(0.5).setInteractive().setScrollFactor(0)
         this.amplify = this.add.sprite(150, 50, "amplify").setScale(1).setInteractive().setScrollFactor(0)
         this.reduce = this.add.sprite(250, 50, "reduce").setScale(1).setInteractive().setScrollFactor(0)

@@ -24,7 +24,7 @@ export default class Loader extends Phaser.Scene {
 
      create(){
         // this.scene.start("transform", {level: "level1", score: 0})
-        this.scene.start("transform", {level: "level1", score: 0})
+        this.scene.start("transform", {level: "level5", score: 0})
      }
 
     /**
@@ -88,6 +88,7 @@ export default class Loader extends Phaser.Scene {
         this.load.tilemapTiledJSON("level4", "assets/mapData/level4.json")
         this.load.tilemapTiledJSON("level5", "assets/mapData/level5.json")
         this.load.tilemapTiledJSON("level6", "assets/mapData/level6.json")
+        this.load.tilemapTiledJSON("level7", "assets/mapData/level7.json")
     }
 
     /**
