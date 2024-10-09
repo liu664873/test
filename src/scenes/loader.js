@@ -24,7 +24,13 @@ export default class Loader extends Phaser.Scene {
 
      create(){
         // this.scene.start("transform", {level: "level1", score: 0})
-        this.scene.start("transform", {level: "level5", score: 0})
+        this.scene.start("transform", {
+            levelData: {
+                level: 4,
+                world: "seabed",
+                score: 0,
+                levelsNumber: 6
+            }})
      }
 
     /**
@@ -82,13 +88,7 @@ export default class Loader extends Phaser.Scene {
      * 加载地图数据
      */
     loadMapData(){
-        this.load.tilemapTiledJSON("level1", "assets/mapData/level1.json")
-        this.load.tilemapTiledJSON("level2", "assets/mapData/level2.json")
-        this.load.tilemapTiledJSON("level3", "assets/mapData/level3.json")
-        this.load.tilemapTiledJSON("level4", "assets/mapData/level4.json")
-        this.load.tilemapTiledJSON("level5", "assets/mapData/level5.json")
-        this.load.tilemapTiledJSON("level6", "assets/mapData/level6.json")
-        this.load.tilemapTiledJSON("level7", "assets/mapData/level7.json")
+        // this.load.tilemapTiledJSON("seabed1", "assets/mapData/level1.json")
     }
 
     /**

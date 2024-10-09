@@ -24,7 +24,7 @@ export default class Map {
         this.tileHeight = this.tilemap.tileHeight
         this.tilesets = this.tilemap.tilesets
         this.tilePros = {}
-        this.grid = new Grid(scene, this)
+        // this.grid = new Grid(scene, this)
         this.gridLayer = null
         this.layerListData = this.tilemap.layers            //存储图层二维数组数据
         this.layerList = []
@@ -48,10 +48,8 @@ export default class Map {
         //玩家和道具重叠检测
         this.scene.physics.add.overlap(this.playerList, this.propList,
             (player, star) => {
-                // this.scene.sound.play("star")
-                ++this.scene.score
-                console.log(this.scene.score)
-                this.scene.progressBar.updateProgress(this.scene.score / this.propList.length)
+                ++this.scene.levelData.score
+                this.scene.progressBar.updateProgress(this.scene.levelData.score / this.propList.length)
                 star.destroy()
             },
             (player, star) => {
@@ -147,7 +145,7 @@ export default class Map {
                     const width = this.scene.sys.game.config.width
                     const height = this.scene.sys.game.config.height
                     const popUp = UI.popUp(this.scene, width / 2, height / 2, this.depth + 10, info,
-                        () => { }, () => { this.scene.scene.start("transform", { level: this.scene.level }) }).setScrollFactor(0)
+                        () => { }, () => { this.scene.scene.start("transform", { levelData: this.scene.levelData }) }).setScrollFactor(0)
                     window.chainTween = null
 
                 }
@@ -160,22 +158,23 @@ export default class Map {
                     z: 0.5
                 },
                 onComplete: () => {
-                    if (this.scene.score < this.propList.length) {
+                    if (this.scene.levelData.score < this.propList.length) {
                         this.scene.cameras.main.stopFollow(data.targets)
-                        let info = `已经收集道具${this.scene.score},还有${this.propList.length - this.scene.score}个\n未收集,是否重新开始？`
+                        let info = `已经收集道具${this.scene.levelData.score},还有${this.propList.length - this.scene.levelData.score}个\n未收集,是否重新开始？`
                         const width = this.scene.sys.game.config.width
                         const height = this.scene.sys.game.config.height
                         const popUp = UI.popUp(this.scene, width / 2, height / 2, this.depth + 10, info,
                             () => { },
-                            () => { SceneEffect.closeScene(this.scene, () => { this.scene.scene.start("transform", { level: "level2" }) }) })
+                            () => { SceneEffect.closeScene(this.scene, () => { this.scene.scene.start("transform", { levelData: this.scene.levelData }) }) })
                     } else {
                         this.scene.cameras.main.stopFollow(data.targets)
                         let info = `是否进入下一关！`
                         const width = this.scene.sys.game.config.width
                         const height = this.scene.sys.game.config.height
+                        this.scene.levelData.level++
                         const popUp = UI.popUp(this.scene, width / 2, height / 2, this.depth + 10, info,
                             () => { },
-                            () => { SceneEffect.closeScene(this.scene, () => { this.scene.scene.start("transform", { level: "level2" }) }) })
+                            () => { SceneEffect.closeScene(this.scene, () => { this.scene.scene.start("transform", { levelData: this.scene.levelData }) }) })
                     }
                     window.chainTween = null
                 }
@@ -189,24 +188,6 @@ export default class Map {
         this.moveData = []
     }
 
-    /**
-     * 测试
-     */
-    // test(){
-    //     if(this.moveDate.length <= 0) return
-    //     this.scene.add.tween({
-    //         targets: this.moveData[0].target,
-    //         prop: this.moveData[0].prop,
-    //         onStart: () => {
-    //             this.moveData[0].onStart()
-    //         },
-    //         onComplete: () => {
-    //             this.moveData[0].onComplete()
-    //             this.moveDate.shift()
-    //             this.test()
-    //         }
-    //     })
-    // }
 
     /**
      * 初始化图层
@@ -302,7 +283,7 @@ export default class Map {
         this.tilesets.forEach(tileset => {
             tileset.tileOffset = new Phaser.Math.Vector2(tileset.offset.x * scale, tileset.offset.y * scale)
         });
-        this.grid.setScale(scale)
+        // this.grid.setScale(scale)
         this.gridLayer.setScale(scale)
         this.gridLayer.setPosition(this.x, this.y + ((this.gridLayer.depth - this.depth - 1) * this.gridLayer.scale * layerOffset.y))
     }
@@ -325,7 +306,7 @@ export default class Map {
         this.shipList.forEach(ship => {
             ship.setGridPosition(ship.gridX, ship.gridY)
         })
-        this.grid.setPosition(this.x, this.y)
+        // this.grid.setPosition(this.x, this.y)
         this.gridLayer.setPosition(this.x, this.y + ((this.gridLayer.depth - this.depth - 1) * this.gridLayer.scale * layerOffset.y))
     }
 

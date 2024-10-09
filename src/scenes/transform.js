@@ -18,15 +18,12 @@ export default class Transform extends Phaser.Scene {
      * score为上一个关卡分数
      */
     init(data){
-        this.level = data.level
-        this.score = data.score
+        this.levelData = data.levelData
     }
 
     create(){
-        console.log(this)
-        console.log(this.tweens)
         this.time.delayedCall(
-            500,
+            200,
             () => {
                 this.toNext()
             }
@@ -37,13 +34,37 @@ export default class Transform extends Phaser.Scene {
      * 跳转下一场景
      */
     toNext(){
-        const data = {
-            level: this.level
-        }
-        if(this.level) {
+        if(this.isHasNextLevel) {
             SceneEffect.openScene(this, () => {
-                this.scene.start(`game`, data)
+                this.scene.start(`game`, {levelData: this.levelData})
             })
-        }
+        } else {
+            let info = `已到最后一关，是否重新开始？`
+                        const width = this.scene.sys.game.config.width
+                        const height = this.scene.sys.game.config.height
+                        const popUp = UI.popUp(this.scene, width / 2, height / 2, this.depth + 10, info,
+                            () => { 
+                                SceneEffect.closeScene(this.scene, () => { 
+                                    this.scene.start("transform", { 
+                                        levelData: this.levelData
+                                    })})
+                            },
+                            () => { 
+                                this.levelData.level = 1
+                                SceneEffect.closeScene(this.scene, () => { 
+                                this.scene.start("transform", { 
+                                    levelData: this.levelData
+                                 }) }) })
+                    }
     }
+
+    /**
+     * 判断是否有下一关
+     */
+    isHasNextLevel(){
+        if(this.level < this.levelsNumber) return true
+        return false
+    }
+
+
 }

@@ -4,7 +4,6 @@ export default class SceneEffect {
         const width = _this.sys.game.config.width
         const height = _this.sys.game.config.height
         const rect = _this.add.rectangle(0, 0, width, height, 0x000000).setOrigin(0).setAlpha(0)
-        console.log(_this)
         // 淡出当前场景内容
         _this.tweens.add({
             targets: _this.cameras.main,

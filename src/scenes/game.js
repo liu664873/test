@@ -16,7 +16,13 @@ export default class Game extends Phaser.Scene {
      * 接受上一个场景的数据
      */
     init(data){
-        this.level = data.level
+        this.levelData = data.levelData
+    }
+
+    preload(){
+        console.log("leveldata", this.levelData)
+        this.load.tilemapTiledJSON(`${this.levelData.world}${this.levelData.level}`, `assets/mapData/${this.levelData.world}${this.levelData.level}.json`)
+        // this.load.image('bg', `assets/`)可以换背景
     }
 
     create(){
@@ -25,9 +31,8 @@ export default class Game extends Phaser.Scene {
 
         this.add.image(0, 0, 'bg').setScale(4).setOrigin(0).setScrollFactor(0)
 
-        this.score = 0
         this.cureSpeed = 1
-        this.map = new Map(this, this.level, 950, 100)
+        this.map = new Map(this, `${this.levelData.world}${this.levelData.level}`, 950, 100)
         this.map.closeGrid()
         this.map.setScale(0.6)
         this.map.setPosition(700, 300)
@@ -42,21 +47,6 @@ export default class Game extends Phaser.Scene {
         this.registry.set("ship", this.map.shipList[0])
         this.registry.set("mapd", this.map)
     
-    }
-
-    /**
-     * 每一帧都执行
-     */
-    update(){
-        // const code = this.registry.get("code")
-        // if(code && code.click){
-        //     this.map.moveData = []
-        //     // eval(code.context)
-        //     if(this.map.moveData.length > 0) this.map.createTweenChain()
-        //     console.log(code, this.map.moveData)
-        //     code.click = false
-        //     code.context = null
-        // }
     }
 
     addOnEvent(){
@@ -95,7 +85,7 @@ export default class Game extends Phaser.Scene {
         });  
         
         this.showGrid.on("pointerdown", () => {
-            if(this.map.grid.visible) this.map.closeGrid()
+            if(this.map.gridLayer.visible) this.map.closeGrid()
             else this.map.openGrid()
         })
         this.amplify.on("pointerdown", () => {this.amplify.clicked = true})
