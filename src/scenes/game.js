@@ -17,6 +17,7 @@ export default class Game extends Phaser.Scene {
      */
     init(data){
         this.levelData = data.levelData
+        console.log("game", this.levelData)
     }
 
     preload(){
