@@ -16,6 +16,7 @@ export default class ItemInfo extends Phaser.GameObjects.Container {
         this.setVisible(false)
         this.addEvents()
     }
+    
     /**
      * 对道具item添加监听事件
      * 当鼠标移动到item是，显示信息
