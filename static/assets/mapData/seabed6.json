@@ -138,7 +138,7 @@
         {
          "columns":10,
          "firstgid":1,
-         "image":"..\/..\/..\/..\/..\/images\/images.png",
+         "image":"..\/images\/images.png",
          "imageheight":2450,
          "imagewidth":1780,
          "margin":0,
@@ -252,7 +252,8 @@
                          "type":"string",
                          "value":"player"
                         }]
-                }, 
+                },
+            
                 {
                  "id":16,
                  "properties":[
@@ -266,8 +267,7 @@
                          "type":"string",
                          "value":"ship"
                         }]
-                },
-            
+                }, 
                 {
                  "id":17,
                  "properties":[
@@ -299,15 +299,15 @@
          "tilewidth":178
         }, 
         {
-         "columns":6,
+         "columns":1,
          "firstgid":71,
          "image":"..\/images\/grid.png",
-         "imageheight":700,
-         "imagewidth":1092,
+         "imageheight":350,
+         "imagewidth":182,
          "margin":0,
          "name":"grid",
          "spacing":0,
-         "tilecount":12,
+         "tilecount":1,
          "tileheight":350,
          "tilewidth":182
         }],

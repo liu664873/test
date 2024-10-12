@@ -13,12 +13,11 @@
 <body style="display: flex;">
     <div id="game" style="width: 500px; height: 500px;"></div>
     <div id="code" class="code">
-        <div id="editor" style="width: 300px; height: 300px;">
-        </div>
+        <div id="editor" style="width: 300px; height: 300px;"></div>
         <button id="run">run</button>
         <button id="new">new</button>
         <button id="stop">stop</button>
-        <button id="clear" onclick="showPopup()">clear</button>
+        <button id="clear">clear</button>
     </div>
     <!-- 弹窗 -->  
     <div id="popup" class="popup-hidden">  
@@ -36,7 +35,7 @@
         window.manager.showPopup("是否重置代码",
             ()=>{
                 window.editor.setValue('');
-                window.game.scene.start("transform",{level:"level2"})
+                window.game.scene.start("transform",{levelData:window.game.registry.get("mapd").scene.levelData})
             },
             ()=>{}
         ) 

@@ -208,11 +208,22 @@ def new(event):
     if(window.chainTween):
         mapd.chainTween.stop()
         window.editor.removeAllHighlight()
-    game.scene.start("transform",{'level':'level1'})
+    window.manager.showPopup("是否重置场景",resetScene,cancel) 
 
-
+def clear(event):
+    window.manager.showPopup("是否重置代码",resetCode,cancel) 
+def resetScene():
+    game = window.game
+    game.scene.start("transform",{'levelData':game.registry.get("mapd").scene.levelData})
+def resetCode():
+    game = window.game
+    window.editor.setValue('')
+    game.scene.start("transform",{'levelData':game.registry.get("mapd").scene.levelData})
+def cancel():
+    pass
 doc["run"].bind("click", echo)
 doc["new"].bind("click", new)
 doc["stop"].bind("click", stop)
+doc["clear"].bind("click", clear)
 #doc["stop"].bind("click", stop)
 #doc["refresh"].bind("click", refresh)
