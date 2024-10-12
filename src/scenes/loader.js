@@ -26,10 +26,10 @@ export default class Loader extends Phaser.Scene {
         // this.scene.start("transform", {level: "level1", score: 0})
         this.scene.start("transform", {
             levelData: {
-                level: 4,
+                level:15,
                 world: "seabed",
                 score: 0,
-                levelsNumber: 6
+                levelsNumber: 15
             }})
      }
 
@@ -81,11 +81,13 @@ export default class Loader extends Phaser.Scene {
         this.load.image("speedX1","assets/images/speedX1.png")
         this.load.image("speedX2","assets/images/speedX2.png")
         this.load.image("speedX4","assets/images/speedX4.png")
+        this.load.image("progressBar", "assets/images/progressBar.png")
+        this.load.image("progressBarBg", "assets/images/progressBarBg.png")
         // this.load.image("images", "assets/images/images.png")
     }
 
     /**
-     * 加载地图数据
+     * 加载地图数据s
      */
     loadMapData(){
         // this.load.tilemapTiledJSON("seabed1", "assets/mapData/level1.json")

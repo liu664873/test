@@ -1,5 +1,6 @@
 import Phaser from "phaser"
 import SceneEffect from "../objects/sceneEffect"
+import UI from "../objects/ui/ui"
 
 /**
  * 转换场景的类
@@ -34,25 +35,27 @@ export default class Transform extends Phaser.Scene {
      * 跳转下一场景
      */
     toNext(){
-        if(this.isHasNextLevel) {
+        console.log("hhh", this.levelData)
+        if(this.isHasNextLevel()) {
             SceneEffect.openScene(this, () => {
                 this.scene.start(`game`, {levelData: this.levelData})
             })
         } else {
-            let info = `已到最后一关，是否重新开始？`
-                        const width = this.scene.sys.game.config.width
-                        const height = this.scene.sys.game.config.height
-                        const popUp = UI.popUp(this.scene, width / 2, height / 2, this.depth + 10, info,
+            let info = `已到最后一关，是否\n重新回到第一关？`
+                        const width = this.sys.game.config.width
+                        const height = this.sys.game.config.height
+                        const popUp = UI.popUp(this, width / 2, height / 2, 20, info,
                             () => { 
-                                SceneEffect.closeScene(this.scene, () => { 
-                                    this.scene.start("transform", { 
+                                this.levelData.level = this.levelData.levelsNumber
+                                SceneEffect.closeScene(this, () => { 
+                                    this.scene.start("game", { 
                                         levelData: this.levelData
                                     })})
                             },
                             () => { 
                                 this.levelData.level = 1
-                                SceneEffect.closeScene(this.scene, () => { 
-                                this.scene.start("transform", { 
+                                SceneEffect.closeScene(this, () => { 
+                                this.scene.start("game", { 
                                     levelData: this.levelData
                                  }) }) })
                     }
@@ -62,7 +65,7 @@ export default class Transform extends Phaser.Scene {
      * 判断是否有下一关
      */
     isHasNextLevel(){
-        if(this.level < this.levelsNumber) return true
+        if(this.levelData.level <= this.levelData.levelsNumber) return true
         return false
     }
 

@@ -1,20 +1,19 @@
 import Phaser from "phaser"
 
 export default class ProgressBar extends Phaser.GameObjects.Container{
-    constructor(scene, x, y, width = 300, height = 30){
+    constructor(scene, x, y){
         super(scene, x ,y)
         this.scene.add.existing(this)
-        this.width = width
-        this.height = height
-        this.bgBar = new Phaser.GameObjects.Graphics(scene, { x: 0, y: 0, fillStyle: { color: 0x222222 } })
-        this.progressBar = new Phaser.GameObjects.Graphics(scene, { x: 0, y: 0, fillStyle: { color: 0x4CAF50 } })
+        this.bgBar = this.scene.add.image(0, 0, "progressBarBg").setOrigin(0)
+        this.progressBar = this.scene.add.image(5, 0, "progressBar").setOrigin(0)
+        this.width = this.bgBar.width
+        this.height = this.bgBar.height
         this.add(this.bgBar)
         this.add(this.progressBar)
+        this.progressBar.displayWidth = 0
 
-        this.bgBar.fillRect(0, 0, this.width, this.height)
-        this.progressBar.fillRect(0, 0, 0, this.height)
     }
-    updateProgress(progess){
-        this.progressBar.fillRect(0, 0, progess*this.width, this.height)
+    updateProgress(progress){
+        this.progressBar.displayWidth = progress*this.progressBar.width
     }
 }

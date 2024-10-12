@@ -17,10 +17,10 @@ export default class Game extends Phaser.Scene {
      */
     init(data){
         this.levelData = data.levelData
+        console.log("game", this.levelData)
     }
 
     preload(){
-        console.log("leveldata", this.levelData)
         this.load.tilemapTiledJSON(`${this.levelData.world}${this.levelData.level}`, `assets/mapData/${this.levelData.world}${this.levelData.level}.json`)
         // this.load.image('bg', `assets/`)可以换背景
     }
