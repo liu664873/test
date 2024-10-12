@@ -20,15 +20,13 @@
     left: 50%;  
     top: 50%;  
     transform: translate(-50%, -50%);  
-    width: 400px;  
-    /* 不再设置height，因为内容高度会自适应 */  
-    background-color: rgba(255, 255, 255, 0.9);  
-    border-radius: 8px;  
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  
+    width: 300px; 
+    height: 303px;
     z-index: 1000;  
     overflow: hidden; /* 超出内容隐藏（但这里主要由子元素控制） */  
     /* 添加padding-bottom以留出按钮的空间（可选，取决于你的布局需求） */  
-    padding-bottom: 60px; /* 假设按钮和间距总共需要60px */  
+    background-image: url('../assets/images/tipBg.png'); /* 背景图片 */
+    background-size: 100% auto;
 }  
   
 .popup-visible {  
@@ -36,38 +34,38 @@
 }  
   
 .popup-content {  
-    position: relative; /* 相对于自己定位，用于内部元素的绝对定位 */  
-    padding: 20px; /* 顶部和侧边的内边距 */  
+    position: relative; /* 相对于自己定位，用于内部元素的绝对定位 */   
     box-sizing: border-box;  
     height: calc(100% - 40px); /* 减去padding和可能的底部空间 */  
     overflow-y: auto; /* 超出内容垂直滚动 */  
+    left: 35%;
+    text-align: center;
 }  
-  
+ #tipText { 
+    padding-bottom: 40px;
+ }
+
 /* 按钮样式和定位 */  
 .popup-content button {  
     /* position: absolute;   */
     position: fixed;  
-    bottom: 0; /* 固定在底部 */  
+    bottom: 30px; /* 固定在底部 */  
     width: calc(30% - 10px); /* 各占一半宽度，减去间距 */  
-    padding: 10px;  
+    padding: 15px;  
     /* 其他样式... */  
+    background-size: cover;
 }  
   
-.popup-content button:first-child {  
-    left: 0; /* 第一个按钮靠左 */  
+.popup-content button:first-of-type {  
+    background-image: url('../assets/images/skip.png'); 
+    left: 30px; /* 第一个按钮靠左 */  
     border-radius: 0 0 0 8px; /* 左上角和右上角圆角为0，左下角和右下角圆角保留 */  
 }  
   
-.popup-content button:last-child {  
-    right: 0; /* 第二个按钮靠右 */  
+.popup-content button:last-child { 
+    background-image: url('../assets/images/confirm.png');  
+    right: 30px; /* 第二个按钮靠右 */  
     border-radius: 0 0 8px 0; /* 右上角和左下角圆角为0，左上角和右下角圆角保留 */  
 }  
   
-/* 取消按钮特定样式（如果需要） */  
-.cancel-button {  
-    background-color: #f44336;  
-    color: white;  
-    border: none;  
-    cursor: pointer;  
-}  
   

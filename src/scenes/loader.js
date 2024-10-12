@@ -83,6 +83,9 @@ export default class Loader extends Phaser.Scene {
         this.load.image("speedX4","assets/images/speedX4.png")
         this.load.image("progressBar", "assets/images/progressBar.png")
         this.load.image("progressBarBg", "assets/images/progressBarBg.png")
+        this.load.image("skip","assets/images/skip.png")
+        this.load.image("confirm","assets/images/confirm.png")
+        this.load.image("tipBg","assets/images/tipBg.png")
         // this.load.image("images", "assets/images/images.png")
     }
 
