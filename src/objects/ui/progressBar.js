@@ -14,6 +14,7 @@ export default class ProgressBar extends Phaser.GameObjects.Container{
 
     }
     updateProgress(progress){
+        console.log(progress)
         this.progressBar.displayWidth = progress*this.progressBar.width
     }
 }
