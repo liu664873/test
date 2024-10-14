@@ -29,6 +29,7 @@ export default class Map {
         this.layerListData = this.tilemap.layers            //存储图层二维数组数据
         this.layerList = []
         this.propList = []
+        this.collectedPropNum = 0 //收集道具的数量
         this.playerList = []
         this.shipList = []
         this.moveData = []
@@ -47,10 +48,11 @@ export default class Map {
     init() {
         //玩家和道具重叠检测
         this.scene.physics.add.overlap(this.playerList, this.propList,
-            (player, star) => {
-                ++this.scene.levelData.score
-                this.scene.progressBar.updateProgress(this.scene.levelData.score / this.propList.length)
-                star.destroy()
+            (player, prop) => {
+                this.collectedPropNum++
+                console.log(this.collectedPropNum, this.propList.length)
+                this.scene.progressBar.updateProgress(this.collectedPropNum / this.propList.length)
+                prop.destroy()
             },
             (player, star) => {
                 return player.gridX === star.gridX && player.gridY === star.gridY
@@ -158,9 +160,9 @@ export default class Map {
                     z: 0.5
                 },
                 onComplete: () => {
-                    if (this.scene.levelData.score < this.propList.length) {
+                    if (this.collectedPropNum < this.propList.length) {
                         this.scene.cameras.main.stopFollow(data.targets)
-                        let info = `已经收集道具${this.scene.levelData.score},还有${this.propList.length - this.scene.levelData.score}个\n未收集,是否重新开始？`
+                        let info = `已经收集道具${this.collectedPropNum},还有${this.propList.length - this.collectedPropNum}个\n未收集,是否重新开始？`
                         const width = this.scene.sys.game.config.width
                         const height = this.scene.sys.game.config.height
                         const popUp = UI.popUp(this.scene, width / 2, height / 2, this.depth + 10, info,

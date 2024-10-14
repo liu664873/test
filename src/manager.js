@@ -72,7 +72,6 @@ export default class Manager {
     showPopup(popupText, call1, call2) {  
         var popup = document.getElementById('popup');  
         popup.style.display = 'flex';  
-        console.log(call1)
         if(popupText) document.getElementById('popupText').textContent = popupText
         var confirmBtn = document.getElementById('confirm-button')
         var cancelBtn = document.getElementById('cancel-button')
