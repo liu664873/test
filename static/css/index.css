@@ -30,16 +30,19 @@
 }  
   
 .popup-content {  
-    margin-top: 40px;
     position: relative; /* 相对于自己定位，用于内部元素的绝对定位 */   
     box-sizing: border-box;  
     height: calc(100% - 40px); /* 减去padding和可能的底部空间 */  
     overflow-y: auto; /* 超出内容垂直滚动 */  
 }  
-
+#tipText{
+    text-align: center;
+    padding-bottom: 20px;
+}
 #popupText {
     padding: 20px;
     white-space: normal; word-wrap: break-word; text-align: left;
+    width: 260px;
 }
  /* #tipText { 
     padding-bottom: 40px;

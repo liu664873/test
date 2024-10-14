@@ -160,7 +160,7 @@ def echo(event):
                                 ']: ') + str(exc)
         else:
             error_str = 'Error: ' + str(exc) 
-        window.manager.showError(error_str, window.error_lineNumber)
+        window.manager.showError("错误",error_str, window.error_lineNumber)
         # window.manager.showPopup(error_str, function() {window.manager.removeHighlight(window.error_lineNumber)})
         # tb_str = traceback.format_exc()
         # window.manager.showPopup(str(tb_str))
@@ -203,15 +203,16 @@ def stop(event):
     #window.editor.removeAllHighlight()
     #game.scene.start("transform",{'level':'level1'})
 def new(event):
-    if(window.chainTween):
+    chainTween = getattr(window, 'chainTween', None)  # 安全获取 window.chainTween，如果不存在则为 None
+    if(chainTween):
         game = window.game
         mapd = game.registry.get("mapd")
         mapd.chainTween.stop()
         window.editor.removeAllHighlight()
-        window.manager.showPopup("是否重置场景",resetScene,cancel) 
+    window.manager.showPopup("重试","是否重置场景",resetScene,cancel) 
 
 def clear(event):
-    window.manager.showPopup("是否重置代码",resetCode,cancel) 
+    window.manager.showPopup("重试","是否重置代码",resetCode,cancel) 
 def resetScene():
     game = window.game
     game.scene.start("transform",{'levelData':game.registry.get("mapd").scene.levelData})
