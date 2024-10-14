@@ -26,24 +26,24 @@
     overflow: hidden; /* 超出内容隐藏（但这里主要由子元素控制） */  
     /* 添加padding-bottom以留出按钮的空间（可选，取决于你的布局需求） */  
     background-image: url('../assets/images/tipBg.png'); /* 背景图片 */
-    background-size: 100% auto;
-}  
-  
-.popup-visible {  
-    display: block; /* 当需要显示弹窗时使用 */  
+    background-size: 100% auto;  
 }  
   
 .popup-content {  
+    margin-top: 40px;
     position: relative; /* 相对于自己定位，用于内部元素的绝对定位 */   
     box-sizing: border-box;  
     height: calc(100% - 40px); /* 减去padding和可能的底部空间 */  
     overflow-y: auto; /* 超出内容垂直滚动 */  
-    left: 35%;
-    text-align: center;
 }  
- #tipText { 
+
+#popupText {
+    padding: 20px;
+    white-space: normal; word-wrap: break-word; text-align: left;
+}
+ /* #tipText { 
     padding-bottom: 40px;
- }
+ } */
 
 /* 按钮样式和定位 */  
 .popup-content button {  
