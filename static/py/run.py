@@ -203,12 +203,12 @@ def stop(event):
     #window.editor.removeAllHighlight()
     #game.scene.start("transform",{'level':'level1'})
 def new(event):
-    game = window.game
-    mapd = game.registry.get("mapd")
     if(window.chainTween):
+        game = window.game
+        mapd = game.registry.get("mapd")
         mapd.chainTween.stop()
         window.editor.removeAllHighlight()
-    window.manager.showPopup("是否重置场景",resetScene,cancel) 
+        window.manager.showPopup("是否重置场景",resetScene,cancel) 
 
 def clear(event):
     window.manager.showPopup("是否重置代码",resetCode,cancel) 
