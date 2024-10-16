@@ -19,7 +19,7 @@ export default class Player extends Object {
 
         this.scene.add.existing(this)
         this.scene.physics.add.existing(this)
-        this.setOrigin(0, 0.7)
+        this.setOrigin(0, 0.75)
         this.setInteractive()
 
         this.moving = false

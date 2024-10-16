@@ -97,7 +97,7 @@
          "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            0, 7, 0, 0, 0, 11, 0, 0, 0, 7, 0,
+            0, 30, 0, 0, 0, 11, 0, 0, 0, 30, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -130,11 +130,11 @@
  "renderorder":"right-down",
  "tiledversion":"1.11.0",
  "tileheight":145,
-"tilesets":[
+ "tilesets":[
         {
          "columns":10,
          "firstgid":1,
-         "image":"..\/..\/..\/..\/..\/images\/images.png",
+         "image":"..\/images\/images.png",
          "imageheight":2450,
          "imagewidth":1780,
          "margin":0,
@@ -194,6 +194,34 @@
                         }]
                 }, 
                 {
+                 "id":8,
+                 "properties":[
+                        {
+                         "name":"name",
+                         "type":"string",
+                         "value":"red_crystal"
+                        }, 
+                        {
+                         "name":"type",
+                         "type":"string",
+                         "value":"energy"
+                        }]
+                }, 
+                {
+                 "id":9,
+                 "properties":[
+                        {
+                         "name":"name",
+                         "type":"string",
+                         "value":"bule1_crystal"
+                        }, 
+                        {
+                         "name":"type",
+                         "type":"string",
+                         "value":"energy"
+                        }]
+                }, 
+                {
                  "id":10,
                  "properties":[
                         {
@@ -248,6 +276,25 @@
                          "type":"string",
                          "value":"player"
                         }]
+                },
+            
+                {
+                 "id":14,
+                 "properties":[
+                        {
+                         "name":"collide",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
+                 "id":15,
+                 "properties":[
+                        {
+                         "name":"type",
+                         "type":"string",
+                         "value":"energy"
+                        }]
                 }, 
                 {
                  "id":16,
@@ -262,8 +309,7 @@
                          "type":"string",
                          "value":"ship"
                         }]
-                },
-            
+                }, 
                 {
                  "id":17,
                  "properties":[
@@ -291,19 +337,122 @@
                          "type":"string",
                          "value":"ship"
                         }]
+                }, 
+                {
+                 "id":19,
+                 "properties":[
+                        {
+                         "name":"collide",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
+                 "id":28,
+                 "properties":[
+                        {
+                         "name":"collide",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
+                 "id":29,
+                 "properties":[
+                        {
+                         "name":"name",
+                         "type":"string",
+                         "value":"bule2_crystal"
+                        }, 
+                        {
+                         "name":"type",
+                         "type":"string",
+                         "value":"energy"
+                        }]
+                }, 
+                {
+                 "id":30,
+                 "properties":[
+                        {
+                         "name":"name",
+                         "type":"string",
+                         "value":"green_crystal"
+                        }, 
+                        {
+                         "name":"type",
+                         "type":"string",
+                         "value":"energy"
+                        }]
+                }, 
+                {
+                 "id":36,
+                 "properties":[
+                        {
+                         "name":"direction",
+                         "type":"string",
+                         "value":"north"
+                        }, 
+                        {
+                         "name":"type",
+                         "type":"string",
+                         "value":"flyer"
+                        }]
+                }, 
+                {
+                 "id":37,
+                 "properties":[
+                        {
+                         "name":"direction",
+                         "type":"string",
+                         "value":"south"
+                        }, 
+                        {
+                         "name":"type",
+                         "type":"string",
+                         "value":"flyer"
+                        }]
+                },
+            
+                {
+                 "id":38,
+                 "properties":[
+                        {
+                         "name":"direction",
+                         "type":"string",
+                         "value":"west"
+                        }, 
+                        {
+                         "name":"type",
+                         "type":"string",
+                         "value":"flyer"
+                        }]
+                }, 
+                {
+                 "id":39,
+                 "properties":[
+                        {
+                         "name":"direction",
+                         "type":"string",
+                         "value":"east"
+                        }, 
+                        {
+                         "name":"type",
+                         "type":"string",
+                         "value":"flyer"
+                        }]
                 }],
          "tilewidth":178
         }, 
         {
-         "columns":6,
+         "columns":1,
          "firstgid":71,
          "image":"..\/images\/grid.png",
-         "imageheight":700,
-         "imagewidth":1092,
+         "imageheight":350,
+         "imagewidth":182,
          "margin":0,
          "name":"grid",
          "spacing":0,
-         "tilecount":12,
+         "tilecount":1,
          "tileheight":350,
          "tilewidth":182
         }],

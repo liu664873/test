@@ -16,7 +16,8 @@ export default class Generator {
     }
 
     static generateEnergy(map, name, x, y, depth){
-        if(propConfig[name]) return new propConfig[name](map, name, x, y, depth)
+        console.log(propConfig[name])
+        if(propConfig[name]) return new propConfig[name].type(map, name, x, y, depth)
         else return null
     }
 

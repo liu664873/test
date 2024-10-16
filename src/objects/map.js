@@ -208,8 +208,8 @@ export default class Map {
                     row.forEach((tile) => {
                         const tilePro = this.tilePros[tile.index]
                         if (tilePro && tilePro.type === "energy") {
-                            const energy = Generator.generateEnergy(this, tilePro.type, tile.x, tile.y, this.depth + layerPro.getDepth())
-                            this.propList.push(energy)
+                            const energy = Generator.generateEnergy(this, tilePro.name, tile.x, tile.y, this.depth + layerPro.getDepth())
+                            energy && this.propList.push(energy)
                         } else if (tilePro && tilePro.type === "player") {
                             const player = Generator.generatePlayer(this, tilePro.type, tile.x, tile.y, this.depth + layerPro.getDepth() + 0.2, tilePro.direction)
                             this.playerList.push(player)

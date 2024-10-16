@@ -66,12 +66,12 @@
         }, 
         {
          "data":[0, 0, 0, 0, 0, 0, 0, 0, 0,
-            0, 4, 4, 4, 1, 4, 4, 4, 0,
+            0, 15, 4, 4, 1, 4, 4, 29, 0,
             0, 4, 1, 1, 1, 1, 1, 1, 0,
             0, 4, 1, 4, 1, 1, 4, 1, 0,
             0, 1, 1, 1, 1, 1, 1, 1, 0,
             0, 4, 1, 4, 1, 1, 4, 1, 0,
-            0, 4, 1, 1, 1, 1, 1, 1, 0,
+            0, 29, 1, 1, 1, 1, 1, 1, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0],
          "height":8,
          "id":2,
@@ -98,11 +98,11 @@
         }, 
         {
          "data":[0, 0, 0, 0, 0, 0, 0, 0, 0,
-            0, 0, 0, 0, 7, 0, 0, 0, 0,
+            0, 0, 0, 0, 9, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 11, 0, 0, 0, 0, 0, 0, 0,
-            0, 0, 0, 0, 7, 0, 0, 0, 0,
+            0, 0, 0, 0, 9, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0],
          "height":8,
@@ -198,6 +198,34 @@
                         }]
                 }, 
                 {
+                 "id":8,
+                 "properties":[
+                        {
+                         "name":"name",
+                         "type":"string",
+                         "value":"red_crystal"
+                        }, 
+                        {
+                         "name":"type",
+                         "type":"string",
+                         "value":"energy"
+                        }]
+                }, 
+                {
+                 "id":9,
+                 "properties":[
+                        {
+                         "name":"name",
+                         "type":"string",
+                         "value":"bule1_crystal"
+                        }, 
+                        {
+                         "name":"type",
+                         "type":"string",
+                         "value":"energy"
+                        }]
+                }, 
+                {
                  "id":10,
                  "properties":[
                         {
@@ -224,7 +252,8 @@
                          "type":"string",
                          "value":"player"
                         }]
-                }, 
+                },
+            
                 {
                  "id":12,
                  "properties":[
@@ -252,8 +281,25 @@
                          "type":"string",
                          "value":"player"
                         }]
-                },
-            
+                }, 
+                {
+                 "id":14,
+                 "properties":[
+                        {
+                         "name":"collide",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
+                 "id":15,
+                 "properties":[
+                        {
+                         "name":"type",
+                         "type":"string",
+                         "value":"energy"
+                        }]
+                }, 
                 {
                  "id":16,
                  "properties":[
@@ -294,6 +340,109 @@
                          "name":"type",
                          "type":"string",
                          "value":"ship"
+                        }]
+                }, 
+                {
+                 "id":19,
+                 "properties":[
+                        {
+                         "name":"collide",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
+                 "id":28,
+                 "properties":[
+                        {
+                         "name":"collide",
+                         "type":"bool",
+                         "value":true
+                        }]
+                },
+            
+                {
+                 "id":29,
+                 "properties":[
+                        {
+                         "name":"name",
+                         "type":"string",
+                         "value":"bule2_crystal"
+                        }, 
+                        {
+                         "name":"type",
+                         "type":"string",
+                         "value":"energy"
+                        }]
+                }, 
+                {
+                 "id":30,
+                 "properties":[
+                        {
+                         "name":"name",
+                         "type":"string",
+                         "value":"green_crystal"
+                        }, 
+                        {
+                         "name":"type",
+                         "type":"string",
+                         "value":"energy"
+                        }]
+                }, 
+                {
+                 "id":36,
+                 "properties":[
+                        {
+                         "name":"direction",
+                         "type":"string",
+                         "value":"north"
+                        }, 
+                        {
+                         "name":"type",
+                         "type":"string",
+                         "value":"flyer"
+                        }]
+                }, 
+                {
+                 "id":37,
+                 "properties":[
+                        {
+                         "name":"direction",
+                         "type":"string",
+                         "value":"south"
+                        }, 
+                        {
+                         "name":"type",
+                         "type":"string",
+                         "value":"flyer"
+                        }]
+                }, 
+                {
+                 "id":38,
+                 "properties":[
+                        {
+                         "name":"direction",
+                         "type":"string",
+                         "value":"west"
+                        }, 
+                        {
+                         "name":"type",
+                         "type":"string",
+                         "value":"flyer"
+                        }]
+                }, 
+                {
+                 "id":39,
+                 "properties":[
+                        {
+                         "name":"direction",
+                         "type":"string",
+                         "value":"east"
+                        }, 
+                        {
+                         "name":"type",
+                         "type":"string",
+                         "value":"flyer"
                         }]
                 }],
          "tilewidth":178

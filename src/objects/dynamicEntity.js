@@ -1,10 +1,5 @@
 import Object from "./object";
 
-const LEFT = "left"
-const RIGHT = "right"
-const UP = "up"
-const DOWN = "down"
-
 /**
  * 拥有动态性的object，有方向，可以移动等等
  * 未完成

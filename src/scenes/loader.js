@@ -26,7 +26,7 @@ export default class Loader extends Phaser.Scene {
         // this.scene.start("transform", {level: "level1", score: 0})
         this.scene.start("transform", {
             levelData: {
-                level:1,
+                level: 14,
                 world: "seabed",
                 score: 0,
                 levelsNumber: 15
@@ -103,6 +103,7 @@ export default class Loader extends Phaser.Scene {
         this.load.spritesheet("player", "assets/images/player.png", {frameWidth: 48, frameHeight: 48})
         this.load.spritesheet("ship", "assets/images/ship.png", {frameWidth: 80, frameHeight: 60})
         this.load.spritesheet("images", "assets/images/images.png", {frameWidth: 178, frameHeight: 350})
+        this.load.spritesheet("images1", "assets/images/images1.png", {frameWidth: 178, frameHeight: 350})
         this.load.spritesheet("grid", 'assets/images/grid.png', {frameWidth: 182, frameHeight: 350})
     }
 }
