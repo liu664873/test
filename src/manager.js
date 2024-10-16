@@ -65,13 +65,14 @@ export default class Manager {
         this.editor.removeHighlight(lineNumber)
     }
 
-    showError(error, lineNumber){
-        this.showPopup(error, () => {this.editor.removeHighlight(lineNumber)}, () => {this.editor.removeHighlight(lineNumber)})
+    showError(tipText,error, lineNumber){
+        this.showPopup(tipText,error, () => {this.editor.removeHighlight(lineNumber)}, () => {this.editor.removeHighlight(lineNumber)})
     }
 
-    showPopup(popupText, call1, call2) {  
+    showPopup(tipText,popupText, call1, call2) {  
         var popup = document.getElementById('popup');  
         popup.style.display = 'flex';  
+        if(tipText) document.getElementById('tipText').textContent = tipText
         if(popupText) document.getElementById('popupText').textContent = popupText
         var confirmBtn = document.getElementById('confirm-button')
         var cancelBtn = document.getElementById('cancel-button')
