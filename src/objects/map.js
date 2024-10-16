@@ -39,6 +39,8 @@ export default class Map {
         this.activeLayerIndex = 0
         this.initLayers()
         this.initMoveSapce(this.activeLayerIndex - 2, this.activeLayerIndex - 1)
+
+        this.shouldShowInfo = true
       
         this.init()
         window.chainTween = null
@@ -50,7 +52,7 @@ export default class Map {
         this.scene.physics.add.overlap(this.playerList, this.propList,
             (player, prop) => {
                 this.collectedPropNum++
-                console.log(this.collectedPropNum, this.propList.length)
+                console.log("aa",this.collectedPropNum, this.propList.length)
                 this.scene.progressBar.updateProgress(this.collectedPropNum / this.propList.length)
                 prop.destroy()
             },
@@ -179,6 +181,7 @@ export default class Map {
                             () => { SceneEffect.closeScene(this.scene, () => { this.scene.scene.start("transform", { levelData: this.scene.levelData }) }) })
                     }
                     window.chainTween = null
+                    window.runningChain = false
                 }
             }
         }
@@ -188,6 +191,7 @@ export default class Map {
         this.chainTween.timeScale = this.scene.cureSpeed
         window.chainTween = this.chainTween
         this.moveData = []
+        window.runningChain = true
     }
 
 

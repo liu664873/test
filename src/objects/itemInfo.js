@@ -24,6 +24,7 @@ export default class ItemInfo extends Phaser.GameObjects.Container {
      */
     addEvents(){
         this.item.on("pointerover", () => {
+            if(window.runnChain || !this.item.map.shouldShowInfo) return
             const vec = new Phaser.Math.Vector2() 
             this.item.map.tilemap.tileToWorldXY(this.item.gridX, this.item.gridY, vec)
             this.setPosition(vec.x + this.scale*this.item.map.tileWidth/2, vec.y - this.scale*this.item.map.tileHeight)

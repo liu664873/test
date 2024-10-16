@@ -13,6 +13,14 @@ const editor = ace.edit("editor", {
     mode: 'ace/mode/python',
 })
 
+let testContent = `#turnLeft(),左转
+#turnRight(),右转
+#step(parm),走parm步
+`;
+
+editor.setValue(testContent)
+editor.clearSelection()
+
 editor.container.addEventListener('click', (e) => {
     console.log('Clicked at', e.clientX, e.clientY)
     var currsorPostion = editor.getCursorPosition()
@@ -54,32 +62,5 @@ editor.removeAllHighlight = function (){
 }
 
 editor.session.Marker
-
-//-------代码补全联想------
-
-const myCustomCompleter = {  
-    getCompletions: function(editor, session, pos, prefix, callback) {  
-        const completions = [
-            { name: 'turnLeft', value: 'turnLeft()', meta: 'function' },
-            { name: 'turnRight', value: 'turnRight()', meta: 'function' },
-            { name: 'step', value: 'step()', meta: 'function' },
-            { name: 'player', value: 'player', meta: 'object' },
-            { name: 'ship', value: 'ship', meta: 'custom' },
-        ];
-        callback(null, completions);
-    }  
-};  
-  
-editor.completers.push(myCustomCompleter)
-console.log(editor)
-
-let testContent = `#turnLeft(),左转
-#turnRight(),右转
-#step(parm),走parm步
-`;
-
-editor.setValue(testContent)
-editor.clearSelection()
-
 
 export default editor

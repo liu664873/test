@@ -17,7 +17,6 @@ export default class Game extends Phaser.Scene {
      */
     init(data){
         this.levelData = data.levelData
-        console.log("game", this.levelData)
     }
 
     preload(){
@@ -56,16 +55,21 @@ export default class Game extends Phaser.Scene {
         let gameHeight = this.sys.game.config.height
 
         this.move.on("pointerup", (pointer) => {
+            if(window.runningChain) return
             dragging = !dragging  
             if(dragging){
+                this.map.shouldShowInfo = false
                 this.move.setTint(0xff0000)
             } else {
+                this.map.shouldShowInfo = true
                 this.move.clearTint()
             }
+            console.log(this.map.shouldShowInfo)
         })
   
         // 鼠标按下事件  
         this.input.on('pointerdown', (pointer) => {  
+            if(window.runningChain) return
             if(dragging){
                 dragX = pointer.x - this.map.x;  
                 dragY = pointer.y - this.map.y;  
@@ -74,6 +78,7 @@ export default class Game extends Phaser.Scene {
     
         // 鼠标移动事件  
         this.input.on('pointermove', (pointer) => {  
+            if(window.runningChain) return
             if (dragging && this.input.activePointer.isDown) {  
                 let x = pointer.x - dragX;  
                 let y = pointer.y - dragY; 
@@ -85,19 +90,28 @@ export default class Game extends Phaser.Scene {
         });  
         
         this.showGrid.on("pointerdown", () => {
+            if(window.runningChain) return
             if(this.map.gridLayer.visible) this.map.closeGrid()
             else this.map.openGrid()
         })
-        this.amplify.on("pointerdown", () => {this.amplify.clicked = true})
+        this.amplify.on("pointerdown", () => {
+            if(window.runningChain) return
+            this.amplify.clicked = true}
+        )
         this.amplify.on("pointerup", () => {
+            if(window.runningChain) return
             if(this.amplify.clicked){
                 if(this.map.scale < 2) this.map.setScale(this.map.scale + 0.2)
                 else this.map.setScale(this.map.scale)
                 this.amplify.clicked = false
             }
         })
-        this.reduce.on("pointerdown", () => {this.reduce.clicked = true})
+        this.reduce.on("pointerdown", () => {
+            if(window.runningChain) return
+            this.reduce.clicked = true}
+        )
         this.reduce.on("pointerup", () => {
+            if(window.runningChain) return
             if(this.reduce.clicked){
                 if(this.map.scale > 0.4) this.map.setScale(this.map.scale - 0.2)
                 else this.map.setScale(this.map.scale)
