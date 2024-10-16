@@ -64,7 +64,7 @@ const myCustomCompleter = {
             { name: 'turnRight', value: 'turnRight()', meta: 'function' },
             { name: 'step', value: 'step()', meta: 'function' },
             { name: 'player', value: 'player', meta: 'object' },
-            { name: 'ship', value: 'ship', meta: 'custom' },
+            { name: 'ship', value: 'ship', meta: 'object' },
         ];
         callback(null, completions);
     }  

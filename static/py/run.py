@@ -5,11 +5,10 @@ import traceback
 import re
 
 window.code_running = False
+window.runningCodeLine = -1 
 
 code_head = '''
-
 window.code_running = True
-
 game = window.game
 player = game.registry.get("player")
 ship = game.registry.get("ship")
@@ -19,6 +18,7 @@ mapd = game.registry.get("mapd")
 
 code_tail = '''
 window.code_running = False
+print(mapd.moveData)
 mapd.createTweenChain()
 '''
 
@@ -43,6 +43,7 @@ def recordOneStep(lineNumber):
 
 def handleOneStep(lineNumber):
     recordOneStep(lineNumber)
+    window.runningCodeLine = lineNumber
     window.gameAndEditor_data.set('runningCodeLine', lineNumber)
 
 def getStartSpaceCount(str):
@@ -149,17 +150,17 @@ def echo(event):
         new_code = '\n'.join(newLines)
         
         code = code_head + new_code + code_tail
-        print(code)
+        print(new_code)
 
         exec(code)
     
     except Exception as exc:
-        if(window.error_lineNumber > 0): 
-            window.manager.highlightLine(window.error_lineNumber, True)
-            error_str = 'Error ' + ('[Line ' + str(window.error_lineNumber) +
-                                ']: ') + str(exc)
-        else:
-            error_str = 'Error: ' + str(exc) 
+        if window.error_lineNumber < 0 :
+            window.error_lineNumber = window.runningCodeLine
+        
+        window.manager.highlightLine(window.error_lineNumber, True)
+        error_str = 'Error ' + ('[Line ' + str(window.error_lineNumber) +
+                            ']: ') + str(exc)
         window.manager.showError("错误",error_str, window.error_lineNumber)
         # window.manager.showPopup(error_str, function() {window.manager.removeHighlight(window.error_lineNumber)})
         # tb_str = traceback.format_exc()

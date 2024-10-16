@@ -22,6 +22,7 @@ export default class Game extends Phaser.Scene {
     preload(){
         this.load.tilemapTiledJSON(`${this.levelData.world}${this.levelData.level}`, `assets/mapData/${this.levelData.world}${this.levelData.level}.json`)
         // this.load.image('bg', `assets/`)可以换背景
+        window.editor.session.setValue("")
     }
 
     create(){
@@ -32,6 +33,7 @@ export default class Game extends Phaser.Scene {
 
         this.cureSpeed = 1
         this.map = new Map(this, `${this.levelData.world}${this.levelData.level}`, 950, 100)
+        console.log(this.map.shipList)
         this.map.closeGrid()
         this.map.setScale(0.6)
         this.map.setPosition(700, 300)

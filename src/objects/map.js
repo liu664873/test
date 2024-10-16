@@ -5,6 +5,13 @@ import Generator from "./generator"
 import UI from "./ui/ui"
 import SceneEffect from "./sceneEffect"
 import { layerOffset, tileOffset } from "../configs/mapConfig"
+
+const directionName = {
+    east: "东",
+    west: "西",
+    south: "南",
+    north: "北"
+}
 /**
  * 维护地图的类
  */
@@ -145,7 +152,7 @@ export default class Map {
                 targets: data.targets,
                 onComplete: () => {
                     this.scene.cameras.main.stopFollow(data.targets)
-                    let info = `${data.target.name}在坐标(${data.from.x},${data.from.y})\n不能向${data.direction}移动，\n是否重新开始？`
+                    let info = `${data.target.name}在坐标(${data.from.x},${data.from.y})不能向${directionName[data.direction]}移动，\n\n是否重新开始？`
                     const width = this.scene.sys.game.config.width
                     const height = this.scene.sys.game.config.height
                     const popUp = UI.popUp(this.scene, width / 2, height / 2, this.depth + 10, info,
@@ -164,7 +171,7 @@ export default class Map {
                 onComplete: () => {
                     if (this.collectedPropNum < this.propList.length) {
                         this.scene.cameras.main.stopFollow(data.targets)
-                        let info = `已经收集道具${this.collectedPropNum},还有${this.propList.length - this.collectedPropNum}个\n未收集,是否重新开始？`
+                        let info = `已经收集道具${this.collectedPropNum},还有${this.propList.length - this.collectedPropNum}个未收集,\n\n是否重新开始？`
                         const width = this.scene.sys.game.config.width
                         const height = this.scene.sys.game.config.height
                         const popUp = UI.popUp(this.scene, width / 2, height / 2, this.depth + 10, info,

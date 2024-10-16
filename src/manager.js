@@ -52,7 +52,7 @@ export default class Manager {
             if(line.match(/if.*:\S/)){
                 return {error:`为了提高代码可读性，在编辑器中，使用条件判断时，后续的语句需要从新的一行开始。`, lineNumber: lineNumber};
             }
-            
+
         }
         return {error: "", lineNumber: -1}
     }

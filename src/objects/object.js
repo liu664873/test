@@ -28,6 +28,7 @@ export default class Object extends Phaser.GameObjects.Sprite {
         this.tileHeight = map.tileHeight
         this.mapWidth = map.width
         this.mapHeight = map.Height
+        this.originScale = null
 
     }
 
@@ -67,7 +68,9 @@ export default class Object extends Phaser.GameObjects.Sprite {
      * 用于调整放大和缩小后不合理渲染 
      */
     setScale(x, y){
-        super.setScale(x, y)
+        const scaleX = this.originScale ? this.originScale*x : x
+        const scaleY = this.originScale && y ? this.originScale*y : y
+        super.setScale(scaleX, scaleY)
         
         this.setGridPosition(this.gridX, this.gridY)
         if(this.info) this.info.setScale(x, y)

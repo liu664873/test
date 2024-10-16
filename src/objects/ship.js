@@ -11,23 +11,23 @@ const NORTH = GAME_DATA.DIECTION_NORTH
 
 export default class Ship extends Object{
     constructor(map, name, gridX, gridY, depth, direction=EAST){
-        super(map, "images", gridX, gridY, depth, 7)
+        super(map, "ship", gridX, gridY, depth, 0)
   
         this.scene.add.existing(this)
         this.scene.physics.add.existing(this)
         this.setDepth(depth)
-        // this.setScale(0.9)
-        this.setOrigin(0, 0.7)
+        this.originScale = 0.65
+        this.setOrigin(0.15, 0.45)
         this.setInteractive()
         this.name = name
 
         this.direction = direction
 
         this.directionImage = {
-            east : 16,
-            south: 17,
-            west: 18,
-            north: 7
+            east : 3,
+            south: 0,
+            west: 6,
+            north: 9
         }
         
         this.setFrame(this.directionImage[this.direction])
@@ -43,8 +43,6 @@ export default class Ship extends Object{
 
         this.moveSpace[gridY][gridX] = 1
 
-        map.shipList.push(this)
-
     }
     
     /**
@@ -53,66 +51,66 @@ export default class Ship extends Object{
     addAnimations() {
         this.anims.create({
             key: EAST,
-            frames: this.anims.generateFrameNumbers("images", { frames: [16]}),
+            frames: this.anims.generateFrameNumbers("ship", { frames: [3]}),
             repeat: -1,
             frameRate: 8
         })
         this.anims.create({
             key: SOUTH,
-            frames: this.anims.generateFrameNumbers("images", { frames: [17] }),
+            frames: this.anims.generateFrameNumbers("ship", { frames: [0] }),
             repeat: -1,
             frameRate: 8
         })
         this.anims.create({
             key: WEST,
-            frames: this.anims.generateFrameNumbers("images", { frames: [18] }),
+            frames: this.anims.generateFrameNumbers("ship", { frames: [6] }),
             repeat: -1,
             frameRate: 8
         })
         this.anims.create({
             key: NORTH,
-            frames: this.anims.generateFrameNumbers("images", { frames: [7] }),
+            frames: this.anims.generateFrameNumbers("ship", { frames: [9] }),
             repeat: -1,
             frameRate: 8
         })
         this.anims.create({
             key: "northToEast",
-            frames: this.anims.generateFrameNumbers("images", { frames: [7, 16] }),
+            frames: this.anims.generateFrameNumbers("ship", { frames: [9, 3] }),
             duration: 1000,
         })
         this.anims.create({
             key: "eastToSouth",
-            frames: this.anims.generateFrameNumbers("images", { frames: [16, 17] }),
+            frames: this.anims.generateFrameNumbers("ship", { frames: [3, 0] }),
             duration: 1000
         })
         this.anims.create({
             key: "southToWest",
-            frames: this.anims.generateFrameNumbers("images", { frames: [17, 18] }),
+            frames: this.anims.generateFrameNumbers("ship", { frames: [0, 6] }),
             duration: 1000
         })
         this.anims.create({
             key:"westToNorth",
-            frames: this.anims.generateFrameNumbers("images", { frames: [18, 7] }),
+            frames: this.anims.generateFrameNumbers("ship", { frames: [6, 9] }),
             duration: 1000
         })
         this.anims.create({
             key: "eastToNorth",
-            frames: this.anims.generateFrameNumbers("images", { frames: [16, 7] }),
+            frames: this.anims.generateFrameNumbers("ship", { frames: [3, 9] }),
             duration: 1000
         })
         this.anims.create({
             key: "southToEast",
-            frames: this.anims.generateFrameNumbers("images", { frames: [17, 16] }),
+            frames: this.anims.generateFrameNumbers("ship", { frames: [0, 3] }),
             duration: 1000
         })
         this.anims.create({
             key: "westToSouth",
-            frames: this.anims.generateFrameNumbers("images", { frames: [18, 17] }),
+            frames: this.anims.generateFrameNumbers("ship", { frames: [6, 0] }),
             duration: 1000
         })
         this.anims.create({
             key: "northToWest",
-            frames: this.anims.generateFrameNumbers("images", { frames: [7, 18] }),
+            frames: this.anims.generateFrameNumbers("ship", { frames: [9, 6] }),
             duration: 1000
         })
     }
@@ -232,7 +230,7 @@ export default class Ship extends Object{
                 isCanMove: isCanMove,
             }
 
-            if(window.code_running) data.lineNumber =  window.gameAndEditor_data.get('runningCodeLine')
+            if(window.code_running) data.lineNumber = window.runningCodeLine
 
             if(this.driver) {
                 this.driver.logicX = this.logicX

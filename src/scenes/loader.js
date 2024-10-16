@@ -81,8 +81,6 @@ export default class Loader extends Phaser.Scene {
         this.load.image("speedX1","assets/images/speedX1.png")
         this.load.image("speedX2","assets/images/speedX2.png")
         this.load.image("speedX4","assets/images/speedX4.png")
-        this.load.image("progressBar", "assets/images/progressBar.png")
-        this.load.image("progressBarBg", "assets/images/progressBarBg.png")
         this.load.image("skip","assets/images/skip.png")
         this.load.image("confirm","assets/images/confirm.png")
         this.load.image("tipBg","assets/images/tipBg.png")
@@ -101,7 +99,8 @@ export default class Loader extends Phaser.Scene {
      */
     loadSprite(){
         this.load.spritesheet("player", "assets/images/player.png", {frameWidth: 48, frameHeight: 48})
-        this.load.spritesheet("ship", "assets/images/ship.png", {frameWidth: 80, frameHeight: 60})
+        this.load.spritesheet("progressBar", "assets/images/progressBar.png", {frameWidth: 180, frameHeight: 36})
+        this.load.spritesheet("ship", "assets/images/ship.png", {frameWidth: 406, frameHeight: 372})
         this.load.spritesheet("images", "assets/images/images.png", {frameWidth: 178, frameHeight: 350})
         this.load.spritesheet("images1", "assets/images/images1.png", {frameWidth: 178, frameHeight: 350})
         this.load.spritesheet("grid", 'assets/images/grid.png', {frameWidth: 182, frameHeight: 350})

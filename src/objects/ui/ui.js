@@ -26,11 +26,11 @@ export default class UI {
     }
     static popUp(scene, x, y, depth, info, callback1, callback2){
         const popUp = UI.prompt(scene, x, y, depth, info).setScrollFactor(0)
-        const cancellBtn = UI.button(scene, -100, 120, 10, "取消", function(){
+        const cancellBtn = UI.button(scene, -200, 150, 10, "取消", function(){
             popUp.destroy()
             callback1()
         }).setScrollFactor(0)
-        const sureBtn = UI.button(scene, 100, 120, 10, "确定", function(){
+        const sureBtn = UI.button(scene, 200, 150, 10, "确定", function(){
             popUp.destroy()
             callback2()
         }).setScrollFactor(0)
