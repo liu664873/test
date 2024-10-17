@@ -9,8 +9,8 @@ export default class ItemInfo extends Phaser.GameObjects.Container {
         this.scene.add.existing(this)
         this.item = item
         this.add(new Phaser.GameObjects.Image(this.scene, 0, 0, "textBg").setScale(3, 3.5))
-        this.add(new Phaser.GameObjects.Text(this.scene, -110, -35, `${item.name}`, {fontSize: 35, color: "#ffffff", lineSpacing : 10}))
-        this.text = new Phaser.GameObjects.Text(this.scene, -110, -5,`x:${item.gridX} y:${item.gridY}`,{fontSize: 35, color: "#ffffff", lineSpacing : 10})
+        this.add(new Phaser.GameObjects.Text(this.scene, -120, -40, `${item.name}`, {fontSize: 33, color: "#ffffff", strokeThickness: 1}))
+        this.text = new Phaser.GameObjects.Text(this.scene, -120, -5,`x:${item.gridX} y:${item.gridY}`,{fontSize: 33, color: "#ffffff", strokeThickness: 1})
         this.add(this.text)
         this.depth = 10
         this.setVisible(false)
