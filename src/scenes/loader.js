@@ -26,7 +26,7 @@ export default class Loader extends Phaser.Scene {
         // this.scene.start("transform", {level: "level1", score: 0})
         this.scene.start("transform", {
             levelData: {
-                level: 1,
+                level: 15,
                 world: "seabed",
                 score: 0,
                 levelsNumber: 15

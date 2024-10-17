@@ -87,6 +87,7 @@ FOR_SKIPS = re.compile('|'.join([re.escape(x) for x in FORBIDDEN_ACT]), re.I)
 def echo(event):
     error_str = ""
     window.error_lineNumber = -1
+    
     # 获取编辑器上输入的代码
     code = window.editor.getValue()
 
@@ -126,15 +127,10 @@ def echo(event):
             window.error_lineNumber = analysis_result.lineNumber
             raise Exception(analysis_result.error)
 
-        if len(line_dict) <= 0:
-            error_str = "代码不能为空！"
-            raise Exception(error_str)
-
         newLines = []
 
         for i in range(len(line_dict)):
             line = line_dict[i]
-
             
             #判断缩进是否正确
             lineHasColon = line[1].strip()[-1] == ':'
@@ -159,9 +155,6 @@ def echo(event):
         exec(code)
     
     except Exception as exc:
-        print("-------")
-        print(exc.with_traceback)
-        print("-------")
         if window.error_lineNumber < 0 :
             window.error_lineNumber = window.runningCodeLine
         
@@ -169,7 +162,31 @@ def echo(event):
         error_str = 'Error ' + ('[Line ' + str(window.error_lineNumber) +
                             ']: ') + str(exc)
         window.manager.showError("错误",error_str, window.error_lineNumber)
-    
+        # window.manager.showPopup(error_str, function() {window.manager.removeHighlight(window.error_lineNumber)})
+        # tb_str = traceback.format_exc()
+        # window.manager.showPopup(str(tb_str))
+
+        # group = re.search(r'File "<string>", line (\d+)', tb_str)
+        # # print('dict', window._line_num_dict)
+        # if group:
+        #     err_line_num = int(group.groups()[0])
+        #     # list of: after processing line number -- real line number
+        #     line_dict_rev = []
+        #     for i in range(len(line_dict)):
+        #         line_dict_rev.append([line_dict[i][2], line_dict[i][0]])
+
+        #     # print('line_dict_rev', line_dict_rev)
+        #     for i in range(len(line_dict_rev) - 1, -1, -1):
+        #         if line_dict_rev[i][0] > err_line_num:
+        #             continue
+        #         window._err_line_num_ace = line_dict_rev[i][1]
+        #         break
+
+        # error_str = 'Error ' + ('[Line ' + str(window._err_line_num_ace) +
+        #                         ']: ' if window._err_line_num_ace != None else '') + str(exc)
+        # window.py_error_str = str(exc)
+        #print(str(exc))
+
 def stop(event):
     game = window.game
     mapd = game.registry.get("mapd")
