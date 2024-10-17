@@ -13,7 +13,6 @@ export default class Manager {
         for(let i = 0; i < codes.length; i++){
             let lineNumber = codes[i][0]
             let line = codes[i][1]
-
             if(line.match("'") || line.match('"')){
                 return {error: `关卡无需使用字符串，请尝试其他解答方式吧。`, lineNumber: lineNumber}
             }

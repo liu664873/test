@@ -45,6 +45,7 @@ def handleOneStep(lineNumber):
     recordOneStep(lineNumber)
     window.runningCodeLine = lineNumber
     window.gameAndEditor_data.set('runningCodeLine', lineNumber)
+ 
 
 def getStartSpaceCount(str):
     count = 0
@@ -157,7 +158,17 @@ def echo(event):
         print(new_code)
 
         exec(code)
-    
+    except SyntaxError as exc:
+        # window.editor.session.getLine()
+
+        window.error_lineNumber = int((exc.lineno-8)/2)+1
+        errMessage = window.editor.session.getLine(window.error_lineNumber-1)
+        
+        error_str = 'Error ' + ('[Line ' + str(window.error_lineNumber) +
+                            ']: ') + '\"' + errMessage + '\"' + "有语法错误，请仔细检查!"
+        window.manager.highlightLine(window.error_lineNumber, True)
+        window.manager.showError("错误",error_str, window.error_lineNumber)
+       
     except Exception as exc:
         print("-------")
         print(exc.with_traceback)
@@ -169,6 +180,8 @@ def echo(event):
         error_str = 'Error ' + ('[Line ' + str(window.error_lineNumber) +
                             ']: ') + str(exc)
         window.manager.showError("错误",error_str, window.error_lineNumber)
+
+
     
 def stop(event):
     game = window.game

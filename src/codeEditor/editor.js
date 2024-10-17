@@ -69,6 +69,7 @@ const myCustomCompleter = {
         callback(null, completions);
     }  
 };  
+
   
 editor.completers.push(myCustomCompleter)
 console.log(editor)
