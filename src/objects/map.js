@@ -151,6 +151,8 @@ export default class Map {
             end = {
                 targets: data.targets,
                 onComplete: () => {
+                    window.chainTween = null
+                    window.runningChain = false
                     this.scene.cameras.main.stopFollow(data.targets)
                     let info = `${data.target.name}在坐标(${data.from.x},${data.from.y})不能向${directionName[data.direction]}移动，\n\n是否重新开始？`
                     const width = this.scene.sys.game.config.width
@@ -169,6 +171,8 @@ export default class Map {
                     z: 0.5
                 },
                 onComplete: () => {
+                    window.chainTween = null
+                    window.runningChain = false
                     if (this.collectedPropNum < this.propList.length) {
                         this.scene.cameras.main.stopFollow(data.targets)
                         let info = `已经收集道具${this.collectedPropNum},还有${this.propList.length - this.collectedPropNum}个未收集,\n\n是否重新开始？`
@@ -187,8 +191,6 @@ export default class Map {
                             () => { },
                             () => { SceneEffect.closeScene(this.scene, () => { this.scene.scene.start("transform", { levelData: this.scene.levelData }) }) })
                     }
-                    window.chainTween = null
-                    window.runningChain = false
                 }
             }
         }
