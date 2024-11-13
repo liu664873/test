@@ -20,7 +20,7 @@
             4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4],
          "height":15,
          "id":1,
-         "name":"layer1",
+         "name":"1_build",
          "opacity":1,
          "properties":[
                 {
@@ -34,7 +34,7 @@
                  "value":"build"
                 }],
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":15,
          "x":0,
          "y":0
@@ -57,7 +57,7 @@
             71, 71, 71, 71, 71, 71, 71, 71, 71, 71, 71, 71, 71, 71, 71],
          "height":15,
          "id":3,
-         "name":"grid",
+         "name":"2_grid",
          "offsetx":0,
          "offsety":-50,
          "opacity":1,
@@ -96,7 +96,7 @@
             4, 4, 4, 1, 1, 1, 1, 1, 1, 1, 1, 1, 4, 4, 4],
          "height":15,
          "id":2,
-         "name":"layer2",
+         "name":"2_build",
          "offsetx":0,
          "offsety":-50,
          "opacity":1,
@@ -112,7 +112,7 @@
                  "value":"build"
                 }],
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":15,
          "x":0,
          "y":0
@@ -135,7 +135,7 @@
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
          "height":15,
          "id":4,
-         "name":"layer2_obj",
+         "name":"2_obj",
          "offsetx":0,
          "offsety":-50,
          "opacity":1,
@@ -156,7 +156,7 @@
          "x":0,
          "y":0
         }],
- "nextlayerid":5,
+ "nextlayerid":8,
  "nextobjectid":1,
  "orientation":"isometric",
  "renderorder":"right-down",
@@ -234,9 +234,14 @@
                          "value":"red_crystal"
                         }, 
                         {
-                         "name":"type",
+                         "name":"tag",
                          "type":"string",
                          "value":"energy"
+                        }, 
+                        {
+                         "name":"type",
+                         "type":"string",
+                         "value":"prop"
                         }]
                 }, 
                 {
@@ -248,9 +253,14 @@
                          "value":"bule1_crystal"
                         }, 
                         {
-                         "name":"type",
+                         "name":"tag",
                          "type":"string",
                          "value":"energy"
+                        }, 
+                        {
+                         "name":"type",
+                         "type":"string",
+                         "value":"prop"
                         }]
                 }, 
                 {
@@ -322,9 +332,14 @@
                  "id":15,
                  "properties":[
                         {
-                         "name":"type",
+                         "name":"tag",
                          "type":"string",
                          "value":"energy"
+                        }, 
+                        {
+                         "name":"type",
+                         "type":"string",
+                         "value":"prop"
                         }]
                 }, 
                 {
@@ -397,9 +412,14 @@
                          "value":"bule2_crystal"
                         }, 
                         {
-                         "name":"type",
+                         "name":"tag",
                          "type":"string",
                          "value":"energy"
+                        }, 
+                        {
+                         "name":"type",
+                         "type":"string",
+                         "value":"prop"
                         }]
                 }, 
                 {
@@ -411,9 +431,14 @@
                          "value":"green_crystal"
                         }, 
                         {
-                         "name":"type",
+                         "name":"tag",
                          "type":"string",
                          "value":"energy"
+                        }, 
+                        {
+                         "name":"type",
+                         "type":"string",
+                         "value":"prop"
                         }]
                 }, 
                 {

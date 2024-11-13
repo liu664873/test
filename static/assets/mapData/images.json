@@ -13,50 +13,152 @@
          "id":0,
          "properties":[
                 {
+                 "name":"carrier",
+                 "type":"bool",
+                 "value":true
+                }, 
+                {
                  "name":"collide",
                  "type":"bool",
                  "value":false
+                }, 
+                {
+                 "name":"type",
+                 "type":"string",
+                 "value":"floor"
+                }]
+        }, 
+        {
+         "id":1,
+         "properties":[
+                {
+                 "name":"carrier",
+                 "type":"bool",
+                 "value":true
+                }, 
+                {
+                 "name":"collide",
+                 "type":"bool",
+                 "value":false
+                }, 
+                {
+                 "name":"type",
+                 "type":"string",
+                 "value":"floor"
+                }]
+        }, 
+        {
+         "id":2,
+         "properties":[
+                {
+                 "name":"carrier",
+                 "type":"bool",
+                 "value":true
+                }, 
+                {
+                 "name":"collide",
+                 "type":"bool",
+                 "value":false
+                }, 
+                {
+                 "name":"type",
+                 "type":"string",
+                 "value":"floor"
                 }]
         }, 
         {
          "id":3,
          "properties":[
                 {
+                 "name":"carrier",
+                 "type":"bool",
+                 "value":true
+                }, 
+                {
                  "name":"collide",
                  "type":"bool",
                  "value":true
+                }, 
+                {
+                 "name":"type",
+                 "type":"string",
+                 "value":"plot"
                 }]
         }, 
         {
          "id":4,
          "properties":[
                 {
+                 "name":"carrier",
+                 "type":"bool",
+                 "value":true
+                }, 
+                {
                  "name":"collide",
                  "type":"bool",
                  "value":false
+                }, 
+                {
+                 "name":"type",
+                 "type":"string",
+                 "value":"floor"
+                }]
+        }, 
+        {
+         "id":5,
+         "properties":[
+                {
+                 "name":"carrier",
+                 "type":"bool",
+                 "value":true
+                }, 
+                {
+                 "name":"collide",
+                 "type":"bool",
+                 "value":false
+                }, 
+                {
+                 "name":"type",
+                 "type":"string",
+                 "value":"floor"
                 }]
         }, 
         {
          "id":6,
          "properties":[
                 {
+                 "name":"carrier",
+                 "type":"bool",
+                 "value":true
+                }, 
+                {
+                 "name":"collide",
+                 "type":"bool",
+                 "value":false
+                }, 
+                {
                  "name":"type",
                  "type":"string",
-                 "value":"energy"
+                 "value":"plot"
                 }]
         }, 
         {
          "id":7,
          "properties":[
                 {
-                 "name":"direction",
-                 "type":"string",
-                 "value":"north"
+                 "name":"carrier",
+                 "type":"bool",
+                 "value":true
+                }, 
+                {
+                 "name":"collide",
+                 "type":"bool",
+                 "value":true
                 }, 
                 {
                  "name":"type",
                  "type":"string",
-                 "value":"ship"
+                 "value":"plot"
                 }]
         }, 
         {
@@ -68,9 +170,14 @@
                  "value":"red_crystal"
                 }, 
                 {
-                 "name":"type",
+                 "name":"tag",
                  "type":"string",
                  "value":"energy"
+                }, 
+                {
+                 "name":"type",
+                 "type":"string",
+                 "value":"prop"
                 }]
         }, 
         {
@@ -82,70 +189,180 @@
                  "value":"bule1_crystal"
                 }, 
                 {
-                 "name":"type",
+                 "name":"tag",
                  "type":"string",
                  "value":"energy"
+                }, 
+                {
+                 "name":"type",
+                 "type":"string",
+                 "value":"prop"
                 }]
         }, 
         {
          "id":10,
          "properties":[
                 {
+                 "name":"canDrive",
+                 "type":"bool",
+                 "value":true
+                }, 
+                {
+                 "name":"carrier",
+                 "type":"bool",
+                 "value":false
+                }, 
+                {
+                 "name":"collide",
+                 "type":"bool",
+                 "value":true
+                }, 
+                {
                  "name":"direction",
                  "type":"string",
                  "value":"east"
                 }, 
                 {
-                 "name":"type",
+                 "name":"name",
                  "type":"string",
                  "value":"player"
+                }, 
+                {
+                 "name":"tag",
+                 "type":"string",
+                 "value":"player"
+                }, 
+                {
+                 "name":"type",
+                 "type":"string",
+                 "value":"dynamicObj"
                 }]
         }, 
         {
          "id":11,
          "properties":[
                 {
+                 "name":"canDrive",
+                 "type":"bool",
+                 "value":true
+                }, 
+                {
+                 "name":"carrier",
+                 "type":"bool",
+                 "value":false
+                }, 
+                {
+                 "name":"collide",
+                 "type":"bool",
+                 "value":true
+                }, 
+                {
                  "name":"direction",
                  "type":"string",
                  "value":"north"
                 }, 
                 {
-                 "name":"type",
+                 "name":"name",
                  "type":"string",
                  "value":"player"
+                }, 
+                {
+                 "name":"tag",
+                 "type":"string",
+                 "value":"player"
+                }, 
+                {
+                 "name":"type",
+                 "type":"string",
+                 "value":"dynamicObj"
                 }]
         }, 
         {
          "id":12,
          "properties":[
                 {
+                 "name":"canDrive",
+                 "type":"bool",
+                 "value":true
+                }, 
+                {
+                 "name":"carrier",
+                 "type":"bool",
+                 "value":false
+                }, 
+                {
+                 "name":"collide",
+                 "type":"bool",
+                 "value":true
+                }, 
+                {
                  "name":"direction",
                  "type":"string",
                  "value":"south"
                 }, 
                 {
-                 "name":"type",
+                 "name":"name",
                  "type":"string",
                  "value":"player"
+                }, 
+                {
+                 "name":"tag",
+                 "type":"string",
+                 "value":"player"
+                }, 
+                {
+                 "name":"type",
+                 "type":"string",
+                 "value":"dynamicObj"
                 }]
         }, 
         {
          "id":13,
          "properties":[
                 {
+                 "name":"canDrive",
+                 "type":"bool",
+                 "value":true
+                }, 
+                {
+                 "name":"carrier",
+                 "type":"bool",
+                 "value":false
+                }, 
+                {
+                 "name":"collide",
+                 "type":"bool",
+                 "value":true
+                }, 
+                {
                  "name":"direction",
                  "type":"string",
                  "value":"west"
                 }, 
                 {
-                 "name":"type",
+                 "name":"name",
                  "type":"string",
                  "value":"player"
+                }, 
+                {
+                 "name":"tag",
+                 "type":"string",
+                 "value":"player"
+                }, 
+                {
+                 "name":"type",
+                 "type":"string",
+                 "value":"dynamicObj"
                 }]
         }, 
         {
          "id":14,
          "properties":[
+                {
+                 "name":"carry",
+                 "type":"bool",
+                 "value":false
+                }, 
                 {
                  "name":"collide",
                  "type":"bool",
@@ -156,9 +373,14 @@
          "id":15,
          "properties":[
                 {
-                 "name":"type",
+                 "name":"tag",
                  "type":"string",
                  "value":"energy"
+                }, 
+                {
+                 "name":"type",
+                 "type":"string",
+                 "value":"prop"
                 }]
         }, 
         {
@@ -170,9 +392,14 @@
                  "value":"east"
                 }, 
                 {
-                 "name":"type",
+                 "name":"tag",
                  "type":"string",
                  "value":"ship"
+                }, 
+                {
+                 "name":"type",
+                 "type":"string",
+                 "value":"dynamicObj"
                 }]
         }, 
         {
@@ -184,9 +411,14 @@
                  "value":"south"
                 }, 
                 {
-                 "name":"type",
+                 "name":"tag",
                  "type":"string",
                  "value":"ship"
+                }, 
+                {
+                 "name":"type",
+                 "type":"string",
+                 "value":"dynamicObj"
                 }]
         }, 
         {
@@ -198,14 +430,24 @@
                  "value":"west"
                 }, 
                 {
-                 "name":"type",
+                 "name":"tag",
                  "type":"string",
                  "value":"ship"
+                }, 
+                {
+                 "name":"type",
+                 "type":"string",
+                 "value":"dynamicObj"
                 }]
         }, 
         {
          "id":19,
          "properties":[
+                {
+                 "name":"carry",
+                 "type":"bool",
+                 "value":false
+                }, 
                 {
                  "name":"collide",
                  "type":"bool",
@@ -215,6 +457,11 @@
         {
          "id":28,
          "properties":[
+                {
+                 "name":"carry",
+                 "type":"bool",
+                 "value":false
+                }, 
                 {
                  "name":"collide",
                  "type":"bool",
@@ -230,79 +477,403 @@
                  "value":"bule2_crystal"
                 }, 
                 {
-                 "name":"type",
+                 "name":"tag",
                  "type":"string",
                  "value":"energy"
+                }, 
+                {
+                 "name":"type",
+                 "type":"string",
+                 "value":"prop"
                 }]
         }, 
         {
          "id":30,
          "properties":[
                 {
+                 "name":"carry",
+                 "type":"bool",
+                 "value":false
+                }, 
+                {
+                 "name":"collide",
+                 "type":"bool",
+                 "value":true
+                }, 
+                {
                  "name":"name",
                  "type":"string",
                  "value":"green_crystal"
                 }, 
                 {
-                 "name":"type",
+                 "name":"tag",
                  "type":"string",
                  "value":"energy"
+                }, 
+                {
+                 "name":"type",
+                 "type":"string",
+                 "value":"prop"
+                }]
+        }, 
+        {
+         "id":35,
+         "properties":[
+                {
+                 "name":"canCarry",
+                 "type":"bool",
+                 "value":true
+                }, 
+                {
+                 "name":"carrier",
+                 "type":"bool",
+                 "value":true
+                }, 
+                {
+                 "name":"collide",
+                 "type":"bool",
+                 "value":false
+                }, 
+                {
+                 "name":"direction",
+                 "type":"string",
+                 "value":"east"
                 }]
         }, 
         {
          "id":36,
          "properties":[
                 {
+                 "name":"canCarry",
+                 "type":"bool",
+                 "value":true
+                }, 
+                {
+                 "name":"carrier",
+                 "type":"bool",
+                 "value":true
+                }, 
+                {
+                 "name":"collide",
+                 "type":"bool",
+                 "value":false
+                }, 
+                {
                  "name":"direction",
                  "type":"string",
                  "value":"north"
                 }, 
                 {
-                 "name":"type",
+                 "name":"name",
                  "type":"string",
                  "value":"flyer"
+                }, 
+                {
+                 "name":"tag",
+                 "type":"string",
+                 "value":"flyer"
+                }, 
+                {
+                 "name":"type",
+                 "type":"string",
+                 "value":"vehicle"
                 }]
         }, 
         {
          "id":37,
          "properties":[
                 {
+                 "name":"canCarry",
+                 "type":"bool",
+                 "value":true
+                }, 
+                {
+                 "name":"carrier",
+                 "type":"bool",
+                 "value":true
+                }, 
+                {
+                 "name":"collide",
+                 "type":"bool",
+                 "value":false
+                }, 
+                {
                  "name":"direction",
                  "type":"string",
                  "value":"south"
                 }, 
                 {
-                 "name":"type",
+                 "name":"name",
                  "type":"string",
                  "value":"flyer"
+                }, 
+                {
+                 "name":"tag",
+                 "type":"string",
+                 "value":"flyer"
+                }, 
+                {
+                 "name":"type",
+                 "type":"string",
+                 "value":"vehicle"
                 }]
         }, 
         {
          "id":38,
          "properties":[
                 {
+                 "name":"canCarry",
+                 "type":"bool",
+                 "value":true
+                }, 
+                {
+                 "name":"carrier",
+                 "type":"bool",
+                 "value":true
+                }, 
+                {
+                 "name":"collide",
+                 "type":"bool",
+                 "value":false
+                }, 
+                {
                  "name":"direction",
                  "type":"string",
                  "value":"west"
                 }, 
                 {
-                 "name":"type",
+                 "name":"name",
                  "type":"string",
                  "value":"flyer"
+                }, 
+                {
+                 "name":"tag",
+                 "type":"string",
+                 "value":"flyer"
+                }, 
+                {
+                 "name":"type",
+                 "type":"string",
+                 "value":"vehicle"
                 }]
         }, 
         {
          "id":39,
          "properties":[
                 {
+                 "name":"canCarry",
+                 "type":"bool",
+                 "value":true
+                }, 
+                {
+                 "name":"carrier",
+                 "type":"bool",
+                 "value":true
+                }, 
+                {
+                 "name":"collide",
+                 "type":"bool",
+                 "value":false
+                }, 
+                {
                  "name":"direction",
                  "type":"string",
                  "value":"east"
                 }, 
                 {
-                 "name":"type",
+                 "name":"name",
                  "type":"string",
                  "value":"flyer"
+                }, 
+                {
+                 "name":"tag",
+                 "type":"string",
+                 "value":"flyer"
+                }, 
+                {
+                 "name":"type",
+                 "type":"string",
+                 "value":"vehicle"
+                }]
+        }, 
+        {
+         "id":40,
+         "properties":[
+                {
+                 "name":"canCarry",
+                 "type":"bool",
+                 "value":true
+                }, 
+                {
+                 "name":"carrier",
+                 "type":"bool",
+                 "value":true
+                }, 
+                {
+                 "name":"collide",
+                 "type":"bool",
+                 "value":false
+                }, 
+                {
+                 "name":"direction",
+                 "type":"string",
+                 "value":"east"
+                }]
+        }, 
+        {
+         "id":41,
+         "properties":[
+                {
+                 "name":"canCarry",
+                 "type":"bool",
+                 "value":true
+                }, 
+                {
+                 "name":"carrier",
+                 "type":"bool",
+                 "value":true
+                }, 
+                {
+                 "name":"collide",
+                 "type":"bool",
+                 "value":true
+                }, 
+                {
+                 "name":"direction",
+                 "type":"string",
+                 "value":"north"
+                }, 
+                {
+                 "name":"name",
+                 "type":"string",
+                 "value":"ship"
+                }, 
+                {
+                 "name":"tag",
+                 "type":"string",
+                 "value":"ship"
+                }, 
+                {
+                 "name":"type",
+                 "type":"string",
+                 "value":"vehicle"
+                }]
+        }, 
+        {
+         "id":42,
+         "properties":[
+                {
+                 "name":"canCarry",
+                 "type":"bool",
+                 "value":true
+                }, 
+                {
+                 "name":"carrier",
+                 "type":"bool",
+                 "value":true
+                }, 
+                {
+                 "name":"collide",
+                 "type":"bool",
+                 "value":true
+                }, 
+                {
+                 "name":"direction",
+                 "type":"string",
+                 "value":"east"
+                }, 
+                {
+                 "name":"name",
+                 "type":"string",
+                 "value":"ship"
+                }, 
+                {
+                 "name":"tag",
+                 "type":"string",
+                 "value":"ship"
+                }, 
+                {
+                 "name":"type",
+                 "type":"string",
+                 "value":"vehicle"
+                }]
+        }, 
+        {
+         "id":43,
+         "properties":[
+                {
+                 "name":"canCarry",
+                 "type":"bool",
+                 "value":true
+                }, 
+                {
+                 "name":"carrier",
+                 "type":"bool",
+                 "value":true
+                }, 
+                {
+                 "name":"collide",
+                 "type":"bool",
+                 "value":true
+                }, 
+                {
+                 "name":"direction",
+                 "type":"string",
+                 "value":"south"
+                }, 
+                {
+                 "name":"name",
+                 "type":"string",
+                 "value":"ship"
+                }, 
+                {
+                 "name":"tag",
+                 "type":"string",
+                 "value":"ship"
+                }, 
+                {
+                 "name":"type",
+                 "type":"string",
+                 "value":"vehicle"
+                }]
+        }, 
+        {
+         "id":44,
+         "properties":[
+                {
+                 "name":"canCarry",
+                 "type":"bool",
+                 "value":true
+                }, 
+                {
+                 "name":"carrier",
+                 "type":"bool",
+                 "value":true
+                }, 
+                {
+                 "name":"collide",
+                 "type":"bool",
+                 "value":true
+                }, 
+                {
+                 "name":"direction",
+                 "type":"string",
+                 "value":"west"
+                }, 
+                {
+                 "name":"name",
+                 "type":"string",
+                 "value":"ship"
+                }, 
+                {
+                 "name":"tag",
+                 "type":"string",
+                 "value":"ship"
+                }, 
+                {
+                 "name":"type",
+                 "type":"string",
+                 "value":"vehicle"
                 }]
         }],
  "tilewidth":178,

@@ -11,26 +11,19 @@ export default class Loader extends Phaser.Scene {
     }
 
     preload(){
+
         this.createBar()
 
         this.addLoadOnEvent()
 
         this.loadAudios()
         this.loadImage()
-        this.loadMapData()
         this.loadSprite()
 
     }
 
      create(){
-        // this.scene.start("transform", {level: "level1", score: 0})
-        this.scene.start("transform", {
-            levelData: {
-                level: 10,
-                world: "contest",
-                score: 0,
-                levelsNumber: 10
-            }})
+        this.createBar()
      }
 
     /**
@@ -47,8 +40,8 @@ export default class Loader extends Phaser.Scene {
      * 创建加载资源条
      */
     createBar(){
-        this.width = this.sys.game.config.width
-        this.height = this.sys.game.config.height
+        this.width = this.sys.game.config.width;
+        this.height = this.sys.game.config.height;
    
        this.bgBar = this.add.graphics({fillStyle: {color: 0xFFEB3B}}) 
        this.bgBar.fillRect(this.width/2 - 400, this.height/2, 800, 40)
@@ -69,7 +62,6 @@ export default class Loader extends Phaser.Scene {
     loadImage(){
         this.load.image("amplify", "assets/images/amplify.png")
         this.load.image("button", "assets/images/button.png")
-        this.load.image("bg", "assets/images/bg.png")
         this.load.image("move", "assets/images/move.png")
         this.load.image("reduce", "assets/images/reduce.png")
         this.load.image("showGrid", "assets/images/showGrid.png")
@@ -77,29 +69,26 @@ export default class Loader extends Phaser.Scene {
         this.load.image("textBg", "assets/images/textBg.png")
         this.load.image("speedX1","assets/images/speedX1.png")
         this.load.image("speedX2","assets/images/speedX2.png")
-        this.load.image("speedX4","assets/images/speedX4.png")
+        this.load.image("speedX3","assets/images/speedX3.png")
         this.load.image("skip","assets/images/skip.png")
         this.load.image("confirm","assets/images/confirm.png")
         this.load.image("tipBg","assets/images/tipBg.png")
-        // this.load.image("images", "assets/images/images.png")
     }
 
     /**
-     * 加载地图数据s
+     * 加载地图数据
      */
-    loadMapData(){
-        // this.load.tilemapTiledJSON("seabed1", "assets/mapData/level1.json")
-    }
+
 
     /**
      * 加载精灵图
      */
     loadSprite(){
-        this.load.spritesheet("player", "assets/images/player.png", {frameWidth: 48, frameHeight: 48})
+        this.load.spritesheet("player", "assets/images/player.png", {frameWidth: 354, frameHeight: 649})
         this.load.spritesheet("progressBar", "assets/images/progressBar.png", {frameWidth: 180, frameHeight: 36})
         this.load.spritesheet("ship", "assets/images/ship.png", {frameWidth: 406, frameHeight: 372})
         this.load.spritesheet("images", "assets/images/images.png", {frameWidth: 178, frameHeight: 350})
-        this.load.spritesheet("images1", "assets/images/images1.png", {frameWidth: 178, frameHeight: 350})
+        this.load.spritesheet("energy", "assets/images/energy.png", {frameWidth: 680, frameHeight: 300})
         this.load.spritesheet("grid", 'assets/images/grid.png', {frameWidth: 182, frameHeight: 350})
     }
 }

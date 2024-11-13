@@ -1,16 +1,15 @@
-import Phaser from "phaser"
-import Game from "./scenes/game"
-import Loader from "./scenes/loader"
-import Transform from "./scenes/transform"
-import editor from "./codeEditor/editor"
-import Manager from "./Manager"
+import Phaser from "phaser";
+import Game from "./scenes/game";
+import Loader from "./scenes/loader";
+import GameManager from "./GameManager";
+import CodeEditor from "./codeEditor/editor";
 
 const config = {
     type: Phaser.AUTO,
     width: 2000,
     height: 2000,
     parent: "game",
-    scale:{
+    scale: {
         mode: Phaser.Scale.FIT
     },
     physics: {
@@ -18,17 +17,44 @@ const config = {
         arcade: {
             gravity: {
                 y: 0
-            }
+            },
         }
     },
-    scene: [Loader, Game, Transform]
+    scene: [Loader, Game]
+};
+
+async function loadMapData() {
+    try {
+        const [gridData, imageData, levelData1,levelData2] = await Promise.all([
+            fetch('assets/mapData/grid.json').then(response => response.json()),
+            fetch('assets/mapData/images.json').then(response => response.json()),
+            fetch('assets/mapData/test1.json').then(response => response.json()),
+            fetch('assets/mapData/test2.json').then(response => response.json())
+        ]);
+
+        const data = {
+            tilesetMap: { grid: gridData, images: imageData },
+            mapDataList: [levelData2, levelData1]
+        };
+        return data;
+    } catch (error) {
+    }
 }
 
+const game = new Phaser.Game(config);
+const manager = new GameManager(game);
+manager.setEditor(new CodeEditor("editor"));
+
+loadMapData().then(data => {
+    if (data) {
+        console.log(data);
+        manager.init(data);
+        manager.selectLevel(1);
+    } 
+}).catch(error => {
+});
+
 window.onload = function() {
-    brython()
-    window.game = new Phaser.Game(config); 
-    window.editor = editor
-    window.gameAndEditor_data = new Map()
-    window.manager = new Manager(window.game, window.editor)
-    window.game.isRunning = true
-}
+    brython(); // Assuming this is some external function call, make sure it's defined
+    window.manager = manager;
+};

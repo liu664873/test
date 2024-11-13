@@ -1,11 +1,12 @@
 import Phaser from "phaser"
-import SceneEffect from "../objects/sceneEffect"
-import UI from "../objects/ui/ui"
+import SceneEffect from "../objects/SceneEffect"
+import UI from "../ui/ui"
 
 /**
  * 转换场景的类
  * 用于处理上一个场景传来的数据，
  * 并且跳到相应的下一个场景
+ * 暂时废弃
  */
 export default class Transform extends Phaser.Scene {
 
@@ -68,6 +69,5 @@ export default class Transform extends Phaser.Scene {
         if(this.levelData.level <= this.levelData.levelsNumber) return true
         return false
     }
-
 
 }

@@ -1,75 +1,37 @@
-import Energy from "../objects/Energy"
-import Player from "../objects/player"
-import Ship from "../objects/ship"
+const GAME_DATA = {
+    // 地图格子的宽高
+    TILE_WIDTH: 180,
+    TILE_HEIGHT: 132,
 
-//地图数据加载配置
-const propConfig = {
+    // 关卡状态
+    LEVEL_STATUS_PASSED: 0,
+    LEVEL_STATUS_FAILED_NOTMOVE: -1,
+    LEVEL_STATUS_FAILED_ENERGY_NOTENOUGH: -2,
 
-    //蓝宝石
-    bule1_crystal: {
-        type: Energy,
-        imageKey: "images1",
-        imgPath: 'assets/images/images1.png',   //暂时没有用
-        dfImage: 40,
-        anims:[
-            {
-                key: "idle",
-                frames: {start: 40, end: 49},
-                repeat: -1,
-                frameRate: 8
-            }]
-    },
+    // 方向
+    DIRECTION_EAST: "east",
+    DIRECTION_SOUTH: "south",
+    DIRECTION_WEST: "west",
+    DIRECTION_NORTH: "north",
 
-    bule2_crystal: {
-        type: Energy,
-        imageKey: "images1",
-        imgPath: 'assets/images/images1.png',
-        dfImage: 50,
-        anims:[
-            {
-                key: "idle",
-                frames: {start: 50, end: 59},
-                repeat: -1,
-                frameRate: 8
-            }]
-    },
+    // 动画键值
+    ANIM_KEY_STEP_EAST: "step_east",
+    ANIM_KEY_STEP_SOUTH: "step_south",
+    ANIM_KEY_STEP_WEST: "step_west",
+    ANIM_KEY_STEP_NORTH: "step_north",
+    ANIM_KEY_TURN_EAST_SOUTH: "turn_east_to_south",
+    ANIM_KEY_TURN_EAST_NORTH: "turn_east_to_north",
+    ANIM_KEY_TURN_SOUTH_EAST: "turn_south_to_east",
+    ANIM_KEY_TURN_SOUTH_WEST: "turn_south_to_west",
+    ANIM_KEY_TURN_WEST_SOUTH: "turn_west_to_south",
+    ANIM_KEY_TURN_WEST_NORTH: "turn_west_to_north",
+    ANIM_KEY_TURN_NORTH_WEST: "turn_north_to_west",
+    ANIM_KEY_TURN_NORTH_EAST: "turn_north_to_east",
+    ANIM_KEY_IDLE_EAST: "idle_east",
+    ANIM_KEY_IDLE_SOUTH: "idle_south",
+    ANIM_KEY_IDLE_WEST: "idle_west",
+    ANIM_KEY_IDLE_NORTH: "idle_north",
+    ANIM_KEY_IDLE: "idle"
+};
 
-    green_crystal: {
-        type: Energy,
-        imageKey: "images1",
-        imgPath: 'assets/images/images1.png',
-        dfImage: 60,
-        anims:[
-            {
-                key: "idle",
-                frames: {start: 60, end: 69},
-                repeat: -1,
-                frameRate: 8
-            }]
-    },
-
-    red_crystal: {
-        type: Energy,
-        imageKey: "images1",
-        imgPath: 'assets/images/images1.png',
-        dfImage: 31,
-        anims:[
-            {
-                key: "idle",
-                frames: {start: 30, end: 39},
-                repeat: -1,
-                frameRate: 8
-            }]
-    },
-}
-
-
-const playerConfig = {
-    "player": Player
-}
-
-const shipConfig = {
-    "ship": Ship
-}
-
-export { propConfig, playerConfig, shipConfig };
+export { GAME_DATA };

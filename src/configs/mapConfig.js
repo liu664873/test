@@ -1,13 +1,15 @@
-import Phaser from "phaser"
-
-const tileOffset = {
-    images: {
-        x: 0,
-        y: 250
+const TileOffset = {
+    images : {
+        offset : {
+            x: 0,
+            y: -282
+        }
     },
     grid: {
-        x: 0,
-        y: 250
+        offset : {
+            x: 0,
+            y: -282
+        }
     }
 }
 
@@ -16,13 +18,5 @@ const layerOffset = {
     y: -50
 }
 
-const GAME_DATA = {
-    DIECTION_EAST: "east",
-    DIECTION_SOUTH: "south",
-    DIECTION_WEST: "west",
-    DIECTION_NORTH: "north",
 
-}
-
-
-export {tileOffset, layerOffset, GAME_DATA }
+export { TileOffset, layerOffset }
