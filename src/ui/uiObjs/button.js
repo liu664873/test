@@ -1,7 +1,7 @@
 import Phaser from "phaser"
 
 export default class Button extends Phaser.GameObjects.Container {
-    constructor(scene, x, y, depth, info, callback, tx){
+    constructor(scene, x, y, info, callback){
         super(scene, x, y)
         this.scene.add.existing(this)
         this.info = info
@@ -9,7 +9,7 @@ export default class Button extends Phaser.GameObjects.Container {
         this.bg = new Phaser.GameObjects.Image(scene, 0, 0, "button").setScale(0.6)
         this.info = new Phaser.GameObjects.Text(scene, -40, -20, info, {color: 0xffffff, fontSize: 40})
         this.add([this.bg, this.info])
-        this.setDepth(depth)
+        this.setDepth(100)
         this.bg.setInteractive()
         this.addEvents()
 

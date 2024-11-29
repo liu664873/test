@@ -68,7 +68,8 @@ export default class DynamicObj extends TileObj {
     /**
      * 初始化状态数据
      */
-    checkStatus(){}
+    checkStatus(){
+    }
 
     /**
      * 给actionData添加动画播放

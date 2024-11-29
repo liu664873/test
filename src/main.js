@@ -6,8 +6,8 @@ import CodeEditor from "./codeEditor/editor";
 
 const config = {
     type: Phaser.AUTO,
-    width: 2000,
-    height: 2000,
+    width: 1200,
+    height: 1200,
     parent: "game",
     scale: {
         mode: Phaser.Scale.FIT
@@ -25,16 +25,20 @@ const config = {
 
 async function loadMapData() {
     try {
-        const [gridData, imageData, levelData1,levelData2] = await Promise.all([
+        const [gridData, imageData] = await Promise.all([
             fetch('assets/mapData/grid.json').then(response => response.json()),
-            fetch('assets/mapData/images.json').then(response => response.json()),
-            fetch('assets/mapData/test1.json').then(response => response.json()),
-            fetch('assets/mapData/test2.json').then(response => response.json())
+            fetch('assets/mapData/images.json').then(response => response.json())
+        ]);
+
+        const mapDataList = await Promise.all([
+            fetch('assets/mapData/contest7.json').then(response => response.json()),
+            fetch('assets/mapData/test2.json').then(response => response.json()),
+            fetch('assets/mapData/test3.json').then(response => response.json())
         ]);
 
         const data = {
             tilesetMap: { grid: gridData, images: imageData },
-            mapDataList: [levelData2, levelData1]
+            mapDataList: mapDataList
         };
         return data;
     } catch (error) {

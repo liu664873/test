@@ -24,9 +24,11 @@ export default class Player extends DynamicObj {
         this.driving = false;
 
         // 初始化载具对象为null，表示玩家当前没有驾驶载具。
-        this.vehicle = null;
+        this.aircraft = null;
 
         this.initStatus();
+
+        this.setDepth(this.depth + 0.5)
 
     }
 
@@ -52,14 +54,15 @@ export default class Player extends DynamicObj {
         }
 
         // 获取目标位置下方建筑瓦片属性、下方对象瓦片属性、当前层建筑瓦片属性和当前层对象瓦片属性。
-        const lowBuildTilePro = this.map.getTilePro(gridX, gridY, this.layerIndex - 1, "build");
-        const lowObjTilePro = this.map.getTilePro(gridX, gridY, this.layerIndex - 1, "obj");
-        const curBuildTilePro = this.map.getTilePro(gridX, gridY, this.layerIndex, "build");
+        const lowPlotTilePro = this.map.getTilePro(gridX, gridY, this.layerIndex - 1, "plot");
+        const curAircraftTilePro = this.map.getTilePro(gridX, gridY, this.layerIndex, "aircraft");
+        const curPlotTilePro = this.map.getTilePro(gridX, gridY, this.layerIndex, "plot");
+        const curFloorTilePro = this.map.getTilePro(gridX, gridY, this.layerIndex, "floor");
         const curObjTilePro = this.map.getTilePro(gridX, gridY, this.layerIndex, "obj");
 
         // 判断目标位置是否允许通过（即是否有carrier属性且没有collide属性）。
-        const carry = this.driving || lowBuildTilePro?.carrier || lowObjTilePro?.carrier || curBuildTilePro?.carrier;
-        const collide = curBuildTilePro?.collide || curObjTilePro?.collide;
+        const carry = lowPlotTilePro?.carrier || curAircraftTilePro?.carrier || curFloorTilePro?.carrier;
+        const collide = curPlotTilePro?.collide || curObjTilePro?.collide;
 
         return carry && !collide;
     }
@@ -70,16 +73,16 @@ export default class Player extends DynamicObj {
      * 如果找到可驾驶的载具，则更新玩家的载具对象和驾驶状态。
      */
     checkStatus() {
-        // 获取玩家当前位置下方图层的对象。
-        const obj = this.map.getTileObj(this.logicX, this.logicY, this.layerIndex - 1);
+        // 获取玩家当前位置图层的对象。
+        const obj = this.map.getTileObj(this.logicX, this.logicY, this.layerIndex, "aircraft");
         const tilePro = this.map.getTileProByIndex(obj?.index);
 
         // 如果找到的对象具有canCarry属性，则更新玩家的载具对象和驾驶状态。
         if (tilePro?.canCarry) {
-            this.vehicle = obj;
+            this.aircraft = obj;
             this.driving = true;
         } else {
-            this.vehicle = null;
+            this.aircraft = null;
             this.driving = false;
         }
     }
