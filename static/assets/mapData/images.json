@@ -177,7 +177,7 @@
                 {
                  "name":"type",
                  "type":"string",
-                 "value":"prop"
+                 "value":"obj"
                 }]
         }, 
         {
@@ -196,7 +196,7 @@
                 {
                  "name":"type",
                  "type":"string",
-                 "value":"prop"
+                 "value":"obj"
                 }]
         }, 
         {
@@ -235,7 +235,7 @@
                 {
                  "name":"type",
                  "type":"string",
-                 "value":"dynamicObj"
+                 "value":"obj"
                 }]
         }, 
         {
@@ -274,7 +274,7 @@
                 {
                  "name":"type",
                  "type":"string",
-                 "value":"dynamicObj"
+                 "value":"obj"
                 }]
         }, 
         {
@@ -313,7 +313,7 @@
                 {
                  "name":"type",
                  "type":"string",
-                 "value":"dynamicObj"
+                 "value":"obj"
                 }]
         }, 
         {
@@ -352,7 +352,7 @@
                 {
                  "name":"type",
                  "type":"string",
-                 "value":"dynamicObj"
+                 "value":"obj"
                 }]
         }, 
         {
@@ -380,7 +380,7 @@
                 {
                  "name":"type",
                  "type":"string",
-                 "value":"prop"
+                 "value":"obj"
                 }]
         }, 
         {
@@ -484,7 +484,7 @@
                 {
                  "name":"type",
                  "type":"string",
-                 "value":"prop"
+                 "value":"obj"
                 }]
         }, 
         {
@@ -494,11 +494,6 @@
                  "name":"carry",
                  "type":"bool",
                  "value":false
-                }, 
-                {
-                 "name":"collide",
-                 "type":"bool",
-                 "value":true
                 }, 
                 {
                  "name":"name",
@@ -513,7 +508,7 @@
                 {
                  "name":"type",
                  "type":"string",
-                 "value":"prop"
+                 "value":"obj"
                 }]
         }, 
         {
@@ -538,6 +533,11 @@
                  "name":"direction",
                  "type":"string",
                  "value":"east"
+                }, 
+                {
+                 "name":"type",
+                 "type":"string",
+                 "value":"aircraft"
                 }]
         }, 
         {
@@ -576,7 +576,7 @@
                 {
                  "name":"type",
                  "type":"string",
-                 "value":"vehicle"
+                 "value":"aircraft"
                 }]
         }, 
         {
@@ -615,7 +615,7 @@
                 {
                  "name":"type",
                  "type":"string",
-                 "value":"vehicle"
+                 "value":"aircraft"
                 }]
         }, 
         {
@@ -654,7 +654,7 @@
                 {
                  "name":"type",
                  "type":"string",
-                 "value":"vehicle"
+                 "value":"aircraft"
                 }]
         }, 
         {
@@ -693,7 +693,7 @@
                 {
                  "name":"type",
                  "type":"string",
-                 "value":"vehicle"
+                 "value":"aircraft"
                 }]
         }, 
         {
@@ -718,6 +718,11 @@
                  "name":"direction",
                  "type":"string",
                  "value":"east"
+                }, 
+                {
+                 "name":"type",
+                 "type":"string",
+                 "value":"aircraft"
                 }]
         }, 
         {
@@ -756,7 +761,7 @@
                 {
                  "name":"type",
                  "type":"string",
-                 "value":"vehicle"
+                 "value":"aircraft"
                 }]
         }, 
         {
@@ -795,7 +800,7 @@
                 {
                  "name":"type",
                  "type":"string",
-                 "value":"vehicle"
+                 "value":"aircraft"
                 }]
         }, 
         {
@@ -834,7 +839,7 @@
                 {
                  "name":"type",
                  "type":"string",
-                 "value":"vehicle"
+                 "value":"aircraft"
                 }]
         }, 
         {
@@ -873,7 +878,7 @@
                 {
                  "name":"type",
                  "type":"string",
-                 "value":"vehicle"
+                 "value":"aircraft"
                 }]
         }],
  "tilewidth":178,

@@ -27,7 +27,6 @@ export default class SceneEffect {
             duration: 500, // 持续时间
             onComplete: () => {
                 callback()
-                // rect.destory()
             }
         });
     }

@@ -45,6 +45,7 @@ export default class TileObj extends Phaser.GameObjects.Container {
         this.mapHeight = map.height;
         this.index = layer.getTileAt(gridX, gridY).index;
         this.layerIndex = layer.depth - map.depth;
+        this.tilePro = this.map.tileProMap[this.index];
         this.showInfo = TileConfig[name]?.info?.showInfo ?? false;
  
         this.offsetX = this.tileWidth / 2; // 保存偏移量默认值，用于位置计算

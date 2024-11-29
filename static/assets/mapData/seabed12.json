@@ -12,7 +12,7 @@
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
          "height":7,
          "id":1,
-         "name":"layer1",
+         "name":"1_plot",
          "opacity":1,
          "properties":[
                 {
@@ -41,21 +41,30 @@
             1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
          "height":7,
          "id":3,
-         "name":"grid",
+         "name":"2_grid",
          "offsetx":0,
-         "offsety":-50,
+         "offsety":-48,
          "opacity":1,
-         "properties":[
-                {
-                 "name":"depth",
-                 "type":"int",
-                 "value":2
-                }, 
-                {
-                 "name":"type",
-                 "type":"string",
-                 "value":"grid"
-                }],
+         "type":"tilelayer",
+         "visible":true,
+         "width":15,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 2, 2, 2, 2, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0,
+            0, 0, 0, 0, 2, 2, 2, 2, 0, 0, 2, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 2, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 2, 2, 2, 2, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+         "height":7,
+         "id":5,
+         "name":"2_floor",
+         "offsetx":0,
+         "offsety":-48,
+         "opacity":1,
          "type":"tilelayer",
          "visible":true,
          "width":15,
@@ -65,28 +74,17 @@
         {
          "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             30, 0, 0, 5, 5, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            5, 2, 2, 2, 2, 5, 5, 0, 0, 5, 2, 0, 0, 0, 0,
-            16, 5, 5, 0, 2, 2, 2, 2, 5, 5, 2, 0, 0, 0, 0,
-            0, 0, 0, 0, 5, 5, 5, 2, 2, 2, 2, 5, 5, 0, 0,
-            0, 0, 0, 0, 0, 0, 0, 2, 5, 5, 2, 2, 2, 2, 0,
+            5, 0, 0, 0, 0, 5, 5, 0, 0, 5, 0, 0, 0, 0, 0,
+            16, 5, 5, 0, 0, 0, 0, 0, 5, 5, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 5, 5, 5, 0, 0, 0, 0, 5, 5, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 5, 5, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
          "height":7,
          "id":2,
-         "name":"layer2",
+         "name":"2_plot",
          "offsetx":0,
-         "offsety":-50,
+         "offsety":-48,
          "opacity":1,
-         "properties":[
-                {
-                 "name":"depth",
-                 "type":"int",
-                 "value":2
-                }, 
-                {
-                 "name":"type",
-                 "type":"string",
-                 "value":"build"
-                }],
          "type":"tilelayer",
          "visible":true,
          "width":15,
@@ -103,359 +101,32 @@
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
          "height":7,
          "id":4,
-         "name":"layer2_obj",
+         "name":"2_obj",
          "offsetx":0,
-         "offsety":-50,
+         "offsety":-48,
          "opacity":1,
-         "properties":[
-                {
-                 "name":"depth",
-                 "type":"int",
-                 "value":2
-                }, 
-                {
-                 "name":"type",
-                 "type":"string",
-                 "value":"obj"
-                }],
          "type":"tilelayer",
          "visible":true,
          "width":15,
          "x":0,
          "y":0
         }],
- "nextlayerid":5,
+ "nextlayerid":6,
  "nextobjectid":1,
  "orientation":"isometric",
  "renderorder":"right-down",
  "tiledversion":"1.11.0",
- "tileheight":145,
+ "tileheight":135,
  "tilesets":[
         {
-         "columns":1,
          "firstgid":1,
-         "image":"..\/images\/grid.png",
-         "imageheight":350,
-         "imagewidth":182,
-         "margin":0,
-         "name":"grid",
-         "spacing":0,
-         "tilecount":1,
-         "tileheight":350,
-         "tilewidth":182
+         "source":"grid.json"
         }, 
         {
-         "columns":10,
          "firstgid":2,
-         "image":"..\/images\/images.png",
-         "imageheight":2450,
-         "imagewidth":1780,
-         "margin":0,
-         "name":"images",
-         "spacing":0,
-         "tilecount":70,
-         "tileheight":350,
-         "tiles":[
-                {
-                 "id":0,
-                 "properties":[
-                        {
-                         "name":"collide",
-                         "type":"bool",
-                         "value":false
-                        }]
-                }, 
-                {
-                 "id":3,
-                 "properties":[
-                        {
-                         "name":"collide",
-                         "type":"bool",
-                         "value":true
-                        }]
-                }, 
-                {
-                 "id":4,
-                 "properties":[
-                        {
-                         "name":"collide",
-                         "type":"bool",
-                         "value":false
-                        }]
-                }, 
-                {
-                 "id":6,
-                 "properties":[
-                        {
-                         "name":"type",
-                         "type":"string",
-                         "value":"energy"
-                        }]
-                }, 
-                {
-                 "id":7,
-                 "properties":[
-                        {
-                         "name":"direction",
-                         "type":"string",
-                         "value":"north"
-                        }, 
-                        {
-                         "name":"type",
-                         "type":"string",
-                         "value":"ship"
-                        }]
-                }, 
-                {
-                 "id":8,
-                 "properties":[
-                        {
-                         "name":"name",
-                         "type":"string",
-                         "value":"red_crystal"
-                        }, 
-                        {
-                         "name":"type",
-                         "type":"string",
-                         "value":"energy"
-                        }]
-                }, 
-                {
-                 "id":9,
-                 "properties":[
-                        {
-                         "name":"name",
-                         "type":"string",
-                         "value":"bule1_crystal"
-                        }, 
-                        {
-                         "name":"type",
-                         "type":"string",
-                         "value":"energy"
-                        }]
-                }, 
-                {
-                 "id":10,
-                 "properties":[
-                        {
-                         "name":"direction",
-                         "type":"string",
-                         "value":"east"
-                        }, 
-                        {
-                         "name":"type",
-                         "type":"string",
-                         "value":"player"
-                        }]
-                }, 
-                {
-                 "id":11,
-                 "properties":[
-                        {
-                         "name":"direction",
-                         "type":"string",
-                         "value":"north"
-                        }, 
-                        {
-                         "name":"type",
-                         "type":"string",
-                         "value":"player"
-                        }]
-                }, 
-                {
-                 "id":12,
-                 "properties":[
-                        {
-                         "name":"direction",
-                         "type":"string",
-                         "value":"south"
-                        }, 
-                        {
-                         "name":"type",
-                         "type":"string",
-                         "value":"player"
-                        }]
-                }, 
-                {
-                 "id":13,
-                 "properties":[
-                        {
-                         "name":"direction",
-                         "type":"string",
-                         "value":"west"
-                        }, 
-                        {
-                         "name":"type",
-                         "type":"string",
-                         "value":"player"
-                        }]
-                }, 
-                {
-                 "id":14,
-                 "properties":[
-                        {
-                         "name":"collide",
-                         "type":"bool",
-                         "value":true
-                        }]
-                }, 
-                {
-                 "id":15,
-                 "properties":[
-                        {
-                         "name":"type",
-                         "type":"string",
-                         "value":"energy"
-                        }]
-                }, 
-                {
-                 "id":16,
-                 "properties":[
-                        {
-                         "name":"direction",
-                         "type":"string",
-                         "value":"east"
-                        }, 
-                        {
-                         "name":"type",
-                         "type":"string",
-                         "value":"ship"
-                        }]
-                }, 
-                {
-                 "id":17,
-                 "properties":[
-                        {
-                         "name":"direction",
-                         "type":"string",
-                         "value":"south"
-                        }, 
-                        {
-                         "name":"type",
-                         "type":"string",
-                         "value":"ship"
-                        }]
-                },
-            
-                {
-                 "id":18,
-                 "properties":[
-                        {
-                         "name":"direction",
-                         "type":"string",
-                         "value":"west"
-                        }, 
-                        {
-                         "name":"type",
-                         "type":"string",
-                         "value":"ship"
-                        }]
-                }, 
-                {
-                 "id":19,
-                 "properties":[
-                        {
-                         "name":"collide",
-                         "type":"bool",
-                         "value":true
-                        }]
-                }, 
-                {
-                 "id":28,
-                 "properties":[
-                        {
-                         "name":"collide",
-                         "type":"bool",
-                         "value":true
-                        }]
-                }, 
-                {
-                 "id":29,
-                 "properties":[
-                        {
-                         "name":"name",
-                         "type":"string",
-                         "value":"bule2_crystal"
-                        }, 
-                        {
-                         "name":"type",
-                         "type":"string",
-                         "value":"energy"
-                        }]
-                }, 
-                {
-                 "id":30,
-                 "properties":[
-                        {
-                         "name":"name",
-                         "type":"string",
-                         "value":"green_crystal"
-                        }, 
-                        {
-                         "name":"type",
-                         "type":"string",
-                         "value":"energy"
-                        }]
-                }, 
-                {
-                 "id":36,
-                 "properties":[
-                        {
-                         "name":"direction",
-                         "type":"string",
-                         "value":"north"
-                        }, 
-                        {
-                         "name":"type",
-                         "type":"string",
-                         "value":"flyer"
-                        }]
-                }, 
-                {
-                 "id":37,
-                 "properties":[
-                        {
-                         "name":"direction",
-                         "type":"string",
-                         "value":"south"
-                        }, 
-                        {
-                         "name":"type",
-                         "type":"string",
-                         "value":"flyer"
-                        }]
-                }, 
-                {
-                 "id":38,
-                 "properties":[
-                        {
-                         "name":"direction",
-                         "type":"string",
-                         "value":"west"
-                        }, 
-                        {
-                         "name":"type",
-                         "type":"string",
-                         "value":"flyer"
-                        }]
-                }, 
-                {
-                 "id":39,
-                 "properties":[
-                        {
-                         "name":"direction",
-                         "type":"string",
-                         "value":"east"
-                        }, 
-                        {
-                         "name":"type",
-                         "type":"string",
-                         "value":"flyer"
-                        }]
-                }],
-         "tilewidth":178
+         "source":"images.json"
         }],
- "tilewidth":185,
+ "tilewidth":182,
  "type":"map",
  "version":"1.10",
  "width":15

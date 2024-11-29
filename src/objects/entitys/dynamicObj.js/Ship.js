@@ -37,14 +37,16 @@ export default class Ship extends DynamicObj {
         }
  
         // 获取目标位置下方建筑瓦片属性、下方对象瓦片属性、当前层建筑瓦片属性和当前层对象瓦片属性。
-        const curBuildTilePro = this.map.getTilePro(gridX, gridY, this.layerIndex, "build");
+        const lowPlotTilePro = this.map.getTilePro(gridX, gridY, this.layerIndex - 1, "plot");
+        const curFloorTilePro = this.map.getTilePro(gridX, gridY, this.layerIndex, "floor");
         const curObjTilePro = this.map.getTilePro(gridX, gridY, this.layerIndex, "obj");
 
 
-        const collide = curBuildTilePro?.collide || curObjTilePro?.collide;
+        const collide = lowPlotTilePro|| curFloorTilePro || curObjTilePro?.collide;
 
  
-        return !collide && (!this.driver || this.driver.canMove(gridX, gridY)); 
+        // return !collide && (!this.driver || this.driver.canMove(gridX, gridY)); 
+        return !collide;
     } 
 
     /**
@@ -69,7 +71,7 @@ export default class Ship extends DynamicObj {
      */
     checkStatus(){
         // 获取上层的同样位置的对象 
-        const obj = this.map.getTileObj(this.logicX, this.logicY, this.layerIndex + 1);
+        const obj = this.map.getTileObj(this.logicX, this.logicY, this.layerIndex, "obj");
         if(!obj) return;
         const tilePro = this.map.getTileProByIndex(obj.index);
         // 检查上层是否有驾驶者 

@@ -71,7 +71,7 @@ export default class Map {
             if (layerType === "grid") {
                 offsetX = x + TileOffset.grid.offset.x;
                 offsetY = y + TileOffset.grid.offset.y;
-            } else if (layerType === "build") {
+            } else if (layerType === "plot" || layerType === "floor") {
                 offsetX = x + TileOffset.images.offset.x;
                 offsetY = y + TileOffset.images.offset.y;
             } else {
@@ -79,7 +79,7 @@ export default class Map {
                 offsetY = y;
             }
 
-            const layer = this.tilemap.createLayer(name, layerType === "obj" ? null : this.tilemap.tilesets, this.x + offsetX, this.y + offsetY);
+            const layer = this.tilemap.createLayer(name, layerType === "obj" || layerType === "aircraft" ? null : this.tilemap.tilesets, this.x + offsetX, this.y + offsetY);
             layer.offsetX = offsetX;
             layer.offsetY = offsetY;
             layer.setDepth(this.depth + depthModifier);
@@ -90,7 +90,7 @@ export default class Map {
 
             this.layerList.push(layer);
 
-            if (layerType === "obj") {
+            if (layerType === "obj" || layerType === "aircraft") {
                 this.processObjectLayer(layer, layerData, layerPro);
             }
         });
@@ -159,21 +159,17 @@ export default class Map {
 
                 const obj = Generator.generateObj(this, layer, tilePro, tile.x, tile.y);
                 if (obj) {
-                    console.log(tilePro, this.layerData)
                     this.layerData[depthModifier][layerType][tile.y][tile.x] = obj;
-
-                    if (tilePro.type === "prop") {
-                        this.propList.push(obj);
-                        this.objList.push(obj);
-
+                    this.objList.push(obj);
+                    if (tilePro.type === "obj") {
                         if (tilePro.tag === "energy") {
+                            this.propList.push(obj)
                             const index = this.energyList.push(obj) - 1;
                             if (obj.info) obj.info.setContext(`energy[${index}]`);
-                        }
-                    } else if ("player" === tilePro.name) this.player = obj
-                    else if("ship" === tilePro.name) this.ship = obj
-
-                    this.objList.push(obj);
+                        } else if ("player" === tilePro.tag) this.player = obj
+                    } else if (tilePro.type === "aircraft") {
+                        if("ship" === tilePro.name) this.ship = obj
+                    }
                 }
             }
         }
@@ -232,8 +228,8 @@ export default class Map {
      * @param {TileObj} 对象
      */  
     updateLocationData(from, to, tileObj) {  
-        this.layerData[tileObj.layerIndex].obj[from.y][from.x] = -1; // 更新地图数据，标记tileObj的原位置为空  
-        this.layerData[tileObj.layerIndex].obj[to.y][to.x] = tileObj; // 更新地图数据，标记新位置为tileObj
+        this.layerData[tileObj.layerIndex][tileObj.tilePro.type][from.y][from.x] = -1; // 更新地图数据，标记tileObj的原位置为空  
+        this.layerData[tileObj.layerIndex][tileObj.tilePro.type][to.y][to.x] = tileObj; // 更新地图数据，标记新位置为tileObj
     } 
 
     overBorder(gridX, gridY) {
@@ -251,15 +247,15 @@ export default class Map {
      
     getTileIndex(gridX, gridY, layerIndex, type) {
         if (this.overBorder(gridX, gridY)) return -1;
-        const layer = this.layerData[layerIndex]?.[type];
+        const layer = this.layerData[layerIndex][type];
         const tile = layer ? layer[gridY][gridX] : undefined;
         return typeof tile === "number" ? tile : tile instanceof TileObj ? tile.index : -1;
     }
      
     // 从对象层中获取瓦片对象
-    getTileObj(gridX, gridY, layerIndex) {
+    getTileObj(gridX, gridY, layerIndex, layerType) {
         if (this.overBorder(gridX, gridY)) return null;
-        const objLayer = this.layerData[layerIndex]?.obj;
+        const objLayer = this.layerData[layerIndex]?.[layerType];
         if (!objLayer) return null;
         const obj = objLayer[gridY]?.[gridX];
         return obj instanceof TileObj ? obj : null;

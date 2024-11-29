@@ -123,8 +123,8 @@ const TileConfig = {
         dfImage: 0,
         health: 100,
         offset: {
-            x: 0,
-            y: -45
+            x: 10,
+            y: 0
         },
         originScale: 0.5,
         info: {
@@ -312,7 +312,7 @@ const TileConfig = {
         dfImage: 9,
         offset: {
             x: 0,
-            y: -30
+            y: -20
         },
         info: {
             showInfo: true,
@@ -321,7 +321,7 @@ const TileConfig = {
                 y: -GAME_DATA.TILE_HEIGHT
             }
         },
-        originScale: 0.4,
+        originScale: 0.3,
         anims:[
             {
                 key: GAME_DATA.ANIM_KEY_IDLE,
