@@ -61,7 +61,7 @@ export default class GameManager {
         this.ship = null;
         this.flyerList = [];
         this.energyList = [];
-
+        
     }
 
     // 添加动作数据
@@ -203,6 +203,14 @@ export default class GameManager {
         if(this.actionAnims) this.actionAnims.timeScale = speed;
         this.animSpeed = speed;
     }
+    pauseActionAnims(){
+        this.actionAnims.pause();
+        this.inPlayActionAnims = false;
+    }
+    resumeActionAnims(){
+        this.actionAnims.resume();
+        this.inPlayActionAnims = true;
+    }
 
     // 选择关卡
     selectLevel(level) {
@@ -210,7 +218,6 @@ export default class GameManager {
             this.showInvalidLevelPrompt();
             return;
         }
-
         this.curLevel = level;
         const mapData = this.getMapData();
         this.resetData();
@@ -268,7 +275,7 @@ export default class GameManager {
         const handleConfirm = () => {
             hidePopup();
             if (typeof call1 === 'function') {
-                call1();
+                call2();
             }
             confirmBtn.removeEventListener('click', handleConfirm);
             cancelBtn.removeEventListener('click', handleCancel);
@@ -277,7 +284,7 @@ export default class GameManager {
         const handleCancel = () => {
             hidePopup();
             if (typeof call2 === 'function') {
-                call2();
+                call1();
             }
             confirmBtn.removeEventListener('click', handleConfirm);
             cancelBtn.removeEventListener('click', handleCancel);

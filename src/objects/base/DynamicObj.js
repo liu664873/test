@@ -58,7 +58,6 @@ export default class DynamicObj extends TileObj {
 
         // 初始化方向
         this.direction = this.map.tileProMap[this.index].direction;
-
         // 逻辑坐标  
         this.logicX = gridX;
         this.logicY = gridY;
