@@ -31,7 +31,7 @@ async function loadMapData() {
         ]);
 
         const mapDataList = await Promise.all([
-            fetch('assets/mapData/contest10.json').then(response => response.json()),
+            fetch('assets/mapData/contest7.json').then(response => response.json()),
             fetch('assets/mapData/test2.json').then(response => response.json()),
             fetch('assets/mapData/test3.json').then(response => response.json())
         ]);

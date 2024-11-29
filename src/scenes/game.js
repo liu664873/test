@@ -25,16 +25,13 @@ export default class Game extends Phaser.Scene {
     }
 
     create() {
-        const { width, height } = this.sys.game.config;
+        const { width, height } = this.cameras.main;
 
         this.add.image(0, 0, 'bg1').setOrigin(0).setScrollFactor(0);
 
 
-        this.map = new Map(this, "map", 950, 0);
-        this.map.setScale(8/Math.max(this.map.width, this.map.height));
-        this.map.setPosition(width/2, Math.abs((height - this.map.gridLayer.height))/2);
-
-
+        this.map = new Map(this, "map", width/2, height/6);
+        this.map.setScale(8/Math.max(this.map.width, this.map.height))
         this.dragging = false;
 
         this.map.closeGrid();
@@ -53,9 +50,6 @@ export default class Game extends Phaser.Scene {
         this.game.manager.initLevel(data);
         // 添加事件监听器
         this.addOnEvent();
-        // this.tweens.addMultiple
-
-        console.log(this.map)
     }
 
     /**
