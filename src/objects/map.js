@@ -161,15 +161,8 @@ export default class Map {
                 const obj = Generator.generateObj(this, layer, tilePro, tile.x, tile.y);
                 if (obj) {
                     this.layerData[depthModifier][layerType][tile.y][tile.x] = obj;
-<<<<<<< HEAD
-
-                    if (tilePro.type === "prop") {
-                        this.propList.push(obj);
-
-=======
                     this.objList.push(obj);
                     if (tilePro.type === "obj") {
->>>>>>> 6dd64a54bba902525b8665f7341656688bae33cf
                         if (tilePro.tag === "energy") {
                             this.propList.push(obj)
                             const index = this.energyList.push(obj) - 1;
