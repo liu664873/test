@@ -1,5 +1,5 @@
 import Phaser from "phaser";
-import Map from "../objects/Map";
+import Map from "../objects/map";
 import UI from "../ui/ui";
 import Prompt from "../ui/uiObjs/prompt";
 

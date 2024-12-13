@@ -16,6 +16,10 @@ export default class Loader extends Phaser.Scene {
 
         this.addLoadOnEvent()
 
+        this.load.on("complete", () => {
+            this.game.manager.selectLevel(1); 
+        });
+
         this.loadAudios()
         this.loadImage()
         this.loadSprite()

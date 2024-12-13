@@ -147,9 +147,9 @@ def new(event):
     manager.showPrompt("重试","是否重置场景", cancel, resetScene) 
 
 def errorCallback1():
-    manager.editor.removeHighlight()
+    window.manager.editor.removeHighlight()
 def errorCallback2():
-    manager.editor.removeHighlight()
+    window.manager.editor.removeHighlight()
 
 
 def clear():
