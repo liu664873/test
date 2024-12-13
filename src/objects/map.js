@@ -53,7 +53,7 @@ export default class Map {
                 this.tileProMap[firstgid + parseInt(key)] = tileset.tileProperties[key]   //需要将key转换成数字
             }
         })
-    }
+}
 
     /**
      * 初始化图层
@@ -99,6 +99,7 @@ export default class Map {
     initLayerData(){
         this.tilemap.layers.forEach(layerData => {
             const layerPro = this.parseLayerName(layerData.name)
+            console.log(layerData)
             if(!this.layerData[layerPro[0]]) this.layerData[layerPro[0]] = {}
             const data = []
             layerData.data.forEach((tiles, i) => {
@@ -160,8 +161,15 @@ export default class Map {
                 const obj = Generator.generateObj(this, layer, tilePro, tile.x, tile.y);
                 if (obj) {
                     this.layerData[depthModifier][layerType][tile.y][tile.x] = obj;
+<<<<<<< HEAD
+
+                    if (tilePro.type === "prop") {
+                        this.propList.push(obj);
+
+=======
                     this.objList.push(obj);
                     if (tilePro.type === "obj") {
+>>>>>>> 6dd64a54bba902525b8665f7341656688bae33cf
                         if (tilePro.tag === "energy") {
                             this.propList.push(obj)
                             const index = this.energyList.push(obj) - 1;

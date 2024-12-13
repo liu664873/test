@@ -15,6 +15,7 @@ export default class Game extends Phaser.Scene {
      * 接受上一个场景的数据
      */
     init(data) {
+        console.log("Received data in Game scene:", data);
         this.mapData = data.mapData;
     }
 

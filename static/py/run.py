@@ -137,7 +137,7 @@ def echo(event):
 
     
 def stop(event):
-    if(manager.inPlayActionAnims):
+    if(manager.actionAnims):
         manager.pauseActionAnims()
     else :
         manager.resumeActionAnims()
@@ -152,13 +152,13 @@ def errorCallback2():
     window.manager.editor.removeHighlight()
 
 
-def clear():
+def clear(event):
     manager.showPrompt("重试","是否重置代码", cancel, resetCode) 
 def resetScene():
     resetCode()
-    manager.selectLevel(manager.currentLevel)
+    manager.selectLevel(manager.curLevel)
 def resetCode():
-    manager.editor.setValue('')
+    manager.editor.editor.setValue('')
 def cancel():
     pass
 
