@@ -23,6 +23,8 @@ export default class GameManager {
         this.mapDataList = mapDataList;
         this.tilesetMap = tilesetMap;
         this.resetGameData();
+
+        this.game.scene.start("loader")
     }
 
     resetGameData() {
@@ -206,6 +208,13 @@ export default class GameManager {
         this.generateAnims();
     }
 
+    clearAnims(){
+        this.actionAnims = null;
+        this.actionDataList = [];
+        this.actionList = [];
+        this.stepCount = 0;
+    }
+
     setAnimSpeed(speed){
         if(this.actionAnims) this.actionAnims.timeScale = speed;
         this.animSpeed = speed;
@@ -254,6 +263,10 @@ export default class GameManager {
         this.mode = GameManager.MODE_PYTHON;
     }
 
+    setMode(mode){
+        this.mode = mode;
+    }
+
     showPrompt(tip, info, call1, call2) {
         const popup = document.getElementById('popup');
         if (!popup) return; // 确保popup元素存在
@@ -281,6 +294,7 @@ export default class GameManager {
 
         const handleConfirm = () => {
             hidePopup();
+            if(this.mode === GameManager.MODE_PYTHON && this.editor) this.editor.removeAllHighlight()
             if (typeof call1 === 'function') {
                 call2();
             }
@@ -290,6 +304,7 @@ export default class GameManager {
 
         const handleCancel = () => {
             hidePopup();
+            if(this.mode === GameManager.MODE_PYTHON && this.editor) this.editor.removeAllHighlight()
             if (typeof call2 === 'function') {
                 call1();
             }

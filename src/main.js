@@ -1,6 +1,7 @@
 import Phaser from "phaser";
 import Game from "./scenes/game";
 import Loader from "./scenes/loader";
+import Blank from "./scenes/blank"
 import GameManager from "./GameManager";
 import CodeEditor from "./codeEditor/editor";
 
@@ -20,7 +21,7 @@ const config = {
             },
         }
     },
-    scene: [Loader, Game]
+    scene: [Blank, Loader, Game]
 };
 
 async function loadMapData() {
@@ -31,7 +32,7 @@ async function loadMapData() {
         ]);
 
         const mapDataList = await Promise.all([
-            fetch('assets/mapData/contest7.json').then(response => response.json()),
+            fetch('assets/mapData/seabed5.json').then(response => response.json()),
             fetch('assets/mapData/test2.json').then(response => response.json()),
             fetch('assets/mapData/test3.json').then(response => response.json()),
             fetch('assets/mapData/test4.json').then(response => response.json()),
@@ -52,14 +53,13 @@ manager.setEditor(new CodeEditor("editor"));
 
 loadMapData().then(data => {
     if (data) {
-        console.log(data);
         manager.init(data);
-        manager.selectLevel(4);
+        manager.selectLevel(1);
     } 
 }).catch(error => {
 });
 
 window.onload = function() {
-    brython(); // Assuming this is some external function call, make sure it's defined
+    brython(); 
     window.manager = manager;
 };
