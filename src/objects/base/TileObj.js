@@ -114,6 +114,7 @@ export default class TileObj extends Phaser.GameObjects.Container {
 
     playAnim(animKey){
         if (!animKey || !this.baseObject.anims.exists(animKey)) return; // 如果动画不存在，则返回
+        console.log(animKey)
         console.log(`key：${animKey}动画存在！`)
         this.baseObject.anims.play(animKey);
     }

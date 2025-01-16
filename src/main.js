@@ -33,7 +33,8 @@ async function loadMapData() {
         const mapDataList = await Promise.all([
             fetch('assets/mapData/contest7.json').then(response => response.json()),
             fetch('assets/mapData/test2.json').then(response => response.json()),
-            fetch('assets/mapData/test3.json').then(response => response.json())
+            fetch('assets/mapData/test3.json').then(response => response.json()),
+            fetch('assets/mapData/test4.json').then(response => response.json()),
         ]);
 
         const data = {
@@ -53,7 +54,7 @@ loadMapData().then(data => {
     if (data) {
         console.log(data);
         manager.init(data);
-        manager.selectLevel(1);
+        manager.selectLevel(4);
     } 
 }).catch(error => {
 });

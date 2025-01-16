@@ -28,6 +28,7 @@ export default class Map {
         this.flyerList = []
         this.player = null;
         this.ship = null;
+        this.flyer = null;
         this.layerData = {}
         this.objList = []
         
@@ -47,6 +48,7 @@ export default class Map {
      */
     initTilesets() {
         this.tilemap.tilesets.forEach(tileset => {
+            console.log(tileset)
             this.tilemap.addTilesetImage(tileset.name, tileset.name)
             const firstgid = tileset.firstgid;
             for (let key in tileset.tileProperties) {
@@ -79,7 +81,7 @@ export default class Map {
                 offsetY = y;
             }
 
-            const layer = this.tilemap.createLayer(name, layerType === "obj" || layerType === "aircraft" ? null : this.tilemap.tilesets, this.x + offsetX, this.y + offsetY);
+            const layer = this.tilemap.createLayer(name, layerType === "obj" || layerType === "aircraft"? null : this.tilemap.tilesets, this.x + offsetX, this.y + offsetY);
             layer.offsetX = offsetX;
             layer.offsetY = offsetY;
             layer.setDepth(this.depth + depthModifier);
@@ -161,15 +163,8 @@ export default class Map {
                 const obj = Generator.generateObj(this, layer, tilePro, tile.x, tile.y);
                 if (obj) {
                     this.layerData[depthModifier][layerType][tile.y][tile.x] = obj;
-<<<<<<< HEAD
-
-                    if (tilePro.type === "prop") {
-                        this.propList.push(obj);
-
-=======
                     this.objList.push(obj);
                     if (tilePro.type === "obj") {
->>>>>>> 6dd64a54bba902525b8665f7341656688bae33cf
                         if (tilePro.tag === "energy") {
                             this.propList.push(obj)
                             const index = this.energyList.push(obj) - 1;
@@ -177,6 +172,11 @@ export default class Map {
                         } else if ("player" === tilePro.tag) this.player = obj
                     } else if (tilePro.type === "aircraft") {
                         if("ship" === tilePro.name) this.ship = obj
+                        if("flyer" === tilePro.name) {
+                            this.flyer = obj
+                            console.log("这是flyer",this.flyer)
+                            this.flyerList.push(obj)
+                        }
                     }
                 }
             }

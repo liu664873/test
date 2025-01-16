@@ -233,7 +233,53 @@ const TileConfig = {
             
         ]
     },
-
+    flyer: {
+        imageKey: "images",
+        dfImage: 38,
+        health: 100,
+        offset: {
+            x: 0,
+            y: -100
+        },
+        originScale: 1,
+        info: {
+            showInfo: true,
+            offset: {
+                x: 0,
+                y: -GAME_DATA.TILE_HEIGHT*1/2
+            }
+        },
+        anims:[
+            {
+                key: GAME_DATA.ANIM_KEY_IDLE_EAST,
+                frames: {start: 39, end: 39},
+                repeat: -1,
+                frameRate: 8,
+                yoyo: false
+            },
+            {
+                key: GAME_DATA.ANIM_KEY_IDLE_NORTH,
+                frames: {start: 36, end: 36},
+                repeat: -1,
+                frameRate: 8,
+                yoyo: false
+            },
+            {
+                key: GAME_DATA.ANIM_KEY_IDLE_SOUTH,
+                frames: {start: 37, end: 37 },
+                repeat: -1,
+                frameRate: 8,
+                yoyo: false
+            },
+            {
+                key: GAME_DATA.ANIM_KEY_IDLE_WEST,
+                frames: {start: 38, end: 38},
+                repeat: -1,
+                frameRate: 8,
+                yoyo: false
+            }
+        ]
+    },
     //蓝宝石
     bule1_crystal: {
         imageKey: "energy",

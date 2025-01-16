@@ -46,7 +46,9 @@ export default class Game extends Phaser.Scene {
             player: this.map.player,
             ship: this.map.ship,
             energyList: this.map.energyList,
-            flyerList: this.map.flyerList
+            flyerList: this.map.flyerList,
+            flyer: this.map.flyer,
+
         };
         this.game.manager.initLevel(data);
         // 添加事件监听器

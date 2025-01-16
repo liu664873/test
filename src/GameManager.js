@@ -5,6 +5,7 @@ export default class GameManager {
     // 静态常量
     static STATUS_PASS = GAME_DATA.LEVEL_STATUS_PASSED;
     static STATUS_FAILED_NOTMOVE = GAME_DATA.LEVEL_STATUS_FAILED_NOTMOVE;
+    static STATUS_FAILED_NOTTURN = GAME_DATA.LEVEL_STATUS_FAILED_NOTTURN;
     static STATUS_FAILED_ENERGY_NOTENOUGH = GAME_DATA.LEVEL_STATUS_FAILED_ENERGY_NOTENOUGH;
 
     //游戏模式
@@ -32,12 +33,13 @@ export default class GameManager {
     }
 
     // 初始化当前关卡
-    initLevel({ scene, player, ship, flyerList, energyList }) {
+    initLevel({ scene, player, ship, energyList , flyerList, flyer}) {
         this.scene = scene;
         this.player = player;
         this.ship = ship;
         this.flyerList = flyerList;
         this.energyList = energyList;
+        this.flyer = flyer;
         this.energyCount = this.energyList.length;
         this.inGame = true;
     }
@@ -110,6 +112,10 @@ export default class GameManager {
                 this.levelStatus = GameManager.STATUS_FAILED_NOTMOVE;
                 break;
             }
+            if(actionData.target.tilePro.name === "flyer" && actionData.type === ActionData.TYPE_TURN){
+                this.levelStatus = GameManager.STATUS_FAILED_NOTTURN;
+                break;
+            }
             this.resolveActionTargets(actionData);
             actionTweens.push(actionData);
         }
@@ -170,6 +176,7 @@ export default class GameManager {
             [GameManager.STATUS_PASS]: { tip: "通关", info: "是否进入下一关？", actions: this.handlePass() },
             [GameManager.STATUS_FAILED_NOTMOVE]: { tip: "重试", info: "此处不能移动！是否重新开始？", actions: this.handleFailure() },
             [GameManager.STATUS_FAILED_ENERGY_NOTENOUGH]: { tip: "重试", info: "能量未收集完！是否重新开始？", actions: this.handleFailure() },
+            [GameManager.STATUS_FAILED_NOTTURN]: { tip: "重试", info: "对象不能转向！是否重新开始？", actions: this.handleFailure() },
             default: { tip: "重试", info: "未知错误！是否重新开始？", actions: this.handleFailure() }
         };
 
@@ -307,7 +314,7 @@ export default class GameManager {
     }
 
     getFlyerList(){
-        return this.flyerList.map(flyer => flyer.createProxy());
+        return this.flyer ? this.flyer.createProxy() : null;
     }
 
 }
